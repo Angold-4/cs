@@ -24,7 +24,7 @@ In 1954, *[John Backus](https://en.wikipedia.org/wiki/John_Backus)* developed th
 
 ### Compiler Structure
 
-**FORTRAN I is the first compiler, which brings huge impact on computer science (Many thought this is impossible). And modern compiers preserve the outlines of FORTRAN I:**<br>
+**FORTRAN I is the first compiler, which brings huge impact on computer science (Many thought this is impossible). And modern compiers preserve the outlines of FORTRAN I:**
 
 1. Lexical Analysis
 2. Parsing
