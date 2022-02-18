@@ -82,6 +82,11 @@ That leads three things:
 **No "Perfect" Language, each of them has its own domain.**
 
 
+## 2. Cool Programming Language
+
+**Classroom Object Oriented Language**
+* Designed to be implemented in a short time
+* \# Cool Compilers > \# Cool Programs
 
 
 
