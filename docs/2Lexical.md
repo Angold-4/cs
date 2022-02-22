@@ -107,6 +107,56 @@ if (i == j)\n\t\tz = 0;\n\telse\n\t\tz = 1;
 
 ### 3. Implement Table-driven DFA
 
+## 3. Exercises
+
+### 1. Minimum States
+![q5](Sources/q5.png)
+
+* **Answer: Minimum states: 3n + 1**
+
+
+![q5ans](Sources/q5ans.png)
+
+### 2. NFA vs. DFA
+**Question: Which of the following automata are NFAs?**
+
+![ndfa](Sources/ndfa.png)
+
+* **NFAs must have a finite set of states, which rules out the last option.**
+* **Every DFA is also an NFA, which is why the first option is included.**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
