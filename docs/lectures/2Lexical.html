@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>Angold-4 Organization</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="../../../images/favicon.png" rel="icon">
+
+<link rel="canonical" href=".">
+        <meta name="author" content="Angold Wang" />
+
+    <meta property="og:site_name" content="Angold-4" />
+<!--     <meta property="og:type" content="article"/> -->
+    <meta property="og:title" content="Angold-4 Organization"/>
+    <meta property="og:url" content="."/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../../../theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="../../../theme/css/font-awesome.min.css" rel="stylesheet">
+<!--     <link href="https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css" rel="stylesheet"> -->
+
+    <link href="../../../theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../theme/css/style.css" type="text/css"/>
+
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://angold4.org" class="navbar-brand">
+<img src="../../../images/logo.png" width="32"/> Angold4            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+			    <li><a href="../../../about.html">About</a>
+                            <li><a href="../../../blogs.html">Blogs</a>
+                            <li><a href="../../../projects.html">Projects</a>
+
+	    </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li> <a title="Youtube" href="https://www.youtube.com/channel/UC3ZAjh2LHhm-FrgxgBtgMzQ" target="_new"><i class="fa fa-youtube"></i> Youtube</a>
+		</li>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+	<section id="content" class="body">
+
+
+<h1>2. Lexical Analysis</h1>
+<h5>Angold Wang 19/02/2022</h5>
+<h4>User view</h4>
+<pre><code class="language-c">if (i == j) 
+    z = 0;
+else 
+    z = 1;
+</code></pre>
+<h4>Compiler view</h4>
+<pre><code>if (i == j)\n\t\tz = 0;\n\telse\n\t\tz = 1;
+</code></pre>
+<h2>1. Formal Languages</h2>
+<h3>Seperate Syntax and Semantics</h3>
+<ul>
+<li>Makes clear what is syntax, what is semantics.</li>
+<li>Example: <strong>Roman numerals vs. Arabic numerals</strong>
+<ul>
+<li>Roman numerals are painful to do addition and subtraction, etc.</li>
+<li>The reason is that the algorithms were kind of complicated.</li>
+<li>The notation causes this big difference (procedure)</li>
+<li>Don't underestimate the importatance of notation.</li>
+</ul>
+</li>
+</ul>
+<h3>Syntax vs. Semantics</h3>
+<ul>
+<li>We can use <strong>Multiple syntax</strong> to represent the <strong>same semantics.</strong></li>
+<li>Which is the basis of <strong>Optimization.</strong></li>
+<li>The fact that several programs that are actually functionally equivalent, that allow us to substitute one program that runs faster than another.</li>
+<li><strong>Never one to many!!!</strong></li>
+</ul>
+<h2>2. Lexical Specification</h2>
+<h4>1. Write rexp for the lexemes of each token class</h4>
+<ul>
+<li>Number = digit+</li>
+<li>Keyword = 'if' + 'else' + 'for' + ...</li>
+<li>Identifier = letter(letter + digit)*</li>
+<li>OpenPar = '('</li>
+<li>...</li>
+</ul>
+<h4>2. Construct R, matching all lexemes for all tokens</h4>
+<p><strong>Which is just the union of all the regular expressions</strong><!-- raw HTML omitted -->
+<strong><code>R = Keyword + Identifier + Number + ...</code></strong><!-- raw HTML omitted -->
+<strong>R is the some of of all the different token classes of our language</strong></p>
+<h4>3. Let input be <code>x1...xn</code></h4>
+<p><strong>For <code>1 &lt;= i &lt;= n</code> check whether <code>x1...xi</code> in <code>L(R)</code></strong>.<!-- raw HTML omitted --></p>
+<p><strong>What if no rules matches?</strong></p>
+<ul>
+<li><strong>if the whole <code>x1...xn</code> not in L(R)</strong> - We don't let this ever happen.</li>
+<li><strong>We we are going to do instead, is to write a category of error strings.</strong>
+<ul>
+<li><strong><code>ERROR = all strings not in the lexical specifications</code></strong></li>
+<li>Put <strong><code>ERROR</code></strong> last in piority</li>
+</ul>
+</li>
+</ul>
+<h4>4. If success, then we know that</h4>
+<p><strong><code>x1...xi</code> in <code>L(Rj)</code> for some j</strong></p>
+<p><strong>How much input is used?</strong></p>
+<ul>
+<li><strong>if <code>x1...xi</code> in <code>L(R)</code>, and so as <code>x1...xj</code> <code>(i != j)</code></strong>
+<ul>
+<li>For example. <strong><code>==</code> should be treat as &quot;double <code>=</code>&quot; or &quot;equal operator <code>==</code>&quot;?</strong></li>
+</ul>
+</li>
+<li>Solution: <strong>Maximal Munch</strong>
+<ul>
+<li>We should always take the longer one when meet ambigurity</li>
+<li>That just the way that humans themselves read things</li>
+</ul>
+</li>
+</ul>
+<p><strong>Which token is used?</strong></p>
+<ul>
+<li><strong>Suppose <code>R = R1 + R2 + ... Rn</code> and there we have:</strong>
+<ul>
+<li><code>(x1...xi)</code> in <code>L(Rj)</code></li>
+<li><code>(x1...xi)</code> in <code>L(Rk)</code></li>
+<li><code>k != j</code></li>
+</ul>
+</li>
+<li>For example. <strong><code>if</code> should be treat as an Identifier or a keyword?</strong></li>
+<li>Solution: <strong>Piority Ordering</strong>
+<ul>
+<li>Choose the one listed first.</li>
+<li>typically, put <strong>keywords</strong> before the <strong>identifiers</strong></li>
+</ul>
+</li>
+</ul>
+<h4>5. Remove <code>x1...xi</code> from input and go to (3)</h4>
+<h2>3. Finite Automata</h2>
+<ul>
+<li><strong>Regular expressions = specification</strong></li>
+<li><strong>Finite automata = implementation</strong></li>
+</ul>
+<p><img src="Sources/rexp.png" alt="rexp"></p>
+<ul>
+<li><strong>Both NFAs and DFAs can recognize regular languages (equivalent power)</strong></li>
+<li><strong>DFAs are faster to execute.</strong>
+<ul>
+<li>There are no choices to consider</li>
+</ul>
+</li>
+<li><strong>NFAs are, in general, smaller.</strong></li>
+</ul>
+<p><strong>Example: A NFA that accepts the rexp: <code>1* + 0</code></strong>:</p>
+<p><img src="Sources/example.png" alt="example"></p>
+<h3>1. Regular Expressions -&gt; NFA</h3>
+<p><img src="Sources/operation.png" alt="operation"></p>
+<h3>2. NFA to DFA</h3>
+<ul>
+<li>Key IDEA: <strong>DFA M' keeps track of the subset of possible states in NFA M.</strong></li>
+<li>That is why in general DFA are much bigger: <strong><code>2^n - 1</code> subsets for n states NFA</strong></li>
+</ul>
+<p><img src="Sources/nfadfa.png" alt="nfadfa"></p>
+<h3>3. Implement Table-driven DFA</h3>
+<h2>3. Exercises</h2>
+<h3>1. Minimum States</h3>
+<p><img src="Sources/q5.png" alt="q5"></p>
+<ul>
+<li><strong>Answer: Minimum states: 3n + 1</strong></li>
+</ul>
+<p><img src="Sources/q5ans.png" alt="q5ans"></p>
+<h3>2. NFA vs. DFA</h3>
+<p><strong>Question: Which of the following automata are NFAs?</strong></p>
+<p><img src="Sources/ndfa.png" alt="ndfa"></p>
+<ul>
+<li><strong>NFAs must have a finite set of states, which rules out the last option.</strong></li>
+<li><strong>Every DFA is also an NFA, which is why the first option is included.</strong></li>
+</ul>
+	</section>
+	</div>
+    </div>
+</div>
+<footer>
+   <div class="well well-lg" id="footer-well">
+      <div class="container">
+
+
+      <div class="row">
+         <div class="col-xs-6">
+            <a href="https://angold4.org" title="Angold-4 Organization" class="image-link"><img src="../../../images/logo.png" class="cmudb-logo" /></a>
+         </div>
+         <div class="col-xs-6">
+            <p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p>
+        </div>
+      </div>
+   </div>
+   </div>
+</footer>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../../../theme/js/respond.min.js"></script>
+
+<!-- Fix scrolling issues to internal HREFs that get positioned behind navbar -->
+<!-- http://stackoverflow.com/questions/10732690/offsetting-an-html-anchor-to-adjust-for-fixed-header -->
+<script src="../../../theme/js/href_scroll.js"></script>
+
+<!-- You know what this is and you know what he did to me... -->
+<script src="../../../theme/js/tim-kraska-betrayed-me.js"></script>
+</body>
+</html>
