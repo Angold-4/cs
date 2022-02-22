@@ -24,7 +24,8 @@ In 1954, *[John Backus](https://en.wikipedia.org/wiki/John_Backus)* developed th
 
 ### Compiler Structure
 
-**FORTRAN I is the first compiler, which brings huge impact on computer science (Many thought this is impossible). And modern compiers preserve the outlines of FORTRAN I:**
+**FORTRAN I is the first compiler, which brings huge impact on computer science (Many thought this is impossible).**<br>
+**And modern compiers preserve the outlines of FORTRAN I:**
 
 1. Lexical Analysis
 2. Parsing
@@ -62,7 +63,7 @@ Today, the overall structure of almost every compiler adheres to this outline<br
 
 #### Why are there so many new programming languages?
 
-**A interesting claim:**
+**An interesting claim:**
 > Programmer training is the dominant cost for a programming language.
 
 That leads three things: 

@@ -66,95 +66,14 @@
 	<section id="content" class="body">
 
 
-<h1>1. Introduction</h1>
-<p><strong>By Angold Wang | 11/02/2022</strong></p>
-<h2>1. Compiler</h2>
-<h3>Overview</h3>
+<h1>cs</h1>
 <ul>
-<li><strong>Compilers translate your program</strong></li>
-<li><strong>Interpreters run your program</strong></li>
+<li><strong>All about Compilers</strong></li>
 </ul>
-<p><img src="Sources/runtime.png" alt="runtime"></p>
-<h3>Compiler History</h3>
-<p><img src="Sources/hist.png" alt="hist"></p>
-<p>In 1954, <em><a href="https://en.wikipedia.org/wiki/John_Backus">John Backus</a></em> developed the first high-level language: <strong>FORTRAN (Formula-Translation)</strong><!-- raw HTML omitted -->
-<strong>Which translate high-level code to assembly, and the performance is close to hand-written assembly!</strong></p>
+<h2>Lectures (Standford CS-143)</h2>
 <ul>
-<li>Development time halved</li>
-<li>in 1958 &gt;50% of all software is in FORTRAN.</li>
-</ul>
-<h3>Compiler Structure</h3>
-<p><strong>FORTRAN I is the first compiler, which brings huge impact on computer science (Many thought this is impossible).</strong><!-- raw HTML omitted -->
-<strong>And modern compiers preserve the outlines of FORTRAN I:</strong></p>
-<ol>
-<li>Lexical Analysis</li>
-<li>Parsing</li>
-<li>Semantic Analysis</li>
-<li>Optimiaztion</li>
-<li>Code Generation</li>
-</ol>
-<p>Today, the overall structure of almost every compiler adheres to this outline<!-- raw HTML omitted --> but proportions are changed since FORTRAN:</p>
-<p><img src="Sources/structure.png" alt="structure"></p>
-<h3>Compiler Economy</h3>
-<h4>Why are there so many programming languages?</h4>
-<p><strong>Application Domains have distinctive/conflicting needs.</strong></p>
-<ul>
-<li>
-<p><strong>Scientific Computing</strong></p>
-<ul>
-<li>Good Floating-point support</li>
-<li>Godd Arrays</li>
-<li>Parallelism</li>
-<li>Example: <em>FORTRAN / Matlab / R</em></li>
-</ul>
-</li>
-<li>
-<p><strong>Business Applications</strong></p>
-<ul>
-<li>Persistance (Stable, Safe)</li>
-<li>Report Generation</li>
-<li>Data Analysis</li>
-<li>Example: <em>SQL</em></li>
-</ul>
-</li>
-<li>
-<p><strong>System Programming</strong></p>
-<ul>
-<li>Control of Resources</li>
-<li>Real-time constraints</li>
-<li>Example: <em>C / C++</em></li>
-</ul>
-</li>
-</ul>
-<p><strong>As you can see, what's important in one domain or most important in one domain is not the same as in another domain. And it is easy to imagine at least that it would be difficult to intergrate all of these into one system that would do good job on all of these things.</strong></p>
-<h4>Why are there so many new programming languages?</h4>
-<p><strong>An interesting claim:</strong></p>
-<blockquote>
-<p>Programmer training is the dominant cost for a programming language.</p>
-</blockquote>
-<p>That leads three things:</p>
-<ol>
-<li>
-<p>Widely used languages are slow to change:<!-- raw HTML omitted -->
-<strong>We would expect the most popular languages, which will have larger and larger programmer basis, to become more and more ossified. To evolve more and more slowly.</strong></p>
-</li>
-<li>
-<p>Better and easier to start a new language:<!-- raw HTML omitted -->
-<strong>Since there are new application domains coming along all the time, instead of updating the widely-used languages, which is very hard and costs much as we metioned above, we better like to start a new language.<!-- raw HTML omitted --></strong>
-<strong>Because you start with zero users and so there is essentially zero training cost at the beginning, the new language can evolve much more quickly to changing situations. And it's just not very costly to experiment with a new language at all.</strong></p>
-</li>
-<li>
-<p>New languages tend to look like old languages:<!-- raw HTML omitted -->
-<strong>Reduce the trainning cost, (Java versus C++)</strong></p>
-</li>
-</ol>
-<h4>What is a good programming language?</h4>
-<p><strong>No &quot;Perfect&quot; Language, each of them has its own domain.</strong></p>
-<h2>2. Cool Programming Language</h2>
-<p><strong>Classroom Object Oriented Language</strong></p>
-<ul>
-<li>Designed to be implemented in a short time</li>
-<li># Cool Compilers &gt; # Cool Programs</li>
+<li><strong>1. <a href="docs/lectures/1Introduction.html">Introduction</a></strong></li>
+<li><strong>2. <a href="docs/lectures/2Lexical.html">Lexical Analysis</a></strong></li>
 </ul>
 	</section>
 	</div>
