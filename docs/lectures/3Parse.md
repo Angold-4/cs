@@ -52,8 +52,31 @@ The idea of CFG is a big step, but the CFG can only tell us whether a sequence o
 
 ![parsetree](Sources/parsetree.png)
 
+**A parse tree has:**
+* Terminals at the leaves
+* Non-terminals at the interior nodes
+
+**An in-order traversal of the leaves is the original input**.
+
+
 ### i. Ambiguity
 
 **A Context-free Grammar is ambiguous if it has more than one parse tree for some string.**
 
 ![ambiguity](Sources/ambiguity.png)
+
+### ii. Handle Ambiguity
+**It is impossible to convert automatically an ambiguous grammar to an unambiguous one,** but we have two general ways:
+1. Precedence
+2. Associativity
+
+
+### iii. Abstract Syntax Tree
+* Like parse trees but ignore some details.
+* Capturing the nesting (recursive) structure of programming language.
+
+
+## 3. Recursive Descent Parsing
+
+
+
