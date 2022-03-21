@@ -4,28 +4,30 @@
 
 ## 1. Compiler
 
-### Overview
-
+### i. Overview
+![always](Sources/always.jpeg)
 * **Compilers translate your program**
 * **Interpreters run your program**
 
 ![runtime](Sources/runtime.png)
 
 
-### Compiler History
+### ii. Compiler History
 
 ![hist](Sources/hist.png)
 
-In 1954, *[John Backus](https://en.wikipedia.org/wiki/John_Backus)* developed the first high-level language: **FORTRAN (Formula-Translation)**<br>
+In 1954, *[John Backus](https://en.wikipedia.org/wiki/John_Backus)* developed the first high-level language: **FORTRAN (Formula-Translation)**
+
 **Which translate high-level code to assembly, and the performance is close to hand-written assembly!**
+
 * Development time halved
 * in 1958 >50% of all software is in FORTRAN.
 
 
-### Compiler Structure
+### iii. Compiler Structure
 
-**FORTRAN I is the first compiler, which brings huge impact on computer science (Many thought this is impossible).**<br>
-**And modern compiers preserve the outlines of FORTRAN I:**
+**FORTRAN I is the first compiler, which brings huge impact on computer science (Many thought this is impossible).**
+**And modern compiers preserve the outlines of FORTRAN:**
 
 1. Lexical Analysis
 2. Parsing
@@ -33,11 +35,11 @@ In 1954, *[John Backus](https://en.wikipedia.org/wiki/John_Backus)* developed th
 4. Optimiaztion
 5. Code Generation
 
-Today, the overall structure of almost every compiler adheres to this outline<br> but proportions are changed since FORTRAN:
+Today, the overall structure of almost every compiler adheres to this outline, but proportions are changed since FORTRAN:
 
 ![structure](Sources/structure.png)
 
-### Compiler Economy
+### iv. Compiler Economy
 
 #### Why are there so many programming languages?
 **Application Domains have distinctive/conflicting needs.**
@@ -45,8 +47,7 @@ Today, the overall structure of almost every compiler adheres to this outline<br
 * **Scientific Computing** 
     * Good Floating-point support
     * Godd Arrays
-    * Parallelism
-    * Example: *FORTRAN / Matlab / R*
+    * Parallelism Example: *FORTRAN / Matlab / R*
 
 * **Business Applications**
     * Persistance (Stable, Safe)
@@ -83,11 +84,48 @@ That leads three things:
 **No "Perfect" Language, each of them has its own domain.**
 
 
-## 2. Cool Programming Language
+## 2. Abstractions
 
-**Classroom Object Oriented Language**
-* Designed to be implemented in a short time
-* \# Cool Compilers > \# Cool Programs
+#### Structure of a typical compiler
+
+**To reduce complexity, and create a more modular system. We divide the whole compiler into different _stages_, and each stages is the procedure of multiple _passes_.**
+
+![stages](Sources/stages.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
