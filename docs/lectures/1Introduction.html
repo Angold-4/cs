@@ -69,24 +69,24 @@
 <h1>1. Introduction</h1>
 <p><strong>By Angold Wang | 11/02/2022</strong></p>
 <h2>1. Compiler</h2>
+<h3>i. Overview</h3>
 <p><img src="Sources/always.jpeg" alt="always"></p>
-<h3>Overview</h3>
 <ul>
 <li><strong>Compilers translate your program</strong></li>
 <li><strong>Interpreters run your program</strong></li>
 </ul>
 <p><img src="Sources/runtime.png" alt="runtime"></p>
-<h3>Compiler History</h3>
+<h3>ii. Compiler History</h3>
 <p><img src="Sources/hist.png" alt="hist"></p>
-<p>In 1954, <em><a href="https://en.wikipedia.org/wiki/John_Backus">John Backus</a></em> developed the first high-level language: <strong>FORTRAN (Formula-Translation)</strong><!-- raw HTML omitted -->
-<strong>Which translate high-level code to assembly, and the performance is close to hand-written assembly!</strong></p>
+<p>In 1954, <em><a href="https://en.wikipedia.org/wiki/John_Backus">John Backus</a></em> developed the first high-level language: <strong>FORTRAN (Formula-Translation)</strong></p>
+<p><strong>Which translate high-level code to assembly, and the performance is close to hand-written assembly!</strong></p>
 <ul>
 <li>Development time halved</li>
 <li>in 1958 &gt;50% of all software is in FORTRAN.</li>
 </ul>
-<h3>Compiler Structure</h3>
-<p><strong>FORTRAN I is the first compiler, which brings huge impact on computer science (Many thought this is impossible).</strong><!-- raw HTML omitted -->
-<strong>And modern compiers preserve the outlines of FORTRAN I:</strong></p>
+<h3>iii. Compiler Structure</h3>
+<p><strong>FORTRAN I is the first compiler, which brings huge impact on computer science (Many thought this is impossible).</strong>
+<strong>And modern compiers preserve the outlines of FORTRAN:</strong></p>
 <ol>
 <li>Lexical Analysis</li>
 <li>Parsing</li>
@@ -94,9 +94,9 @@
 <li>Optimiaztion</li>
 <li>Code Generation</li>
 </ol>
-<p>Today, the overall structure of almost every compiler adheres to this outline<!-- raw HTML omitted --> but proportions are changed since FORTRAN:</p>
+<p>Today, the overall structure of almost every compiler adheres to this outline, but proportions are changed since FORTRAN:</p>
 <p><img src="Sources/structure.png" alt="structure"></p>
-<h3>Compiler Economy</h3>
+<h3>iv. Compiler Economy</h3>
 <h4>Why are there so many programming languages?</h4>
 <p><strong>Application Domains have distinctive/conflicting needs.</strong></p>
 <ul>
@@ -105,8 +105,7 @@
 <ul>
 <li>Good Floating-point support</li>
 <li>Godd Arrays</li>
-<li>Parallelism</li>
-<li>Example: <em>FORTRAN / Matlab / R</em></li>
+<li>Parallelism Example: <em>FORTRAN / Matlab / R</em></li>
 </ul>
 </li>
 <li>
@@ -151,11 +150,57 @@
 </ol>
 <h4>What is a good programming language?</h4>
 <p><strong>No &quot;Perfect&quot; Language, each of them has its own domain.</strong></p>
-<h2>2. Cool Programming Language</h2>
-<p><strong>Classroom Object Oriented Language</strong></p>
-<ul>
-<li>Designed to be implemented in a short time</li>
-</ul>
+<h2>2. Typical Compiler Stages</h2>
+<h4>Structure of a typical compiler</h4>
+<p><strong>To reduce complexity, and create a more modular system. We divide the whole compiler into different <em>stages</em>, and each stages is the procedure of multiple <em>passes</em>.</strong></p>
+<p><img src="Sources/stages.png" alt="stages"></p>
+<p>The monolithic structure may be more <strong>efficient</strong>, and the multi-pass structure helps to <strong>reduce the complexity of the implementation</strong>, and it is relatively <strong>simple to debug</strong>, it also improves the <strong>flexibility,</strong> which means different combinations of optimization techniques can be used in different situations.</p>
+<p>To make this abstraction more concrete, consider the steps required to generate executable code from the following expression:</p>
+<pre><code>C = A + 3 * 4 
+</code></pre>
+<h3>i. Lexical Analysis</h3>
+<p>Basically, the <strong>Lexical Analyzer</strong> transforms the <strong>input source char stream</strong> into the <strong>word stream of the given programming language</strong> (so called &quot;token&quot;), each token must classified into the a <strong>grammatical category.</strong></p>
+<p>For example, after the lexical analysis, the input source program becomes:</p>
+<pre><code>(identifier, C), (assign equal, =), (identifier, A),
+(add, +), (integer, 3), (multiple, *), (integer, 4).
+</code></pre>
+<p>Nowadays, since we had a great understanding of the math concepts (<strong>Finite-automata</strong>) behind the Lexer (aka. Scanner) implementation. People design many tools in order to auto-generate Lexer by using the given <strong>Regular Expression.</strong></p>
+<h3>ii. Parsing</h3>
+<p>Now, the parsing step is going to match the <strong>grammar</strong> of the input <strong>tokens</strong>.</p>
+<h4>Programming language constructs have recursive structure.</h4>
+<pre><code>S -&gt; A | ... ;
+A -&gt; E ASSIGN_EQUAL E;
+E -&gt; E + T | T ;
+T -&gt; T * F | F
+F -&gt; (E) | IDENTIFIER | INTEGER | OP ;
+</code></pre>
+<p>The language above is called <strong>Context-free Grammar</strong>, which can describe the grammar of given programming language.
+<strong>Not only we want to check whether the input tokens is in the grammar, but we also need to produce an output that represents a valid stream of tokens for future processes.</strong>
+The output is called <strong>Parse Tree</strong>, which describes the derivation steps, and it is enough for future pass. <em>(From Button to UP)</em></p>
+<p><img src="Sources/ptree.png" alt="ptree"></p>
+<h3>iii. Semantic Analysis</h3>
+<p><strong>Grammatically correct statements may be meaningless. Whether it has meaning depends on its context.</strong></p>
+<p>For example, think about the following two sentences in English:</p>
+<pre><code>Rocks are green vegetables.
+Compilers are engineered objects.
+</code></pre>
+<p>Both of them use the same syntatic category token in the same order, but the previous statement has no reasonable semantics. To understand that statement, contextual knowledge about <code>Rocks</code>, <code>Vegetables</code> are required.</p>
+<p>In the <strong>runtime</strong> of this pass, the compiler will maintain a <strong>symbol table</strong>, where stores the <strong>context</strong> of each variable, like their type, value, size, etc,. <strong>And the compiler will use that table to check whether each <code>variable</code>, <code>function</code>, <code>class</code> ... is used in compliance with its definitions.</strong></p>
+<p>Like in the <code>C = A + 3 * 4</code> example, in this pass, the compiler will try to find the definition of variable <code>A</code> and <code>C</code>, and check their type and value. If all of them are valid in this context. then Compiler will come to the next stages.</p>
+<h3>iv. Optimization</h3>
+<p>The term <strong>&quot;Optimization&quot;</strong> implies that the compiler needs to find the optimal solution to a problem. <strong>But the problems that occur in the optimization process are so intricate and complex that these problems cannot actually be optimally solved.</strong></p>
+<p>The mordern optimizer is extremely complex, because there are a lot of things need to be concerned. The Optimizer are also divied into a lot of <strong>passes</strong>, each pass is responsible to deal with some optimizations. They read source IR and then output transformed IR.</p>
+<p>In our example, to reduce the execution time, we can optimize the IR by reducing the number of lines, or the number of registers used. (assume <code>A</code> equal to 5 in this context).</p>
+<pre><code>t0 = 3          |          t0 = 12
+t1 = 4          |          t1 = 3 + 12
+t2 = t0 * t1    |          t2 = 5
+t3 = A         =|=&gt;        t2 = t1
+t4 = t3 + t2    |
+t5 = C          |
+t5 = t4         |
+</code></pre>
+<h3>v. Backend</h3>
+<p><strong>The backend of the compiler will traverse the IR form of the code and output the code of the target machine (or interpreter).</strong></p>
 	</section>
 	</div>
     </div>
