@@ -1,9 +1,15 @@
+#include <assert.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+
+
+//
+// Tokenizer
+// 
 
 typedef enum {
     TK_PUNCT, // Puntuators 0
@@ -24,7 +30,6 @@ struct Token {
 
 // Input string
 static char *current_input;
-
 
 // Reports an error and exit.
 static void error(char *fmt, ...) {
@@ -117,8 +122,8 @@ static Token *tokenize(void) {
 	    continue;
 	}
 
-	// Puntuator
-	if (*p == '+' || *p == '-') {
+	// Puntuators
+	if (ispunct(*p)) {
 	    cur = cur->next = new_token(TK_PUNCT, p, p+1);
 	    // we know exactly the len is 1
 	    // and the val is record on its tok->loc
@@ -133,6 +138,161 @@ static Token *tokenize(void) {
     return head.next;
 }
 
+//
+// Parser
+// 
+ 
+typedef enum {
+  ND_ADD, // +
+  ND_SUB, // -
+  ND_MUL, // *
+  ND_DIV, // /
+  ND_NUM, // Integer
+  ND_ERR,
+} NodeKind;
+
+// AST node type
+typedef struct Node Node;
+struct Node {
+  NodeKind kind; // Node kind
+  Node *lhs;     // Left-hand side
+  Node *rhs;     // Right-hand side
+  int val;       // Used if kind == ND_NUM
+};
+
+static Node *new_node(NodeKind kind) {
+  // helper function
+  Node *node = calloc(1, sizeof(Node));
+  node->kind = kind;
+  return node;
+}
+
+static Node *new_binary(NodeKind kind, Node *lhs, Node *rhs) {
+  Node *node = new_node(kind);
+  node->lhs = lhs;
+  node->rhs = rhs;
+  return node;
+}
+
+static Node *new_num(int val) {
+  Node *node = new_node(ND_NUM);
+  node->val = val;
+  return node;
+}
+
+static Node *expr(Token **rest, Token *tok);
+static Node *mul(Token **rest, Token *tok);
+static Node *primary(Token **rest, Token *tok);
+
+
+
+// expr = mul ("+" mul | '-' mul)* 
+static Node *expr(Token **rest, Token *tok) { // rest -> move the pointer after finish
+  Node *node = mul(&tok, tok);
+  for (;;) { // *
+    if (equal(tok, "+")) {
+      node = new_binary(ND_ADD, node, mul(&tok, tok->next));
+      continue;
+    }
+    if (equal(tok, "-")) {
+      node = new_binary(ND_SUB, node, mul(&tok, tok->next));
+      continue;
+    }
+    *rest = tok; // update pointer
+    return node;
+  }
+}
+
+// mul = primary ("*" primary | "/" primary)*
+static Node *mul(Token **rest, Token *tok) {
+  Node *node = primary(&tok, tok);
+  for (;;) { // *
+    if (equal(tok, "*")) {
+      node = new_binary(ND_MUL, node, primary(&tok, tok->next));
+      continue;
+    }
+
+    if (equal(tok, "/")) {
+      node = new_binary(ND_DIV, node, primary(&tok, tok->next));
+      continue;
+    }
+
+    *rest = tok; // update pointer
+    return node;
+  }
+}
+
+// primary = "(" expr ")" | num
+static Node *primary(Token **rest, Token *tok) {
+  if (equal(tok, "(")) {
+    Node *node = expr(&tok, tok->next);
+    *rest = skip(tok, ")");
+    return node;
+  }
+
+  if (tok->kind == TK_NUM) {
+    Node *node = new_num(tok->val);
+    *rest = tok->next; // also update the pointer
+    return node;
+  }
+
+  error_tok(tok, "Unexpected an expression");
+  return new_node(ND_ERR); // never go to there
+}
+
+
+//
+// Code Generator
+//
+
+static int depth;
+
+static void push(void) {
+  printf("  push %%rax\n");
+  depth++;
+}
+
+static void pop(char *arg) {
+  printf("  pop %s\n", arg);
+  depth--;
+}
+
+static void gen_expr(Node *node) {
+  if (node->kind == ND_NUM) {
+    printf("  mov $%d, %%rax\n", node->val);
+    return;
+  }
+
+  // otherwise it is a token node
+  gen_expr(node->rhs);
+  push();
+  gen_expr(node->lhs); // rax
+  pop("%rdi"); // we do not touch rax
+
+  switch (node->kind) {
+  // store in rax
+  case ND_ADD:
+    printf("  add %%rdi, %%rax\n");
+    return;
+  case ND_SUB:
+    printf("  sub %%rdi, %%rax\n");
+    return;
+  case ND_MUL:
+    printf("  imul %%rdi, %%rax\n");
+    return;
+  case ND_DIV:
+    printf("  cqo\n");
+    printf("  idiv %%rdi\n");
+    return;
+  case ND_ERR:
+    return;
+  case ND_NUM:
+    return;
+  }
+
+  error("invalid expression");
+}
+
 
 int main(int argc, char **argv) {
   if (argc != 2) {
@@ -140,31 +300,27 @@ int main(int argc, char **argv) {
   }
 
   current_input = argv[1];
+
+  // Tokenizer
   Token *tok = tokenize();
 
+  // Parser
+  Node *node = expr(&tok, tok);
+
+  if (tok->kind != TK_EOF) {
+    error_tok(tok, "Extra token");
+  }
+
+  // Code Generator
   printf(".section	__TEXT,__text,regular,pure_instructions\n");
   printf(".build_version macos, 12, 0	sdk_version 12, 0\n");
   printf(".globl _main\n");
   printf("_main:\n");
 
-  // The first token must be an number
-  printf("  mov $%d, %%rax\n", get_number(tok));
-  tok = tok->next;
-
-
-  // ... followed by either `+ <number>` or `- <number>`.
-  while (tok->kind != TK_EOF) {
-      if (equal(tok, "+")) {
-	  printf("  add $%d, %%rax\n", get_number(tok->next));
-	  tok = tok->next->next;
-	  continue;
-      }
-
-      tok = skip(tok, "-"); // will move the pointer here
-      printf("  sub $%d, %%rax\n", get_number(tok));
-      tok = tok->next;
-  }
+  gen_expr(node);
 
   printf("  ret\n");
+  assert(depth == 0);
+
   return 0;
 }
