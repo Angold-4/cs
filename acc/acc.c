@@ -70,10 +70,11 @@ static void error_tok(Token *tok, char *fmt, ...) {
 static bool equal(Token *tok, char *op) {
   // 1. The same character (memcmp)
   // 2. The same length (\0)
+  // Won't update the pointer (token)
   return memcmp(tok->loc, op, tok->len) == 0 && op[tok->len] == '\0';
 }
 
-// Ensure that the current token is `s`.
+// Ensure that the current token is `s`. only one char
 static Token *skip(Token *tok, char *s) {
   if (!equal(tok, s))
     error_tok(tok, "expected '%s'", s);
@@ -95,6 +96,21 @@ static Token *new_token(TokenKind kind, char *start, char *end) {
   tok->loc = start;
   tok->len = end - start;
   return tok;
+}
+
+
+// Check whether p start with *q (q better be a const char*)
+static bool startwith(char *p, char *q) {
+  return strncmp(p, q, strlen(q)) == 0;
+}
+
+
+// Read a punctuator token from p and returns its length.
+static int read_punt(char *p) {
+  if (startwith(p, ">=") || startwith(p, "<=") ||
+      startwith(p, "==") || startwith(p, "!="))
+    return 2;
+  return ispunct(*p) ? 1 : 0; // ispunct only test char p
 }
 
 
@@ -123,12 +139,11 @@ static Token *tokenize(void) {
 	}
 
 	// Puntuators
-	if (ispunct(*p)) {
-	    cur = cur->next = new_token(TK_PUNCT, p, p+1);
-	    // we know exactly the len is 1
-	    // and the val is record on its tok->loc
-	    p++;
-	    continue;
+	int punct_len = read_punt(p);
+	if (punct_len) {
+	  cur = cur->next = new_token(TK_PUNCT, p, p+punct_len);
+	  p += cur->len;
+	  continue;
 	}
 
 	error_at(p, "Invalid token");
@@ -147,7 +162,11 @@ typedef enum {
   ND_SUB, // -
   ND_MUL, // *
   ND_DIV, // /
-  ND_NEG, // unary
+  ND_NEG, // unary -
+  ND_EQ,  // ==
+  ND_NE,  // !=
+  ND_LT,  // <
+  ND_LE,  // <=
   ND_NUM, // integer
   ND_ERR,
 } NodeKind;
@@ -187,16 +206,69 @@ static Node *new_num(int val) {
   return node;
 }
 
+
 static Node *expr(Token **rest, Token *tok);
+static Node *equality(Token **rest, Token *tok);
+static Node *relational(Token **rest, Token *tok);
+static Node *add(Token **rest, Token *tok);
 static Node *mul(Token **rest, Token *tok);
 static Node *unary(Token **rest, Token *tok);
 static Node *primary(Token **rest, Token *tok);
 
 
-
-// expr = mul ("+" mul | '-' mul)* 
+// expr = equality
 static Node *expr(Token **rest, Token *tok) { 
-  // rest -> move the pointer after finish
+  return equality(rest, tok);
+}
+
+// equality = relational ("==" relational | "!=" relational)*
+static Node *equality(Token **rest, Token *tok) {
+  Node *node = relational(&tok, tok);
+
+  for (;;) { // *
+    if (equal(tok, "==")) {
+      node = new_binary(ND_EQ, node, relational(&tok, tok->next));
+      continue;
+    }
+
+    if (equal(tok, "!=")) {
+      node = new_binary(ND_NE, node, relational(&tok, tok->next));
+      continue;
+    }
+    *rest = tok;
+    return node;
+  }
+}
+
+// relational = add ("<" add | "<=" add | ">" add | ">=" add)*
+static Node *relational(Token **rest, Token *tok) {
+  Node *node = add(&tok, tok);
+
+  for (;;) { // *
+    if (equal(tok, "<")) {
+      node = new_binary(ND_LT, node, add(&tok, tok->next));
+      continue;
+    }
+    if (equal(tok, "<=")) {
+      node = new_binary(ND_LE, node, add(&tok, tok->next));
+      continue;
+    }
+    if (equal(tok, ">")) {
+      node = new_binary(ND_LT, add(&tok, tok->next), node);
+      continue;
+    }
+    if (equal(tok, ">=")) {
+      node = new_binary(ND_LE, add(&tok, tok->next), node);
+      continue;
+    }
+    // otherwise not inside *
+    *rest = tok;
+    return node;
+  }
+}
+
+// add = mul ("+" mul | "-" mul)*
+static Node *add(Token **rest, Token *tok) {
   Node *node = mul(&tok, tok);
   for (;;) { // *
     if (equal(tok, "+")) {
@@ -211,6 +283,7 @@ static Node *expr(Token **rest, Token *tok) {
     return node;
   }
 }
+
 
 // mul = unary ("*" unary | "/" unary)*
 static Node *mul(Token **rest, Token *tok) {
@@ -297,8 +370,9 @@ static void gen_expr(Node *node) {
     break;
   }
 
+  // else binary expression
   gen_expr(node->rhs);
-  push();
+  push();      // store it in the stack
   gen_expr(node->lhs); // rax
   pop("%rdi"); // we do not touch rax
 
@@ -316,6 +390,23 @@ static void gen_expr(Node *node) {
   case ND_DIV:
     printf("  cqo\n");
     printf("  idiv %%rdi\n");
+    return;
+  case ND_EQ:
+  case ND_NE:
+  case ND_LT:
+  case ND_LE:
+    printf("  cmp %%rdi %%rax\n");
+
+    if (node->kind == ND_EQ)
+      printf("  sete %%al\n");
+    else if (node->kind == ND_NE)
+      printf("  setne %%al\n");
+    else if (node->kind == ND_LT)
+      printf("  setl %%al\n");
+    else if (node->kind == ND_LE)
+      printf("  setle %%al\n");
+
+    printf("  movzb %%al, %%rax\n");
     return;
   default:
     return;
@@ -335,8 +426,13 @@ int main(int argc, char **argv) {
   // Tokenizer
   Token *tok = tokenize();
 
+  // printf("token pass\n");
+
+
   // Parser
   Node *node = expr(&tok, tok);
+
+  // printf("parse pass\n");
 
   if (tok->kind != TK_EOF) {
     error_tok(tok, "Extra token");
