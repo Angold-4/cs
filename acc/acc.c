@@ -395,7 +395,7 @@ static void gen_expr(Node *node) {
   case ND_NE:
   case ND_LT:
   case ND_LE:
-    printf("  cmp %%rdi %%rax\n");
+    printf("  cmp %%rdi, %%rax\n");
 
     if (node->kind == ND_EQ)
       printf("  sete %%al\n");

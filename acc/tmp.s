@@ -2,7 +2,11 @@
 .build_version macos, 12, 0	sdk_version 12, 0
 .globl _main
 _main:
-  mov $10, %rax
-  neg %rax
-  neg %rax
+  mov $1, %rax
+  push %rax
+  mov $2, %rax
+  pop %rdi
+  cmp %rdi, %rax
+  setle %al
+  movzb %al, %rax
   ret
