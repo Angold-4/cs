@@ -258,22 +258,12 @@ $ echo $?
 21
 ```
 
-It is worth mentioning that in this series of weicc development notes. I'll trying to avoid put this big chunk of code in the main body of my post. Instead, I will put the code into my corresbonding **[weicc commits](https://github.com/Angold-4/weicc/commits/main)**, and put link there for your easy reference. 
-**And also I won't talk too much about the code itself, because I try not to use many complex algorithms (because I can't use them freely either) and write comments as much as possible (most of them were brute force).**
+It is worth mentioning that in this series of weicc development notes. I'll trying to avoid putting this big chunk of code in the main body of my post. Instead, I will put the code into my corresbonding **[weicc commits](https://github.com/Angold-4/weicc/commits/main)**, and put link there for your easy reference. 
+**And also I won't talk too much about the code itself, because I try not to use many complex algorithms (I can't use them freely either) and write comments as much as possible (most of them were brute force).**
 
 This is a very interesting piece of code, and it is perfect as a dessert, giving us some sort of taste of **compiler** or **compilation procedure**.
 
 Thanks for reading this! If you have any questions or suggestions, please email me **@[wangold4w@gmail.com](mailto:wangold4w@gmail.com)**.
-
-## References
-1. **[Reflections on Trusting Trust, 1984, Thompson](../../docs/weicc/thompson1984.pdf)**
-2. **[VCF East 2019 -- Brian Kernighan interviews Ken Thompson](https://www.youtube.com/watch?v=tc4ROCJYbm0)**
-3. **[AT&T Archives: The UNIX Operating System](https://www.youtube.com/watch?v=EY6q5dv_B-o)**
-4. **[Ken Thompson and Dennis Ritchie Explain UNIX (Bell Labs)](https://www.youtube.com/watch?v=JoVQTPbD6UY)**
-5. **[2011 (27th) Japan Prize; Dr. Ritchie / Dr. Thompson](https://www.youtube.com/watch?v=IjvjqAVkvYo)**
-6. **[低レイヤを知りたい人のためのCコンパイラ作成入門 by Rui Ueyama](https://www.sigbus.info/compilerbook)**
-
-
 ## Development environment assumed in this series*
 
 ### Linux (Ubuntu)
@@ -290,3 +280,15 @@ $ sudo apt install -y gcc make git binutils libc6-dev
 
 ### Windows (WSL)
 Windows is not compatible with Linux at the assembly source level. However, with Windows 10, it is possible to run Linux on Windows like a single application, and by using it, you can proceed with development on Windows. An application called Windows Subsystem for Linux (WSL) is the Linux compatible environment. When practicing the contents of this book on Windows, please install WSL and proceed with development in it.
+
+
+## References
+1. **[Reflections on Trusting Trust, 1984, Thompson](../../docs/weicc/thompson1984.pdf)**
+2. **[VCF East 2019 -- Brian Kernighan interviews Ken Thompson](https://www.youtube.com/watch?v=tc4ROCJYbm0)**
+3. **[AT&T Archives: The UNIX Operating System](https://www.youtube.com/watch?v=EY6q5dv_B-o)**
+4. **[Ken Thompson and Dennis Ritchie Explain UNIX (Bell Labs)](https://www.youtube.com/watch?v=JoVQTPbD6UY)**
+5. **[2011 (27th) Japan Prize; Dr. Ritchie / Dr. Thompson](https://www.youtube.com/watch?v=IjvjqAVkvYo)**
+6. **[低レイヤを知りたい人のためのCコンパイラ作成入門 by Rui Ueyama](https://www.sigbus.info/compilerbook)**
+
+****
+**This page was last edited on 17 May 2022, at 15:48 (UTC), by [Angold Wang](https://github.com/Angold-4).**

@@ -25,6 +25,6 @@
 * **[weicc repository on github](://github.com/Angold-4/weicc)**
 
 
-0. **[Thompson-1984](docs/weicc/1Thompson1984.html)**
-1. **[Calculator-level language creation](docs/weicc/2Calculator.html)**
+1. **[Thompson-1984](docs/weicc/1Thompson1984.html)**
+2. **[Calculator-level language creation](docs/weicc/2Calculator.html)**
 

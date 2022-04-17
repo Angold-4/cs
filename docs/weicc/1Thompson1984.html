@@ -276,19 +276,10 @@ $ ./tmp
 $ echo $?
 21
 </code></pre>
-<p>It is worth mentioning that in this series of weicc development notes. I'll trying to avoid put this big chunk of code in the main body of my post. Instead, I will put the code into my corresbonding <strong><a href="https://github.com/Angold-4/weicc/commits/main">weicc commits</a></strong>, and put link there for your easy reference.
-<strong>And also I won't talk too much about the code itself, because I try not to use many complex algorithms (because I can't use them freely either) and write comments as much as possible (most of them were brute force).</strong></p>
+<p>It is worth mentioning that in this series of weicc development notes. I'll trying to avoid putting this big chunk of code in the main body of my post. Instead, I will put the code into my corresbonding <strong><a href="https://github.com/Angold-4/weicc/commits/main">weicc commits</a></strong>, and put link there for your easy reference.
+<strong>And also I won't talk too much about the code itself, because I try not to use many complex algorithms (I can't use them freely either) and write comments as much as possible (most of them were brute force).</strong></p>
 <p>This is a very interesting piece of code, and it is perfect as a dessert, giving us some sort of taste of <strong>compiler</strong> or <strong>compilation procedure</strong>.</p>
 <p>Thanks for reading this! If you have any questions or suggestions, please email me <strong>@<a href="mailto:wangold4w@gmail.com">wangold4w@gmail.com</a></strong>.</p>
-<h2>References</h2>
-<ol>
-<li><strong><a href="../../docs/weicc/thompson1984.pdf">Reflections on Trusting Trust, 1984, Thompson</a></strong></li>
-<li><strong><a href="https://www.youtube.com/watch?v=tc4ROCJYbm0">VCF East 2019 -- Brian Kernighan interviews Ken Thompson</a></strong></li>
-<li><strong><a href="https://www.youtube.com/watch?v=EY6q5dv_B-o">AT&amp;T Archives: The UNIX Operating System</a></strong></li>
-<li><strong><a href="https://www.youtube.com/watch?v=JoVQTPbD6UY">Ken Thompson and Dennis Ritchie Explain UNIX (Bell Labs)</a></strong></li>
-<li><strong><a href="https://www.youtube.com/watch?v=IjvjqAVkvYo">2011 (27th) Japan Prize; Dr. Ritchie / Dr. Thompson</a></strong></li>
-<li><strong><a href="https://www.sigbus.info/compilerbook">低レイヤを知りたい人のためのCコンパイラ作成入門 by Rui Ueyama</a></strong></li>
-</ol>
 <h2>Development environment assumed in this series*</h2>
 <h3>Linux (Ubuntu)</h3>
 <p><strong>I use Linux as my developing environment (especially Ubuntu 20.04) that runs on so-called ordinary PCs such as Intel and AMD.</strong>
@@ -300,6 +291,17 @@ $ sudo apt install -y gcc make git binutils libc6-dev
 <p><strong>MacOS is fairly compatible with Linux at the source level of the assembly, but it's not fully compatible (specifically, it doesn't support a feature called &quot;static linking&quot;). Due to this problem, I think it is very hard to implement a MacOS Version of C compiler. (It might can be implemented, but there may be various incompatibilities in every detail).</strong> I'll trying to implement a MacOS version of weicc. You may refer to the <strong><a href="https://github.com/Angold-4/weicc/tree/macos">macos branch</a></strong> to check the updates.</p>
 <h3>Windows (WSL)</h3>
 <p>Windows is not compatible with Linux at the assembly source level. However, with Windows 10, it is possible to run Linux on Windows like a single application, and by using it, you can proceed with development on Windows. An application called Windows Subsystem for Linux (WSL) is the Linux compatible environment. When practicing the contents of this book on Windows, please install WSL and proceed with development in it.</p>
+<h2>References</h2>
+<ol>
+<li><strong><a href="../../docs/weicc/thompson1984.pdf">Reflections on Trusting Trust, 1984, Thompson</a></strong></li>
+<li><strong><a href="https://www.youtube.com/watch?v=tc4ROCJYbm0">VCF East 2019 -- Brian Kernighan interviews Ken Thompson</a></strong></li>
+<li><strong><a href="https://www.youtube.com/watch?v=EY6q5dv_B-o">AT&amp;T Archives: The UNIX Operating System</a></strong></li>
+<li><strong><a href="https://www.youtube.com/watch?v=JoVQTPbD6UY">Ken Thompson and Dennis Ritchie Explain UNIX (Bell Labs)</a></strong></li>
+<li><strong><a href="https://www.youtube.com/watch?v=IjvjqAVkvYo">2011 (27th) Japan Prize; Dr. Ritchie / Dr. Thompson</a></strong></li>
+<li><strong><a href="https://www.sigbus.info/compilerbook">低レイヤを知りたい人のためのCコンパイラ作成入門 by Rui Ueyama</a></strong></li>
+</ol>
+<hr>
+<p><strong>This page was last edited on 17 May 2022, at 15:48 (UTC), by <a href="https://github.com/Angold-4">Angold Wang</a>.</strong></p>
 	</section>
 	</div>
     </div>
