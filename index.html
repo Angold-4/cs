@@ -67,15 +67,33 @@
 
 
 <h1>cs</h1>
+<p><img src="docs/weicc/Sources/mmm.jpeg" alt="mmmjpeg"></p>
+<h2>Rob Pikes's 5 Rules of Programming</h2>
 <ul>
-<li><strong>All about Compilers</strong></li>
+<li><strong>Rule 1</strong>. You can't tell where a program is going to spend its time. Bottlenecks occur in surprising places, so don't try to second guess and put in a speed hack until you've proven that's where the bottleneck is.</li>
+<li><strong>Rule 2</strong>. Measure. Don't tune for speed until you've measured, and even then don't unless one part of the code overwhelms the rest.</li>
+<li><strong>Rule 3</strong>. Fancy algorithms are slow when n is small, and n is usually small. Fancy algorithms have big constants. Until you know that n is frequently going to be big, don't get fancy. (Even if n does get big, use Rule 2 first.)</li>
+<li><strong>Rule 4</strong>. Fancy algorithms are buggier than simple ones, and they're much harder to implement. Use simple algorithms as well as simple data structures.</li>
+<li><strong>Rule 5</strong>. Data dominates. If you've chosen the right data structures and organized things well, the algorithms will almost always be self-evident. Data structures, not algorithms, are central to programming.</li>
 </ul>
-<h2>Lectures (Standford CS-143)</h2>
+<h2>Lectures (Stanford CS-143)</h2>
 <ul>
 <li><strong>1. <a href="docs/lectures/1Introduction.html">Introduction</a></strong></li>
 <li><strong>2. <a href="docs/lectures/2Lexical.html">Lexical Analysis</a></strong></li>
 <li><strong>3. <a href="docs/lectures/3Parse.html">Parsing</a></strong></li>
 </ul>
+<h2>acc: A simple integer arithmetic calculator</h2>
+<ul>
+<li><strong><a href="acc/acc.c">acc.c</a></strong></li>
+</ul>
+<h2>weicc: A small C compiler</h2>
+<ul>
+<li><strong><a href="://github.com/Angold-4/weicc">weicc repository on github</a></strong></li>
+</ul>
+<ol start="0">
+<li><strong><a href="docs/weicc/1Thompson1984.html">Thompson-1984</a></strong></li>
+<li><strong><a href="docs/weicc/2Calculator.html">Calculator-level language creation</a></strong></li>
+</ol>
 	</section>
 	</div>
     </div>
