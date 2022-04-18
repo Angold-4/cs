@@ -99,7 +99,7 @@
 <p><strong>Problem: Write a source program that, when compiled and executed, will produce as output an exact copy of its source. (Thompson)</strong></p>
 </blockquote>
 <p>There are a couple of different strategies to writing quines. The obvious one is to just write code that opens the code file and prints it out. But the more interesting ones involve language features that allow for self-embedding (using variables) and a lot of trial and error is involved.</p>
-<p><strong><a href="../../uc/stages/quines.c">quine.c</a></strong> is one of the implementation, I found it very intersting while implementing it that <strong>if you take care of the variables inside the program, you may implement your own version very easy (careful enough). However, if you try to use no variables (<code>TEXT</code>) in <code>quine.c</code> it seems impossible to implement quine.</strong></p>
+<p><strong><a href="../../uc/stages/quine.c">quine.c</a></strong> is one of the implementation, I found it very intersting while implementing it that <strong>if you take care of the variables inside the program, you may implement your own version very easy (careful enough). However, if you try to use no variables (<code>TEXT</code>) in <code>quine.c</code> it seems impossible to implement quine.</strong></p>
 <p>For example, first, whatever the program looks like, at some point it has to print something:</p>
 <pre><code>print ...
 </code></pre>
@@ -184,7 +184,7 @@ Using our new compiler <code>xcompilerc</code>, we can compile this <code>hw.x</
 Going back to the lineage of a compiler for a modern complex programming language, another compiler used to compile an implementation of that language, and so on. <strong>eventually someone used machine language directly in the early days of computers.</strong></p>
 <p><strong>The current compilers start with a very small assembller ancestors, just like the origin of life. So almost any existing executable is an indirect descendant of its primitive assembler.</strong></p>
 <h2>2. Meet weicc</h2>
-<p>As we mentioned above, if you already have an implementation of language X, there is no logical contradicton in creating a new language X compiler using that language itself. If you want to self-host, you can simply proceed with the development with an <strong>existing compiler and switch when your own is complete</strong>.</p>
+<p>As I mentioned above, if you already have an implementation of language X, there is no logical contradicton in creating a new language X compiler using that language itself. If you want to self-host, you can simply proceed with the development with an <strong>existing compiler and switch when your own is complete</strong>.</p>
 <p>And that is exactly what I am trying to implement in this series - <strong>A C language compiler that is implement using C</strong>.
 Initially  I plan to create a new language, but I can't come up with any new features or peculiarities for this new language, even if I implement it successfully, it may just a mediocre, buggy and flawed language.
 Designing and implementing the original language is good in terms of improving the design sense of the language, but as I mentioned above, it also has its pitfalls: You may design some specification of your own language intentionally where implementation is cumbersome.</p>

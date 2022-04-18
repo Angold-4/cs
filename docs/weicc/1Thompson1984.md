@@ -28,7 +28,7 @@ In this speech, thompson mentioned a lot of special topics, including program sa
 
 There are a couple of different strategies to writing quines. The obvious one is to just write code that opens the code file and prints it out. But the more interesting ones involve language features that allow for self-embedding (using variables) and a lot of trial and error is involved.
 
-**[quine.c](../../uc/stages/quines.c)** is one of the implementation, I found it very intersting while implementing it that **if you take care of the variables inside the program, you may implement your own version very easy (careful enough). However, if you try to use no variables (`TEXT`) in `quine.c` it seems impossible to implement quine.**
+**[quine.c](../../uc/stages/quine.c)** is one of the implementation, I found it very intersting while implementing it that **if you take care of the variables inside the program, you may implement your own version very easy (careful enough). However, if you try to use no variables (`TEXT`) in `quine.c` it seems impossible to implement quine.**
 
 For example, first, whatever the program looks like, at some point it has to print something: 
 ```
@@ -156,7 +156,7 @@ Going back to the lineage of a compiler for a modern complex programming languag
 **The current compilers start with a very small assembller ancestors, just like the origin of life. So almost any existing executable is an indirect descendant of its primitive assembler.**
  
 ## 2. Meet weicc
-As we mentioned above, if you already have an implementation of language X, there is no logical contradicton in creating a new language X compiler using that language itself. If you want to self-host, you can simply proceed with the development with an **existing compiler and switch when your own is complete**. 
+As I mentioned above, if you already have an implementation of language X, there is no logical contradicton in creating a new language X compiler using that language itself. If you want to self-host, you can simply proceed with the development with an **existing compiler and switch when your own is complete**. 
 
 And that is exactly what I am trying to implement in this series - **A C language compiler that is implement using C**.
 Initially  I plan to create a new language, but I can't come up with any new features or peculiarities for this new language, even if I implement it successfully, it may just a mediocre, buggy and flawed language. 
