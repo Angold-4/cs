@@ -291,4 +291,4 @@ Windows is not compatible with Linux at the assembly source level. However, with
 6. **[低レイヤを知りたい人のためのCコンパイラ作成入門 by Rui Ueyama](https://www.sigbus.info/compilerbook)**
 
 ****
-**This page was last edited on 17 May 2022, at 15:48 (UTC), by [Angold Wang](https://github.com/Angold-4).**
+**This page was last edited on 17 Apr 2022, at 15:48 (UTC), by [Angold Wang](https://github.com/Angold-4).**
