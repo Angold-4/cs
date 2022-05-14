@@ -31,7 +31,6 @@ I think that is one of the correct way to understand a compiler, and what I am g
 
 ## 1. Tokenizer
 
-
 ## 2. Parser
 
 
