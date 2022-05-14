@@ -439,7 +439,6 @@ int main(int argc, char **argv) {
   }
 
   // Code Generator
-  printf(".section	__TEXT,__text,regular,pure_instructions\n");
   printf(".globl main\n");
   printf("main:\n");
 
