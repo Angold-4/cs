@@ -11,7 +11,7 @@ After you compile and test that code on your machine, back to the implementation
 So, what is the difference? In my opinion, like I mentioned in **[cs.1 Introduction](https://angold4.org/cs/docs/lectures/1Introduction.html)**:
 > **To reduce the complexity of implementation, people divide the whole compiler into different *stages*.**
 
-Theoretically, a single-pass, monolithic compiler structure would work, but it hard to implement, especially in **debugging** and **cooperating**, if you implement a compiler in this way (we did it in this 30-line code), the whole compiler is just a **Code Generator** (so-called the **Back End**). 
+Theoretically, a single-pass, monolithic compiler structure would work, but it is also hard to implement, especially in **debugging** and **cooperating**, if you implement a compiler in this way (we did it in this 30-line code), the whole compiler is just a **Code Generator** (so-called the **Back End**). 
 
 ![stages](Sources/stages.png)
 

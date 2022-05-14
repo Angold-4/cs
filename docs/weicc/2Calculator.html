@@ -76,11 +76,11 @@
 <blockquote>
 <p><strong>To reduce the complexity of implementation, people divide the whole compiler into different <em>stages</em>.</strong></p>
 </blockquote>
-<p>Theoretically, a single-pass, monolithic compiler structure would work, but it hard to implement, especially in <strong>debugging</strong> and <strong>cooperating</strong>, if you implement a compiler in this way (we did it in this 30-line code), the whole compiler is just a <strong>Code Generator</strong> (so-called the <strong>Back End</strong>).</p>
+<p>Theoretically, a single-pass, monolithic compiler structure would work, but it is also hard to implement, especially in <strong>debugging</strong> and <strong>cooperating</strong>, if you implement a compiler in this way (we did it in this 30-line code), the whole compiler is just a <strong>Code Generator</strong> (so-called the <strong>Back End</strong>).</p>
 <p><img src="Sources/stages.png" alt="stages"></p>
 <p>However, the mordern compiler, who recieves some unknown, unpredictable input stream, just like I said before, it is difficult to use a single <strong>Code Generator</strong> to emit code for such complex input sources.</p>
 <p><strong>&quot;Dividing compiler into multiple stages&quot;</strong> is a very brilliant idea, not only does it reduce the complexity of implementing a mordern compiler by making the differet stages independently, but it also make it way much easier for the student to understand a mordern compiler.</p>
-<p>But at the same time, we should also notice the side-effects of this design choice: <strong>It is easy to bring an illusion to the beginner that all compilers should contain these 4 or 5 different stages.</strong> If they learn the compiler stage by stage, which means, only learn the parser after they fully understand the tokenizer, only touch code generator after they fully understand the front end, etc., I believe it is not the correct way:</p>
+<p>But at the same time, we should also notice the side-effects of this design choice: <strong>It is easy to bring an illusion to the beginners that all compilers should contain these 4 or 5 different stages.</strong> If they learn the compiler stage by stage, which means, only learn the parser after they fully understand the tokenizer, only touch code generator after they fully understand the front end, etc., I believe it is not the correct way:</p>
 <ol>
 <li>
 <p><strong>Since each part's output (immediate code) is used for the next part (in the other words, the earlier part &quot;serves&quot; the later part ), there is no &quot;fully understand&quot; before you touch the next part and knowing that what does it want.</strong></p>
@@ -90,7 +90,7 @@
 </li>
 </ol>
 <p><strong>In our example here, this &quot;30-line c code&quot; is nothing but a small code generator due to the simple and predictable input source. But if we want to add more features to this compiler, we should add more stages in order to help our code generator emit code.</strong></p>
-<p>I think that is one of the correct way to understand a compiler, and what I am going to do in this Chapter is add a <strong>Tokenizer</strong> and a <strong>Parser</strong> to our compiler in order to support more complex operations like <strong>division <code>/</code></strong> and **multiplicatin <code>*</code> **.</p>
+<p>I think that is one of the correct way to understand a compiler, and what I am going to do in this Chapter is to add a <strong>Tokenizer</strong> and a <strong>Parser</strong> to our compiler in order to support more complex operations like <strong>division</strong> and <strong>multiplication</strong>.</p>
 <h2>1. Tokenizer</h2>
 <h2>2. Parser</h2>
 	</section>
