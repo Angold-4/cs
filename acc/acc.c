@@ -440,9 +440,8 @@ int main(int argc, char **argv) {
 
   // Code Generator
   printf(".section	__TEXT,__text,regular,pure_instructions\n");
-  printf(".build_version macos, 12, 0	sdk_version 12, 0\n");
-  printf(".globl _main\n");
-  printf("_main:\n");
+  printf(".globl main\n");
+  printf("main:\n");
 
   gen_expr(node);
 
