@@ -87,9 +87,15 @@ Many compiler experts believe that the compiler is akin to "Dinosaurs" or "Drago
 ![rustflow](Sources/rustflow.png)
 
 
-#### GCC
+#### GNU Compiler Collection (GCC)
 
-
+* **[Link](https://gcc.gnu.org/)** | **[Source Code](https://github.com/gcc-mirror/gcc)**
+* **Code Size: *~2.2m* lines of mostly C, C++. *600k* lines Ada.**
+* **Self hosting, bootstrapped from other C compilers.**
+* **Multi-language(C, C++, ObjC, Ada, D, Go, Fortran), multi-target (21)**
+* **Generates quite fast code. Language & target-agnostic TREE AST and RTL IR**
+    * Challenging to work on.
+* 1987-present, large multi-org team.
 
 
 ## 2. Tokenizer
@@ -106,14 +112,35 @@ Notice that the first 3 languages in the first part of this article all end in [
 * 2003-now, UIUC at first, many industrial contributors now.
 * **Longstanding dream of compiler engineering world, possibly most successful attempt at it yet!**
 
+Here is a funny diagram of modern compilers from Andi McClure [https://runhello.com/](https://runhello.com/).
+
+![llvm](Sources/llvm.png)
+
+If you are interested in LLVM, and how does it works, you may refer to this **[slide](../../uc/llvmIR/MIT6_172F18_lec5.pdf).**
+
+Here is a procedure for you to test the llvm IR code:
+
+### 1. Create file `fib.c`
+
+Please copy the [fib.c](../../uc/llvmIR/fib.c) into the directory you want to work in.
 
 
+### 2. Using clang to generate llvm IR code
+```
+clang -S -emit-llvm fib.c
+```
+Now the [fib.ll](../../uc/llvmIR/fib.ll) contains the IR code, which can be used to generate further muti-platform code.
 
+### 3. Using weicc to generate corresponding assembly code (optional)
 
+If you want to check the difference between actual assembly code and this LLVM IR code, you may use our weicc to compile that c file.
+For this, I already put an executable file (`weicc`) here: **[weicc](https://github.com/Angold-4/cs/blob/main/uc/llvmIR/weicc?raw=true)**.
+If you want to compile weicc from source, just clone the latest source from github [https://github.com/Angold-4/weicc](https://github.com/Angold-4/weicc) and build your own using Makefile.
 
-
-
-
+After that, emit assembly code by executing:
+```
+./weicc -o fib2.s fib.c
+```
 
 ## References
 1. **[Slides](http://venge.net/graydon/talks/CompilerTalk-2019.pdf) of a talk related to compilers in March 26, 2019 at UBC by [Gradon Hoare](https://github.com/graydon).**
