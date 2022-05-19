@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
     "        System.out.println(l[i]);",
     "    for(int i = 0; i < l.length; i++)",
     "        System.out.println( l[0] + q + l[i] + q + ',' );",
-    "    for(int i = 10; i <= 18; i++))",
+    "    for(int i = 10; i <= 18; i++)",
     "        System.out.println(l[i]);",
     "  }",
     "}",
