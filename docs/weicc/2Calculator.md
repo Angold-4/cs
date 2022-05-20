@@ -52,7 +52,7 @@ Many compiler experts believe that the compiler is akin to "Dinosaurs" or "Drago
 #### Clang (LLVM Project)
  
 * **[Link](https://clang.llvm.org/)** | **[Source Code](https://github.com/llvm/llvm-project/tree/main/clang)**
-* **Code Size: *~2m lines of C++* **
+* **Code Size: *~2m lines of C++***
     * *800k* lines clang (front end)
     * *1.2m* LLVM
 * **Self hosting, bootstrapped from GCC**
@@ -64,7 +64,7 @@ Many compiler experts believe that the compiler is akin to "Dinosaurs" or "Drago
 #### Swiftc
 
 * **[Link](https://www.swift.org/swift-compiler/)** | **[Source Code](https://github.com/apple/swift)**
-* **Code Size: *~2.5m lines of C++* **
+* **Code Size: *~2.5m lines of C++***
     * *530k* lines of C++ (front-end)
     * *2m* lines of clang and LLVM (swift interoprate with C/ObjC libraries)
 * **Not self-hosting.**
@@ -118,7 +118,7 @@ In some contexts, "all the optimizations" is too much, since too much optimizati
 * **Optimization** is hard, we cannot make an optimizer that do too well always.
 * In some cases, (dynamic dispatch, pointer chasing): optimizer just can't do too well anyways.
 
-##### Proebsting's law** - "Compiler Advances Double Computing Power Every 18 Years
+##### Proebsting's law - "Compiler Advances Double Computing Power Every 18 Years
 
 ![pl](Sources/pl.png)
 
@@ -137,7 +137,7 @@ Interpreters & Compilers actually have a long relationship! And the interpreters
 
 ![computing](Sources/computing.jpg)
 
-* **1940s: First digital computers** (Or should call it "calculator")
+* **1940s: First digital computers** (or should call it "calculator")
 * **Computers: Fixed-function machines and/or humans(largely women) doing job called "computer".**
 * At that time, "Computing power" literally measured in "kilo-girls" and "kilo-girl-hours".
 * Around 1945, the first general computer **ENIAC** built for US Army, doing artillery calculations in WWII.
@@ -209,7 +209,7 @@ As an example, from [https://xavierleroy.org/talks/zam-kazam05.pdf](https://xavi
 
 In V8, we saw another example of balancing **Interpretation** and **Compilation** - **JIT (Just in Time) Compilation** for improved performance.
 
-The JIT, which can be simply illustrate as **"Compile at runtime"**. The V8 engine is both a compiler and an interpreter. There are basically three steps involved in processing the code:
+The JIT, which can be illustrate as **"Compile at runtime"**. The V8 engine is both a compiler and an interpreter. There are basically three steps involved in processing the code:
 
 The parsing phase will generate a AST (Abstract Syntax Tree). In general, after that there are usually two ways to compile the AST into bytecode:
 
@@ -264,9 +264,7 @@ After that, emit assembly code by executing:
 ```
 
 ## References
-1. **[Slides](http://venge.net/graydon/talks/CompilerTalk-2019.pdf) of a talk related to compilers in March 26, 2019 at UBC by [Gradon Hoare](https://github.com/graydon).**
-
-2. **[History of programming language from Wikipedia](https://en.wikipedia.org/wiki/History_of_programming_languages)**
-
-3. **[Geeksforgeeks How V8 compiles javascript code?](https://www.geeksforgeeks.org/how-v8-compiles-javascript-code/)**
+1. [Slides](http://venge.net/graydon/talks/CompilerTalk-2019.pdf) of a talk related to compilers in March 26, 2019 at UBC by [Gradon Hoare](https://github.com/graydon).
+2. [History of programming language from Wikipedia](https://en.wikipedia.org/wiki/History_of_programming_languages)
+3. [Geeksforgeeks How V8 compiles javascript code?](https://www.geeksforgeeks.org/how-v8-compiles-javascript-code/)
 
