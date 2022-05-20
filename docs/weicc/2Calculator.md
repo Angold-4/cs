@@ -93,9 +93,130 @@ Many compiler experts believe that the compiler is akin to "Dinosaurs" or "Drago
 * **Code Size: *~2.2m* lines of mostly C, C++. *600k* lines Ada.**
 * **Self hosting, bootstrapped from other C compilers.**
 * **Multi-language(C, C++, ObjC, Ada, D, Go, Fortran), multi-target (21)**
-* **Generates quite fast code. Language & target-agnostic TREE AST and RTL IR**
+* **Generates quite fast code. Language & target-agnostic TREE AST and RTL IR.**
     * Challenging to work on.
 * 1987-present, large multi-org team.
+
+
+### ii. Variations
+
+#### Why so big?
+
+**Compilers get big because the development costs are seen as justified by the benefits, at least to the people paying the bills.**
+
+1. Developer productivity: Highly expressive languages, extensive diagnostics, IDE intergration, legacy interop.
+2. **Compiled code will be released on billions of devices, and used for different purpose.**
+3. **At that time, compilation time and target code executing time become very huge (optimization)**
+4. Covering & exploiting all the hardware: when a new chip released, they pay for an industrial compiler to make use of it.
+
+#### Variation #1: Optimizations
+
+##### Fewer optimizations
+
+In some contexts, "all the optimizations" is too much, since too much optimizations are too slow to compile, costs too much memory, too much development / maintenance effort and too inflexible.
+
+* **Optimization** is hard, we cannot make an optimizer that do too well always.
+* In some cases, (dynamic dispatch, pointer chasing): optimizer just can't do too well anyways.
+
+##### Proebsting's law** - "Compiler Advances Double Computing Power Every 18 Years
+
+![pl](Sources/pl.png)
+
+Scoott, Kevin. On Proebsting's Law. 2001
+
+Just like Moore's law, another empirical observation. **Optimizations seem to only win ~3-5x, after *60+* years of work. And it seems less true as languages gains more abstractions to eliminate. (More true if lower-level).**
+
+
+
+#### Variation #2: Interpretation and Compilation
+
+You may hear that quote before: "**The CPU is the lowest level interpreter.**". In fact, **all involve compilers interacting with interpreters.**
+Interpreters & Compilers actually have a long relationship! And the interpreters predate compilers. Let us travel back in time to the beginning, to illustrate!
+
+##### 1. Origins of "Computer"
+
+![computing](Sources/computing.jpg)
+
+* **1940s: First digital computers** (Or should call it "calculator")
+* **Computers: Fixed-function machines and/or humans(largely women) doing job called "computer".**
+* At that time, "Computing power" literally measured in "kilo-girls" and "kilo-girl-hours".
+* Around 1945, the first general computer **ENIAC** built for US Army, doing artillery calculations in WWII.
+    * Which bring a new role: "Programmers", drawn from "computer" staff, all women.
+    * "Programming" at that time meant physically **rewiring** per task.
+
+##### 2. Stored Programs
+
+![program](Sources/program.jpg)
+
+* **In 1948, [Jean Bartik](https://en.wikipedia.org/wiki/Jean_Bartik) leads team to convert ENIAC to "stored programs"**
+    * which is instructions (called "orders" at that time) held in memory.
+    * These instructions will be interpreted by hardware.
+    * **Faster to reconfigure than rewiring, but ran slower.**
+* **In 1949, The first software interpreter for ENIAC released.**
+    * Short Code software interpreters for higher level "pseudo-code" instructions.
+    * This pseudo-code denotes **subroutine calls and expressions**.
+    * Faster to programming with, but *~50x* slower than HW-interpreted before.
+
+An example from Wikipedia: The pseudo-code:
+```
+a = (b + c) / b * c
+```
+was converted to Short Code by a sequence of substitutions and final regrouping.
+```
+X3 =  (  X1 +  Y1 )  /  X1 * Y1   substitute variables
+X3 03 09 X1 07 Y1 02 04 X1   Y1   substitute operators and parentheses. 
+07Y10204X1Y1                      group into 12-byte words.
+0000X30309X1
+```
+This short code was interpreted and ran about *50x* slower than machine code.
+
+* **In 1952, [Grace Hopper](https://en.wikipedia.org/wiki/Grace_Hopper) completed the first compiler, known as the A-0.**
+    * A-0 translate pseudo-codes into machine code.
+    * **Results runs almost as fast as manualy coded, but as easy to write-for as interpreter.**
+
+
+
+##### 3. Balance between Interpretation and Compilation
+
+**All about balancing time tradeoffs!** (coding-time | compiler-execution-time | run-time).
+Here we introduce two more mordern compilers as examples to illustrade this trade-off.
+
+#### Eclipse Compiler for Java (ECJ)
+* **[Link](https://www.eclipse.org/downloads/packages/release/juno/sr2/eclipse-ide-java-developers) | Not Open Source**
+* **Code Size: *146k* lines Java**
+* **Self-hosting, bootstrapped from javac**
+* **Compile Java Code into JVM IR (Java Bytecode)**
+* **Used in many Java products (e.g,. IntelliJ IDEA) Rich semantics, good diagnostics, IDE intergration**
+* 2001-now, IBM, OSS.
+
+In Eclipse example, we see a trade-off - **Stop before real machine code. Emit IR == "virtual machine" code**.
+Which can be compiled or even just interpreted further. And the residual VM interpreter has several real advantages:
+1. Easier to port to new hardware (Just need to make it running). (EZ Multi-platform)
+2. **Faster compilation & program start up**, keeps interactive user engaged.
+3. As an interpreter, it is relatively simple to write, less labour. Makes you can focus your time on frontend semantics.
+
+As an example, from [https://xavierleroy.org/talks/zam-kazam05.pdf](https://xavierleroy.org/talks/zam-kazam05.pdf), **The general bytecode interpreters, as a cheap implementation device, offering *1/4* of the performance of optimizing native-code compilers, at *1/20* of the implementation cost.**
+
+
+#### V8 Engine
+* **[Link](https://v8.dev/)** | **[Source Code](https://github.com/v8/v8)**
+* **Code Size: *660k* lines C++ including backends.**
+* **Not self-hosting**
+* **Compile Javascript code into Machine Code, Multi-target(7), Multi-tier JIT**
+    * Multiple generations of optimization and IRs.
+    * **Always adjusting for sweet spot of runtime performance vs. compile time, memory, maintenance cost, etc.**
+* 2008-present, mostly Google.
+
+In V8, we saw another example of balancing **Interpretation** and **Compilation** - **JIT (Just in Time) Compilation** for improved performance.
+
+The JIT, which can be simply illustrate as **"Compile at runtime"**. The V8 engine is both a compiler and an interpreter. There are basically three steps involved in processing the code:
+
+The parsing phase will generate a AST (Abstract Syntax Tree). In general, after that there are usually two ways to compile the AST into bytecode:
+
+* **Using an Interpreter: The interpreter scans the code line by line and converts it into bytecode.**
+* **Using an Compiler: The compiler scans the entire document and compiles it into highly optimized bytecode.**
+
+The V8 engine initially uses an interpreter to interpret the code line by line. On further executions, **the V8 engine finds patterns such as frequently executed functions frequently used variables, and compiles them to improve preformance.**
 
 
 ## 2. Tokenizer
@@ -105,7 +226,7 @@ Many compiler experts believe that the compiler is akin to "Dinosaurs" or "Drago
 
 ## Aside: what is this "LLVM"?
 
-Notice that the first 3 languages in the first part of this article all end in [LLVM](https://github.com/llvm/llvm-project). "Low Level Virtual Machine".
+Notice that the first 3 languages in the first part of this article are end in [LLVM](https://github.com/llvm/llvm-project). "Low Level Virtual Machine".
 
 * Strongly typed IR, serialization format, library of optimizations, lowering to many target architectures.
 * **"One-stop-shop" for compiler backends.**: LLVM IR => Multi-target
@@ -145,4 +266,7 @@ After that, emit assembly code by executing:
 ## References
 1. **[Slides](http://venge.net/graydon/talks/CompilerTalk-2019.pdf) of a talk related to compilers in March 26, 2019 at UBC by [Gradon Hoare](https://github.com/graydon).**
 
+2. **[History of programming language from Wikipedia](https://en.wikipedia.org/wiki/History_of_programming_languages)**
+
+3. **[Geeksforgeeks How V8 compiles javascript code?](https://www.geeksforgeeks.org/how-v8-compiles-javascript-code/)**
 

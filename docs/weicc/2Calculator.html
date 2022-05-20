@@ -91,8 +91,230 @@
 </ol>
 <p><strong>In our example here, this &quot;30-line c code&quot; is nothing but a small code generator due to the simple and predictable input source. But if we want to add more features to this compiler, we should add more stages in order to help our code generator emit code.</strong></p>
 <p>I think that is one of the correct way to understand a compiler, and what I am going to do in this Chapter is to add a <strong>Tokenizer</strong> and a <strong>Parser</strong> to our compiler in order to support more complex operations like <strong>division</strong> and <strong>multiplication</strong>.</p>
-<h2>1. Tokenizer</h2>
-<h2>2. Parser</h2>
+<h2>1. Revisited: Modern Compilers</h2>
+<p><img src="Sources/dinosaurs.jpg" alt="dinosaurs"></p>
+<blockquote>
+<p><strong>A wander through a weired landscape to the heart of compilation</strong></p>
+</blockquote>
+<p>In <strong><a href="https://angold4.org/cs/docs/lectures/1Introduction.html">cs.1 Introduction</a></strong>, we've talked a little bit about <strong>Modern Compiler</strong> and <strong>Compiler History</strong>. Before we really step into the actual compiler development, I want to share something related to the actual mordern industrial compilers since the gap between small &quot;class&quot; projects and industrial compilers seems to be overwhelming, and this huge gap may cause terror and misunderstanding when you want to write some stuff of your
+own from scratch.</p>
+<p><img src="Sources/owl.png" alt="owl"></p>
+<p>Many compiler experts believe that the compiler is akin to &quot;Dinosaurs&quot; or &quot;Dragons&quot; (<strong><a href="https://www.rust-lang.org/">Rust</a> creator <a href="https://github.com/graydon">Graydon Hoare</a></strong> mentioned that in his <strong><a href="http://venge.net/graydon/talks/CompilerTalk-2019.pdf">talk</a></strong>).</p>
+<ul>
+<li><strong>Some are bigger and scarier.</strong></li>
+<li><strong>Some are weird and wonderful.</strong></li>
+<li><strong>Some are really tiny!</strong></li>
+</ul>
+<p><img src="Sources/dragon.png" alt="dragon"></p>
+<h3>i. First impression: some giants</h3>
+<h4>Clang (LLVM Project)</h4>
+<ul>
+<li><strong><a href="https://clang.llvm.org/">Link</a></strong> | <strong><a href="https://github.com/llvm/llvm-project/tree/main/clang">Source Code</a></strong></li>
+<li>**Code Size: <em>~2m lines of C++</em> **
+<ul>
+<li><em>800k</em> lines clang (front end)</li>
+<li><em>1.2m</em> LLVM</li>
+</ul>
+</li>
+<li><strong>Self hosting, bootstrapped from GCC</strong></li>
+<li><strong>Compile C-language family (C, C++, ObjC) to multi-target (23).</strong></li>
+<li><strong>Good diagnostics, fast code</strong></li>
+<li>Originally Apple, 2007-now, large multi-org team.</li>
+</ul>
+<h4>Swiftc</h4>
+<ul>
+<li><strong><a href="https://www.swift.org/swift-compiler/">Link</a></strong> | <strong><a href="https://github.com/apple/swift">Source Code</a></strong></li>
+<li>**Code Size: <em>~2.5m lines of C++</em> **
+<ul>
+<li><em>530k</em> lines of C++ (front-end)</li>
+<li><em>2m</em> lines of clang and LLVM (swift interoprate with C/ObjC libraries)</li>
+</ul>
+</li>
+<li><strong>Not self-hosting.</strong></li>
+<li><strong>Compile Swift language into multi-target.</strong></li>
+<li><strong>Newer app-dev language. Extra SIL IR for Swift-specific optimizations.</strong></li>
+<li>2014-now, mostly Apple.</li>
+</ul>
+<h4>Rustc</h4>
+<ul>
+<li><strong><a href="https://doc.rust-lang.org/rustc/what-is-rustc.html">Link</a></strong> | <strong><a href="https://github.com/rust-lang/rust/tree/master/compiler">Source Code</a></strong></li>
+<li><strong>Code Size: <em>~1.5m</em> lines of Rust and C++</strong>
+<ul>
+<li><em>~360k</em> lines of Rust.</li>
+<li><em>1.2m</em> lines of LLVM.</li>
+</ul>
+</li>
+<li><strong>Self hosting, bootstrapped from OCaml.(ML)</strong></li>
+<li><strong>Compile Rust language into multi-target.</strong></li>
+<li><strong>Newer safe system language, the <a href="https://blog.rust-lang.org/2016/04/19/MIR.html">HIR and MIR</a>.</strong></li>
+<li>Originally mostly Mozilla, 2010-now, large multi-org team.</li>
+</ul>
+<p><img src="Sources/rustflow.png" alt="rustflow"></p>
+<h4>GNU Compiler Collection (GCC)</h4>
+<ul>
+<li><strong><a href="https://gcc.gnu.org/">Link</a></strong> | <strong><a href="https://github.com/gcc-mirror/gcc">Source Code</a></strong></li>
+<li><strong>Code Size: <em>~2.2m</em> lines of mostly C, C++. <em>600k</em> lines Ada.</strong></li>
+<li><strong>Self hosting, bootstrapped from other C compilers.</strong></li>
+<li><strong>Multi-language(C, C++, ObjC, Ada, D, Go, Fortran), multi-target (21)</strong></li>
+<li><strong>Generates quite fast code. Language &amp; target-agnostic TREE AST and RTL IR.</strong>
+<ul>
+<li>Challenging to work on.</li>
+</ul>
+</li>
+<li>1987-present, large multi-org team.</li>
+</ul>
+<h3>ii. Variations</h3>
+<h4>Why so big?</h4>
+<p><strong>Compilers get big because the development costs are seen as justified by the benefits, at least to the people paying the bills.</strong></p>
+<ol>
+<li>Developer productivity: Highly expressive languages, extensive diagnostics, IDE intergration, legacy interop.</li>
+<li><strong>Compiled code will be released on billions of devices, and used for different purpose.</strong></li>
+<li><strong>At that time, compilation time and target code executing time become very huge (optimization)</strong></li>
+<li>Covering &amp; exploiting all the hardware: when a new chip released, they pay for an industrial compiler to make use of it.</li>
+</ol>
+<h4>Variation #1: Optimizations</h4>
+<h5>Fewer optimizations</h5>
+<p>In some contexts, &quot;all the optimizations&quot; is too much, since too much optimizations are too slow to compile, costs too much memory, too much development / maintenance effort and too inflexible.</p>
+<ul>
+<li><strong>Optimization</strong> is hard, we cannot make an optimizer that do too well always.</li>
+<li>In some cases, (dynamic dispatch, pointer chasing): optimizer just can't do too well anyways.</li>
+</ul>
+<h5>Proebsting's law** - &quot;Compiler Advances Double Computing Power Every 18 Years</h5>
+<p><img src="Sources/pl.png" alt="pl"></p>
+<p>Scoott, Kevin. On Proebsting's Law. 2001</p>
+<p>Just like Moore's law, another empirical observation. <strong>Optimizations seem to only win ~3-5x, after <em>60+</em> years of work. And it seems less true as languages gains more abstractions to eliminate. (More true if lower-level).</strong></p>
+<h4>Variation #2: Interpretation and Compilation</h4>
+<p>You may hear that quote before: &quot;<strong>The CPU is the lowest level interpreter.</strong>&quot;. In fact, <strong>all involve compilers interacting with interpreters.</strong>
+Interpreters &amp; Compilers actually have a long relationship! And the interpreters predate compilers. Let us travel back in time to the beginning, to illustrate!</p>
+<h5>1. Origins of &quot;Computer&quot;</h5>
+<p><img src="Sources/computing.jpg" alt="computing"></p>
+<ul>
+<li><strong>1940s: First digital computers</strong> (Or should call it &quot;calculator&quot;)</li>
+<li><strong>Computers: Fixed-function machines and/or humans(largely women) doing job called &quot;computer&quot;.</strong></li>
+<li>At that time, &quot;Computing power&quot; literally measured in &quot;kilo-girls&quot; and &quot;kilo-girl-hours&quot;.</li>
+<li>Around 1945, the first general computer <strong>ENIAC</strong> built for US Army, doing artillery calculations in WWII.
+<ul>
+<li>Which bring a new role: &quot;Programmers&quot;, drawn from &quot;computer&quot; staff, all women.</li>
+<li>&quot;Programming&quot; at that time meant physically <strong>rewiring</strong> per task.</li>
+</ul>
+</li>
+</ul>
+<h5>2. Stored Programs</h5>
+<p><img src="Sources/program.jpg" alt="program"></p>
+<ul>
+<li><strong>In 1948, <a href="https://en.wikipedia.org/wiki/Jean_Bartik">Jean Bartik</a> leads team to convert ENIAC to &quot;stored programs&quot;</strong>
+<ul>
+<li>which is instructions (called &quot;orders&quot; at that time) held in memory.</li>
+<li>These instructions will be interpreted by hardware.</li>
+<li><strong>Faster to reconfigure than rewiring, but ran slower.</strong></li>
+</ul>
+</li>
+<li><strong>In 1949, The first software interpreter for ENIAC released.</strong>
+<ul>
+<li>Short Code software interpreters for higher level &quot;pseudo-code&quot; instructions.</li>
+<li>This pseudo-code denotes <strong>subroutine calls and expressions</strong>.</li>
+<li>Faster to programming with, but <em>~50x</em> slower than HW-interpreted before.</li>
+</ul>
+</li>
+</ul>
+<p>An example from Wikipedia: The pseudo-code:</p>
+<pre><code>a = (b + c) / b * c
+</code></pre>
+<p>was converted to Short Code by a sequence of substitutions and final regrouping.</p>
+<pre><code>X3 =  (  X1 +  Y1 )  /  X1 * Y1   substitute variables
+X3 03 09 X1 07 Y1 02 04 X1   Y1   substitute operators and parentheses. 
+07Y10204X1Y1                      group into 12-byte words.
+0000X30309X1
+</code></pre>
+<p>This short code was interpreted and ran about <em>50x</em> slower than machine code.</p>
+<ul>
+<li><strong>In 1952, <a href="https://en.wikipedia.org/wiki/Grace_Hopper">Grace Hopper</a> completed the first compiler, known as the A-0.</strong>
+<ul>
+<li>A-0 translate pseudo-codes into machine code.</li>
+<li><strong>Results runs almost as fast as manualy coded, but as easy to write-for as interpreter.</strong></li>
+</ul>
+</li>
+</ul>
+<h5>3. Balance between Interpretation and Compilation</h5>
+<p><strong>All about balancing time tradeoffs!</strong> (coding-time | compiler-execution-time | run-time).
+Here we introduce two more mordern compilers as examples to illustrade this trade-off.</p>
+<h4>Eclipse Compiler for Java (ECJ)</h4>
+<ul>
+<li><strong><a href="https://www.eclipse.org/downloads/packages/release/juno/sr2/eclipse-ide-java-developers">Link</a> | Not Open Source</strong></li>
+<li><strong>Code Size: <em>146k</em> lines Java</strong></li>
+<li><strong>Self-hosting, bootstrapped from javac</strong></li>
+<li><strong>Compile Java Code into JVM IR (Java Bytecode)</strong></li>
+<li><strong>Used in many Java products (e.g,. IntelliJ IDEA) Rich semantics, good diagnostics, IDE intergration</strong></li>
+<li>2001-now, IBM, OSS.</li>
+</ul>
+<p>In Eclipse example, we see a trade-off - <strong>Stop before real machine code. Emit IR == &quot;virtual machine&quot; code</strong>.
+Which can be compiled or even just interpreted further. And the residual VM interpreter has several real advantages:</p>
+<ol>
+<li>Easier to port to new hardware (Just need to make it running). (EZ Multi-platform)</li>
+<li><strong>Faster compilation &amp; program start up</strong>, keeps interactive user engaged.</li>
+<li>As an interpreter, it is relatively simple to write, less labour. Makes you can focus your time on frontend semantics.</li>
+</ol>
+<p>As an example, from <a href="https://xavierleroy.org/talks/zam-kazam05.pdf">https://xavierleroy.org/talks/zam-kazam05.pdf</a>, <strong>The general bytecode interpreters, as a cheap implementation device, offering <em>1/4</em> of the performance of optimizing native-code compilers, at <em>1/20</em> of the implementation cost.</strong></p>
+<h4>V8 Engine</h4>
+<ul>
+<li><strong><a href="https://v8.dev/">Link</a></strong> | <strong><a href="https://github.com/v8/v8">Source Code</a></strong></li>
+<li><strong>Code Size: <em>660k</em> lines C++ including backends.</strong></li>
+<li><strong>Not self-hosting</strong></li>
+<li><strong>Compile Javascript code into Machine Code, Multi-target(7), Multi-tier JIT</strong>
+<ul>
+<li>Multiple generations of optimization and IRs.</li>
+<li><strong>Always adjusting for sweet spot of runtime performance vs. compile time, memory, maintenance cost, etc.</strong></li>
+</ul>
+</li>
+<li>2008-present, mostly Google.</li>
+</ul>
+<p>In V8, we saw another example of balancing <strong>Interpretation</strong> and <strong>Compilation</strong> - <strong>JIT (Just in Time) Compilation</strong> for improved performance.</p>
+<p>The JIT, which can be simply illustrate as <strong>&quot;Compile at runtime&quot;</strong>. The V8 engine is both a compiler and an interpreter. There are basically three steps involved in processing the code:</p>
+<p>The parsing phase will generate a AST (Abstract Syntax Tree). In general, after that there are usually two ways to compile the AST into bytecode:</p>
+<ul>
+<li><strong>Using an Interpreter: The interpreter scans the code line by line and converts it into bytecode.</strong></li>
+<li><strong>Using an Compiler: The compiler scans the entire document and compiles it into highly optimized bytecode.</strong></li>
+</ul>
+<p>The V8 engine initially uses an interpreter to interpret the code line by line. On further executions, <strong>the V8 engine finds patterns such as frequently executed functions frequently used variables, and compiles them to improve preformance.</strong></p>
+<h2>2. Tokenizer</h2>
+<h2>3. Parser</h2>
+<h2>Aside: what is this &quot;LLVM&quot;?</h2>
+<p>Notice that the first 3 languages in the first part of this article are end in <a href="https://github.com/llvm/llvm-project">LLVM</a>. &quot;Low Level Virtual Machine&quot;.</p>
+<ul>
+<li>Strongly typed IR, serialization format, library of optimizations, lowering to many target architectures.</li>
+<li><strong>&quot;One-stop-shop&quot; for compiler backends.</strong>: LLVM IR =&gt; Multi-target</li>
+<li>2003-now, UIUC at first, many industrial contributors now.</li>
+<li><strong>Longstanding dream of compiler engineering world, possibly most successful attempt at it yet!</strong></li>
+</ul>
+<p>Here is a funny diagram of modern compilers from Andi McClure <a href="https://runhello.com/">https://runhello.com/</a>.</p>
+<p><img src="Sources/llvm.png" alt="llvm"></p>
+<p>If you are interested in LLVM, and how does it works, you may refer to this <strong><a href="../../uc/llvmIR/MIT6_172F18_lec5.pdf">slide</a>.</strong></p>
+<p>Here is a procedure for you to test the llvm IR code:</p>
+<h3>1. Create file <code>fib.c</code></h3>
+<p>Please copy the <a href="../../uc/llvmIR/fib.c">fib.c</a> into the directory you want to work in.</p>
+<h3>2. Using clang to generate llvm IR code</h3>
+<pre><code>clang -S -emit-llvm fib.c
+</code></pre>
+<p>Now the <a href="../../uc/llvmIR/fib.ll">fib.ll</a> contains the IR code, which can be used to generate further muti-platform code.</p>
+<h3>3. Using weicc to generate corresponding assembly code (optional)</h3>
+<p>If you want to check the difference between actual assembly code and this LLVM IR code, you may use our weicc to compile that c file.
+For this, I already put an executable file (<code>weicc</code>) here: <strong><a href="https://github.com/Angold-4/cs/blob/main/uc/llvmIR/weicc?raw=true">weicc</a></strong>.
+If you want to compile weicc from source, just clone the latest source from github <a href="https://github.com/Angold-4/weicc">https://github.com/Angold-4/weicc</a> and build your own using Makefile.</p>
+<p>After that, emit assembly code by executing:</p>
+<pre><code>./weicc -o fib2.s fib.c
+</code></pre>
+<h2>References</h2>
+<ol>
+<li>
+<p><strong><a href="http://venge.net/graydon/talks/CompilerTalk-2019.pdf">Slides</a> of a talk related to compilers in March 26, 2019 at UBC by <a href="https://github.com/graydon">Gradon Hoare</a>.</strong></p>
+</li>
+<li>
+<p><strong><a href="https://en.wikipedia.org/wiki/History_of_programming_languages">History of programming language from Wikipedia</a></strong></p>
+</li>
+<li>
+<p><strong><a href="https://www.geeksforgeeks.org/how-v8-compiles-javascript-code/">Geeksforgeeks How V8 compiles javascript code?</a></strong></p>
+</li>
+</ol>
 	</section>
 	</div>
     </div>
