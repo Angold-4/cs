@@ -27,7 +27,7 @@ If you do not know what parsing is, here is the definition. But you may still co
 
 ### i. The Target of Parsing
 
-The **"linear representation"** that shown in the definition may be a sentence, a computer program, a knitting pattern, a sequence of geological strata, or even a piece of music. But they do have something in common: 
+The **"linear representation"** that shown in the definition may be a sentence, a computer program, a knitting pattern, a sequence of geological strata, or even a piece of music. and they do have something in common: 
 
 1. Any linear representation (sequence) has some **rule** with it, which tells the parser whether it is an valid sequence, and tells us the meaning of the representation. We call that rule **grammar**.
 
@@ -37,7 +37,15 @@ The **"linear representation"** that shown in the definition may be a sentence, 
 
 ### ii. The Purpose of Parsing
 
-### iii. How to Parsing
+For each grammar, there are generally an infinite number of linear representations (aka "sentence") that can be structured with it. **The finite-size grammar can supply structure to an infinite number of sentences.** And that is the purpose of a grammar: **To Summarize succinctly the structure of an infinite number of objects of a certain class."**
+
+In general, there are two reasons to perform this structuring process called parsing:
+
+1. **After parsing a given sentence, we can show that whether this sentence can be recongnized according to a grammar.** And for the error-repairing parsers, they can suggest possible word classes for missing or unknown words on clay tablets.
+
+2. **Grammars usually have semantics attached to them** (Specific sementics is attached to specific rules); **The obtained structure (e.g. parse tree) of parsing can help us to process the sentence fucther. (understand its semantics)**
+    * The obtained structure often shows which rules were involved in the production of a string and how.
+    * Reconginition is not enough, we need parsing to get the full benefit of the syntactic approach.
 
 
 ## 2. Grammars as a Generating Device
