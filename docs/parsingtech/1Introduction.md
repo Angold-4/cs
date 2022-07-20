@@ -47,7 +47,22 @@ In general, there are two reasons to perform this structuring process called par
     * The obtained structure often shows which rules were involved in the production of a string and how.
     * Reconginition is not enough, we need parsing to get the full benefit of the syntactic approach.
 
-
 ## 2. Grammars as a Generating Device
 
+Everyone who has studied a foreign language knows that a grammar is a book of rules and examples which describes and teaches the language. The computer scientist takes a very abstracted view of it, which not only can grammar describe a language, **but also it should show the recipe of that language (the recipe should imply how a sentence can be constructed).**
+
+Quite unlike human, the computer needs a **clear, well-understood and unambiguous grammar** in order to process its language. In the human's world, the linguist holds his view of language because it gives him a formal tight grip on a seemingly chaotic and perhaps infinitely complex object: **natual language**, and understand its meaning through the human's heart.
+
+
+### i. Describing a language through a finite recipe.
+
+**A good way to build a set of objects is to start with a small object and to give rules how to add to it and construct new objects from it.** For example, "Two is an even number and the sum of two even numbers is again an even number" effectively generates the set of all even numbers. 
+
+
 ## 3. The Chomsky Hierarchy of Grammars
+
+![30grammar](Sources/30grammar.png)
+
+
+
+
