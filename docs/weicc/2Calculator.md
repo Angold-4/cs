@@ -223,6 +223,8 @@ The V8 engine initially uses an interpreter to interpret the code line by line. 
 
 ## 3. Parser
 
+**The output of the parser (tree-like structure) shows the order in which the operations in the code are to be performed.**
+
 
 ## Aside: what is this "LLVM"?
 

@@ -24,7 +24,10 @@
 
 * **[weicc repository on github](://github.com/Angold-4/weicc)**
 
-
 1. **[Thompson-1984](docs/weicc/1Thompson1984.html)**
 2. **[Calculator-level language creation](docs/weicc/2Calculator.html)**
 
+## Parsing Techniques
+* **[Parsing Techniques](./docs/parsingtech/ParsingTechniques.pdf)** by Dick Grune & Ceriel J.H. Jacobs
+
+1. **[Parsing and Grammars](./docs/parsingtech/1Introduction.html)**

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>Angold-4 Organization</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="../../../images/favicon.png" rel="icon">
+
+<link rel="canonical" href=".">
+        <meta name="author" content="Angold Wang" />
+
+    <meta property="og:site_name" content="Angold-4" />
+<!--     <meta property="og:type" content="article"/> -->
+    <meta property="og:title" content="Angold-4 Organization"/>
+    <meta property="og:url" content="."/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="../../../theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="../../../theme/css/font-awesome.min.css" rel="stylesheet">
+<!--     <link href="https://cdnjs.cloudflare.com/ajax/libs/typicons/2.0.9/typicons.min.css" rel="stylesheet"> -->
+
+    <link href="../../../theme/css/pygments/monokai.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../theme/css/style.css" type="text/css"/>
+
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://angold4.org" class="navbar-brand">
+<img src="../../../images/logo.png" width="32"/> Angold4            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+			    <li><a href="../../../about.html">About</a>
+                            <li><a href="../../../blogs.html">Blogs</a>
+                            <li><a href="../../../projects.html">Projects</a>
+
+	    </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li> <a title="Youtube" href="https://www.youtube.com/channel/UC3ZAjh2LHhm-FrgxgBtgMzQ" target="_new"><i class="fa fa-youtube"></i> Youtube</a>
+		</li>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+	<section id="content" class="body">
+
+
+
+<h3>Parsing Techniques Notes by Angold Wang</h3>
+<h1>1. Parsing and Grammars</h1>
+<p>Include Chapter 1 &amp; 2 of the book: <strong><a href="ParsingTechniques.pdf">Parsing Techniques</a></strong>.</p>
+<p><strong>Parsing (syntactic analysis) is one of the best understood branches of computer science.</strong> And of course parsers are being used extensively in a number of disciplines:</p>
+<h3>In Computer Science</h3>
+<ul>
+<li><strong>Compiler Construction</strong></li>
+<li><strong>Database Interfaces</strong></li>
+<li><strong>Artificial Intelligence</strong></li>
+<li>...</li>
+</ul>
+<h3>In Linguistics</h3>
+<ul>
+<li><strong>Text and Textual Analysis</strong></li>
+<li><strong>Natual language Translation and Recongnition</strong></li>
+<li><strong>Corpora Analysis</strong></li>
+<li>...</li>
+</ul>
+<p>In this series: <strong><a href="https://angold4.org/cs/">Parsing Techniques Notes</a></strong>, I'm trying to illustrate the basic concepts, and techniques of <strong>Parsing</strong>, which are the notes of the book: <strong><a href="ParsingTechniques.pdf">Parsing Techniques</a></strong> by <strong>Dick Grune</strong> and <strong>Ceriel Jacobs</strong>.</p>
+<h2>1. An Overview of Parsing</h2>
+<p><strong>&quot;Parsing is the process of structuring a linear representation in accordance with a given grammar&quot;</strong>.</p>
+<p>If you do not know what parsing is, here is the definition. But you may still confuse with that after reading it. Since this definition has been kept abstract on purpose, to allow as wide an interpretation as possible.</p>
+<h3>i. The Target of Parsing</h3>
+<p>The <strong>&quot;linear representation&quot;</strong> that shown in the definition may be a sentence, a computer program, a knitting pattern, a sequence of geological strata, or even a piece of music. and they do have something in common:</p>
+<ol>
+<li>
+<p>Any linear representation (sequence) has some <strong>rule</strong> with it, which tells the parser whether it is an valid sequence, and tells us the meaning of the representation. We call that rule <strong>grammar</strong>.</p>
+</li>
+<li>
+<p>Any linear representation (sequence) in which the <strong>preceding elements in some way restrict the next element</strong>.</p>
+<ul>
+<li>For example: Consider a simple calculator &quot;<strong><code>1 + 2 =</code></strong>&quot;: if the preciciding element in that expression is a number, say <code>3</code>, <strong>it will restrict its next element so that it can only be a symbol (e,g. <code>+</code>)</strong>.</li>
+<li>If there is no restriction, the sequence still has a grammar, but this grammar is trivial, uninformative and hard to understand.</li>
+</ul>
+</li>
+</ol>
+<h3>ii. The Purpose of Parsing</h3>
+<p>For each grammar, there are generally an infinite number of linear representations (aka &quot;sentence&quot;) that can be structured with it. <strong>The finite-size grammar can supply structure to an infinite number of sentences.</strong> And that is the purpose of a grammar: <strong>To Summarize succinctly the structure of an infinite number of objects of a certain class.&quot;</strong></p>
+<p>In general, there are two reasons to perform this structuring process called parsing:</p>
+<ol>
+<li>
+<p><strong>After parsing a given sentence, we can show that whether this sentence can be recongnized according to a grammar.</strong> And for the error-repairing parsers, they can suggest possible word classes for missing or unknown words on clay tablets.</p>
+</li>
+<li>
+<p><strong>Grammars usually have semantics attached to them</strong> (Specific sementics is attached to specific rules); <strong>The obtained structure (e.g. parse tree) of parsing can help us to process the sentence fucther. (understand its semantics)</strong></p>
+<ul>
+<li>The obtained structure often shows which rules were involved in the production of a string and how.</li>
+<li>Reconginition is not enough, we need parsing to get the full benefit of the syntactic approach.</li>
+</ul>
+</li>
+</ol>
+<h2>2. Grammars as a Generating Device</h2>
+<p>Everyone who has studied a foreign language knows that a grammar is a book of rules and examples which describes and teaches the language. The computer scientist takes a very abstracted view of it, which not only can grammar describe a language, <strong>but also it should show the recipe of that language (the recipe should imply how a sentence can be constructed).</strong></p>
+<p>Quite unlike human, the computer needs a <strong>clear, well-understood and unambiguous grammar</strong> in order to process its language. In the human's world, the linguist holds his view of language because it gives him a formal tight grip on a seemingly chaotic and perhaps infinitely complex object: <strong>natual language</strong>, and understand its meaning through the human's heart.</p>
+<h3>i. Describing a language through a finite recipe.</h3>
+<p><strong>A good way to build a set of objects is to start with a small object and to give rules how to add to it and construct new objects from it.</strong> For example, &quot;Two is an even number and the sum of two even numbers is again an even number&quot; effectively generates the set of all even numbers.</p>
+<h2>3. The Chomsky Hierarchy of Grammars</h2>
+<p><img src="Sources/30grammar.png" alt="30grammar"></p>
+	</section>
+	</div>
+    </div>
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+this.page.url = "https://angold4.org/cs/docs/parsingtech/1Introduction.html"
+this.page.identifier = "cs/docs/parsingtech/1Introduction.html"
+
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://angold.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</div>
+<footer>
+   <div class="well well-lg" id="footer-well">
+      <div class="container">
+
+
+      <div class="row">
+         <div class="col-xs-6">
+            <a href="https://angold4.org" title="Angold-4 Organization" class="image-link"><img src="../../../images/logo.png" class="cmudb-logo" /></a>
+         </div>
+         <div class="col-xs-6">
+            <p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p>
+        </div>
+      </div>
+   </div>
+   </div>
+</footer>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../../theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="../../../theme/js/respond.min.js"></script>
+
+<!-- Fix scrolling issues to internal HREFs that get positioned behind navbar -->
+<!-- http://stackoverflow.com/questions/10732690/offsetting-an-html-anchor-to-adjust-for-fixed-header -->
+<script src="../../../theme/js/href_scroll.js"></script>
+
+<!-- You know what this is and you know what he did to me... -->
+<script src="../../../theme/js/tim-kraska-betrayed-me.js"></script>
+</body>
+</html>
+
