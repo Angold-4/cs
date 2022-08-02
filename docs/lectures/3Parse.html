@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="../../../images/favicon.png" rel="icon">
-
 <link rel="canonical" href=".">
         <meta name="author" content="Angold Wang" />
 
@@ -26,6 +25,128 @@
 
     <link href="../../../theme/css/pygments/monokai.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../theme/css/style.css" type="text/css"/>
+
+  <style>
+
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+
+    li {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    a {
+      font-size: 18px;
+    }
+
+    k
+
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+    {   }
+
+    @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
 
 </head>
 <body>
@@ -64,79 +185,140 @@
     <div class="row">
         <div class="col-lg-12">
 	<section id="content" class="body">
-
-
-
-<h1>3. Parsing</h1>
-<h2>1. Context-free Grammars</h2>
-<h3>i. The limitation of Regular Languages</h3>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#parsing" id="toc-parsing">3. Parsing</a>
+<ul>
+<li><a href="#context-free-grammars" id="toc-context-free-grammars">1.
+Context-free Grammars</a>
+<ul>
+<li><a href="#i.-the-limitation-of-regular-languages"
+id="toc-i.-the-limitation-of-regular-languages">i. The limitation of
+Regular Languages</a></li>
+<li><a href="#ii.-context-free-grammars"
+id="toc-ii.-context-free-grammars">ii. Context-free Grammars</a></li>
+</ul></li>
+<li><a href="#parse-tree" id="toc-parse-tree">2. Parse Tree</a>
+<ul>
+<li><a href="#i.-ambiguity" id="toc-i.-ambiguity">i. Ambiguity</a></li>
+<li><a href="#ii.-handle-ambiguity" id="toc-ii.-handle-ambiguity">ii.
+Handle Ambiguity</a></li>
+<li><a href="#iii.-abstract-syntax-tree"
+id="toc-iii.-abstract-syntax-tree">iii. Abstract Syntax Tree</a></li>
+</ul></li>
+<li><a href="#recursive-descent-parsing"
+id="toc-recursive-descent-parsing">3. Recursive Descent Parsing</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="parsing">3. Parsing</h1>
+<h2 id="context-free-grammars">1. Context-free Grammars</h2>
+<h3 id="i.-the-limitation-of-regular-languages">i. The limitation of
+Regular Languages</h3>
 <ul>
 <li><strong>The weakest formal languages that widely used.</strong></li>
-<li><strong>Finite automaton cannot remember # of times it has visited a particular state.</strong></li>
-<li><strong>There are a lot of languages that are non-regular</strong> (Using pumping lemma)
+<li><strong>Finite automaton cannot remember # of times it has visited a
+particular state.</strong></li>
+<li><strong>There are a lot of languages that are non-regular</strong>
+(Using pumping lemma)
 <ul>
-<li>i.e. Strings of balanced parentheses are not regular</li>
+<li>i.e. Strings of balanced parentheses are not regular</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<p><img src="Sources/limitation.png" alt="limitation"></p>
-<h3>ii. Context-free Grammars</h3>
-<h4>Why do we need CFG?</h4>
-<p><strong>There are a lot of things that Lexical Analysis cannot do, through there are also some complicated things that they can do.</strong></p>
-<p>Not all strings of tokens are programs, the parser must distinguish between valid and invalid strings of tokens.</p>
-<p>| Phase | Input | Output |
-| ----- | ----- | ------ |
-| Lexer | String of characters | string of tokens |
-| Parser | String of tokens | Parse tree |</p>
+<figure>
+<img src="Sources/limitation.png" alt="limitation" />
+<figcaption aria-hidden="true">limitation</figcaption>
+</figure>
+<h3 id="ii.-context-free-grammars">ii. Context-free Grammars</h3>
+<h4 id="why-do-we-need-cfg">Why do we need CFG?</h4>
+<p><strong>There are a lot of things that Lexical Analysis cannot do,
+through there are also some complicated things that they can
+do.</strong></p>
+<p>Not all strings of tokens are programs, the parser must distinguish
+between valid and invalid strings of tokens.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Phase</th>
+<th>Input</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lexer</td>
+<td>String of characters</td>
+<td>string of tokens</td>
+</tr>
+<tr class="even">
+<td>Parser</td>
+<td>String of tokens</td>
+<td>Parse tree</td>
+</tr>
+</tbody>
+</table>
 <ul>
-<li><strong>The parser need to figure out the meaning of the input tokens, and the meaning is embedded within the structure of the parse tree</strong></li>
+<li><strong>The parser need to figure out the meaning of the input
+tokens, and the meaning is embedded within the structure of the parse
+tree</strong></li>
 </ul>
-<h4>Terminals</h4>
+<h4 id="terminals">Terminals</h4>
 <ul>
-<li><strong>Programming language constructs have recursive structure</strong>.</li>
+<li><strong>Programming language constructs have recursive
+structure</strong>.</li>
 </ul>
 <pre><code>EXPR:
 if EXPR then EXPR else EXPR fi
-while EXPR loop EXPR pool
-</code></pre>
+while EXPR loop EXPR pool</code></pre>
 <ul>
-<li><strong>The tokens (cannot be replaced recursively) is called terminal</strong></li>
-<li><strong>The grammar's language is going to be a language over strings whose alphabet are the terminal symbols.</strong></li>
+<li><strong>The tokens (cannot be replaced recursively) is called
+terminal</strong></li>
+<li><strong>The grammar’s language is going to be a language over
+strings whose alphabet are the terminal symbols.</strong></li>
 </ul>
-<h4>Definition of CFG</h4>
-<p><img src="Sources/defcfg.png" alt="defcfg"></p>
-<p><strong>Context-free Grammars generate strings:</strong></p>
-<ol>
-<li>Write down start variable</li>
-<li>Replace any variable accorting to a rule, <strong>Repeat until only terminals remain.</strong></li>
-<li>Result is the generated string, and <strong>we've generated a string that is in the language of the grammar.</strong></li>
-<li><strong><code>L(G)</code></strong> is the language of <strong>all</strong> generated strings.</li>
-<li>We call <strong><code>L(G)</code></strong> a Context Free language.</li>
-</ol>
-<h2>2. Parse Tree</h2>
-<p>The idea of CFG is a big step, but the CFG can only tell us whether a sequence of token are in or not in the language. Despite this, we are also intersted in the derivation process, which can be described as a <strong>Parse Tree</strong>.</p>
-<p><img src="Sources/parsetree.png" alt="parsetree"></p>
-<p><strong>A parse tree has:</strong></p>
-<ul>
-<li>Terminals at the leaves</li>
-<li>Non-terminals at the interior nodes</li>
-</ul>
-<p><strong>An in-order traversal of the leaves is the original input</strong>.</p>
-<h3>i. Ambiguity</h3>
-<p><strong>A Context-free Grammar is ambiguous if it has more than one parse tree for some string.</strong></p>
-<p><img src="Sources/ambiguity.png" alt="ambiguity"></p>
-<h3>ii. Handle Ambiguity</h3>
-<p><strong>It is impossible to convert automatically an ambiguous grammar to an unambiguous one,</strong> but we have two general ways:</p>
-<ol>
-<li>Precedence</li>
-<li>Associativity</li>
-</ol>
-<h3>iii. Abstract Syntax Tree</h3>
+<h4 id="definition-of-cfg">Definition of CFG</h4>
+<figure>
+<img src="Sources/defcfg.png" alt="defcfg" />
+<figcaption aria-hidden="true">defcfg</figcaption>
+</figure>
+<p><strong>Context-free Grammars generate strings:</strong> 1. Write
+down start variable 2. Replace any variable accorting to a rule,
+<strong>Repeat until only terminals remain.</strong> 3. Result is the
+generated string, and <strong>we’ve generated a string that is in the
+language of the grammar.</strong> 4. <strong><code>L(G)</code></strong>
+is the language of <strong>all</strong> generated strings. 5. We call
+<strong><code>L(G)</code></strong> a Context Free language.</p>
+<h2 id="parse-tree">2. Parse Tree</h2>
+<p>The idea of CFG is a big step, but the CFG can only tell us whether a
+sequence of token are in or not in the language. Despite this, we are
+also intersted in the derivation process, which can be described as a
+<strong>Parse Tree</strong>.</p>
+<figure>
+<img src="Sources/parsetree.png" alt="parsetree" />
+<figcaption aria-hidden="true">parsetree</figcaption>
+</figure>
+<p><strong>A parse tree has:</strong> * Terminals at the leaves *
+Non-terminals at the interior nodes</p>
+<p><strong>An in-order traversal of the leaves is the original
+input</strong>.</p>
+<h3 id="i.-ambiguity">i. Ambiguity</h3>
+<p><strong>A Context-free Grammar is ambiguous if it has more than one
+parse tree for some string.</strong></p>
+<figure>
+<img src="Sources/ambiguity.png" alt="ambiguity" />
+<figcaption aria-hidden="true">ambiguity</figcaption>
+</figure>
+<h3 id="ii.-handle-ambiguity">ii. Handle Ambiguity</h3>
+<p><strong>It is impossible to convert automatically an ambiguous
+grammar to an unambiguous one,</strong> but we have two general ways: 1.
+Precedence 2. Associativity</p>
+<h3 id="iii.-abstract-syntax-tree">iii. Abstract Syntax Tree</h3>
 <ul>
 <li>Like parse trees but ignore some details.</li>
-<li>Capturing the nesting (recursive) structure of programming language.</li>
+<li>Capturing the nesting (recursive) structure of programming
+language.</li>
 </ul>
-<h2>3. Recursive Descent Parsing</h2>
+<h2 id="recursive-descent-parsing">3. Recursive Descent Parsing</h2>
 	</section>
 	</div>
     </div>
@@ -176,6 +358,10 @@ this.page.identifier = "cs/docs/lectures/3Parse.html"
    </div>
 </footer>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <script src="../../../theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->

@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="../../../images/favicon.png" rel="icon">
-
 <link rel="canonical" href=".">
         <meta name="author" content="Angold Wang" />
 
@@ -26,6 +25,128 @@
 
     <link href="../../../theme/css/pygments/monokai.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../theme/css/style.css" type="text/css"/>
+
+  <style>
+
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+
+    li {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    a {
+      font-size: 18px;
+    }
+
+    k
+
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+    {   }
+
+    @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
 
 </head>
 <body>
@@ -64,250 +185,471 @@
     <div class="row">
         <div class="col-lg-12">
 	<section id="content" class="body">
-
-
-
-<h2>An introduction to creating a C compiler - weicc</h2>
-<h1>2. Calculator-level Language Creation</h1>
-<p><img src="Sources/ultra.jpg" alt="ultra"></p>
-<p>In the <strong><a href="https://angold4.org/cs/docs/weicc/1Thompson1984.html">previous ariticle</a></strong> of this series. <strong>I gave you some sort of &quot;taste&quot; of a compiler by giving a simple 30-line C program, which is a small compiler that can only generate code of add and substract operations.</strong></p>
-<p>After you compile and test that code on your machine, back to the implementation, you may wonder the difference between mordern compiler and this small &quot;compiler&quot;: they all meet the definition of a compiler.</p>
-<p>So, what is the difference? In my opinion, like I mentioned in <strong><a href="https://angold4.org/cs/docs/lectures/1Introduction.html">cs.1 Introduction</a></strong>:</p>
-<blockquote>
-<p><strong>To reduce the complexity of implementation, people divide the whole compiler into different <em>stages</em>.</strong></p>
-</blockquote>
-<p>Theoretically, a single-pass, monolithic compiler structure would work, but it is also hard to implement, especially in <strong>debugging</strong> and <strong>cooperating</strong>, if you implement a compiler in this way (we did it in this 30-line code), the whole compiler is just a <strong>Code Generator</strong> (so-called the <strong>Back End</strong>).</p>
-<p><img src="Sources/stages.png" alt="stages"></p>
-<p>However, the mordern compiler, who recieves some unknown, unpredictable input stream, just like I said before, it is difficult to use a single <strong>Code Generator</strong> to emit code for such complex input sources.</p>
-<p><strong>&quot;Dividing compiler into multiple stages&quot;</strong> is a very brilliant idea, not only does it reduce the complexity of implementing a mordern compiler by making the differet stages independently, but it also make it way much easier for the student to understand a mordern compiler.</p>
-<p>But at the same time, we should also notice the side-effects of this design choice: <strong>It is easy to bring an illusion to the beginners that all compilers should contain these 4 or 5 different stages.</strong> If they learn the compiler stage by stage, which means, only learn the parser after they fully understand the tokenizer, only touch code generator after they fully understand the front end, etc., I believe it is not the correct way:</p>
-<ol>
-<li>
-<p><strong>Since each part's output (immediate code) is used for the next part (in the other words, the earlier part &quot;serves&quot; the later part ), there is no &quot;fully understand&quot; before you touch the next part and knowing that what does it want.</strong></p>
-</li>
-<li>
-<p><strong>In general, the compiler should never be developed from stage to stage, it always start with a full-stages, small piece of code, and after adding more features to each part gradually at the same time. Finially becomes the &quot;complex mordern compiler&quot;.</strong></p>
-</li>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#an-introduction-to-creating-a-c-compiler---weicc"
+id="toc-an-introduction-to-creating-a-c-compiler---weicc">An
+introduction to creating a C compiler - weicc</a></li>
+<li><a href="#calculator-level-language-creation"
+id="toc-calculator-level-language-creation">2. Calculator-level Language
+Creation</a>
+<ul>
+<li><a href="#revisited-modern-compilers"
+id="toc-revisited-modern-compilers">1. Revisited: Modern Compilers</a>
+<ul>
+<li><a href="#i.-first-impression-some-giants"
+id="toc-i.-first-impression-some-giants">i. First impression: some
+giants</a></li>
+<li><a href="#ii.-variations" id="toc-ii.-variations">ii.
+Variations</a></li>
+</ul></li>
+<li><a href="#tokenizer" id="toc-tokenizer">2. Tokenizer</a></li>
+<li><a href="#parser" id="toc-parser">3. Parser</a></li>
+<li><a href="#aside-what-is-this-llvm"
+id="toc-aside-what-is-this-llvm">Aside: what is this “LLVM”?</a>
+<ul>
+<li><a href="#create-file-fib.c" id="toc-create-file-fib.c">1. Create
+file <code>fib.c</code></a></li>
+<li><a href="#using-clang-to-generate-llvm-ir-code"
+id="toc-using-clang-to-generate-llvm-ir-code">2. Using clang to generate
+llvm IR code</a></li>
+<li><a
+href="#using-weicc-to-generate-corresponding-assembly-code-optional"
+id="toc-using-weicc-to-generate-corresponding-assembly-code-optional">3.
+Using weicc to generate corresponding assembly code (optional)</a></li>
+</ul></li>
+<li><a href="#references" id="toc-references">References</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="an-introduction-to-creating-a-c-compiler---weicc">An
+introduction to creating a C compiler - weicc</h2>
+<h1 id="calculator-level-language-creation">2. Calculator-level Language
+Creation</h1>
+<figure>
+<img src="Sources/ultra.jpg" alt="ultra" />
+<figcaption aria-hidden="true">ultra</figcaption>
+</figure>
+<p>In the <strong><a
+href="https://angold4.org/cs/docs/weicc/1Thompson1984.html">previous
+ariticle</a></strong> of this series. <strong>I gave you some sort of
+“taste” of a compiler by giving a simple 30-line C program, which is a
+small compiler that can only generate code of add and substract
+operations.</strong></p>
+<p>After you compile and test that code on your machine, back to the
+implementation, you may wonder the difference between mordern compiler
+and this small “compiler”: they all meet the definition of a
+compiler.</p>
+<p>So, what is the difference? In my opinion, like I mentioned in
+<strong><a
+href="https://angold4.org/cs/docs/lectures/1Introduction.html">cs.1
+Introduction</a></strong>: &gt; <strong>To reduce the complexity of
+implementation, people divide the whole compiler into different
+<em>stages</em>.</strong></p>
+<p>Theoretically, a single-pass, monolithic compiler structure would
+work, but it is also hard to implement, especially in
+<strong>debugging</strong> and <strong>cooperating</strong>, if you
+implement a compiler in this way (we did it in this 30-line code), the
+whole compiler is just a <strong>Code Generator</strong> (so-called the
+<strong>Back End</strong>).</p>
+<figure>
+<img src="Sources/stages.png" alt="stages" />
+<figcaption aria-hidden="true">stages</figcaption>
+</figure>
+<p>However, the mordern compiler, who recieves some unknown,
+unpredictable input stream, just like I said before, it is difficult to
+use a single <strong>Code Generator</strong> to emit code for such
+complex input sources.</p>
+<p><strong>“Dividing compiler into multiple stages”</strong> is a very
+brilliant idea, not only does it reduce the complexity of implementing a
+mordern compiler by making the differet stages independently, but it
+also make it way much easier for the student to understand a mordern
+compiler.</p>
+<p>But at the same time, we should also notice the side-effects of this
+design choice: <strong>It is easy to bring an illusion to the beginners
+that all compilers should contain these 4 or 5 different
+stages.</strong> If they learn the compiler stage by stage, which means,
+only learn the parser after they fully understand the tokenizer, only
+touch code generator after they fully understand the front end, etc., I
+believe it is not the correct way: 1. <strong>Since each part’s output
+(immediate code) is used for the next part (in the other words, the
+earlier part “serves” the later part ), there is no “fully understand”
+before you touch the next part and knowing that what does it
+want.</strong></p>
+<ol start="2" type="1">
+<li><strong>In general, the compiler should never be developed from
+stage to stage, it always start with a full-stages, small piece of code,
+and after adding more features to each part gradually at the same time.
+Finially becomes the “complex mordern compiler”.</strong></li>
 </ol>
-<p><strong>In our example here, this &quot;30-line c code&quot; is nothing but a small code generator due to the simple and predictable input source. But if we want to add more features to this compiler, we should add more stages in order to help our code generator emit code.</strong></p>
-<p>I think that is one of the correct way to understand a compiler, and what I am going to do in this Chapter is to add a <strong>Tokenizer</strong> and a <strong>Parser</strong> to our compiler in order to support more complex operations like <strong>division</strong> and <strong>multiplication</strong>.</p>
-<h2>1. Revisited: Modern Compilers</h2>
-<p><img src="Sources/dinosaurs.jpg" alt="dinosaurs"></p>
+<p><strong>In our example here, this “30-line c code” is nothing but a
+small code generator due to the simple and predictable input source. But
+if we want to add more features to this compiler, we should add more
+stages in order to help our code generator emit code.</strong></p>
+<p>I think that is one of the correct way to understand a compiler, and
+what I am going to do in this Chapter is to add a
+<strong>Tokenizer</strong> and a <strong>Parser</strong> to our compiler
+in order to support more complex operations like
+<strong>division</strong> and <strong>multiplication</strong>.</p>
+<h2 id="revisited-modern-compilers">1. Revisited: Modern Compilers</h2>
+<figure>
+<img src="Sources/dinosaurs.jpg" alt="dinosaurs" />
+<figcaption aria-hidden="true">dinosaurs</figcaption>
+</figure>
 <blockquote>
-<p><strong>A wander through a weired landscape to the heart of compilation</strong></p>
+<p><strong>A wander through a weired landscape to the heart of
+compilation</strong></p>
 </blockquote>
-<p>In <strong><a href="https://angold4.org/cs/docs/lectures/1Introduction.html">cs.1 Introduction</a></strong>, we've talked a little bit about <strong>Modern Compiler</strong> and <strong>Compiler History</strong>. Before we really step into the actual compiler development, I want to share something related to the actual mordern industrial compilers since the gap between small &quot;class&quot; projects and industrial compilers seems to be overwhelming, and this huge gap may cause terror and misunderstanding when you want to write some stuff of your
-own from scratch.</p>
-<p><img src="Sources/owl.png" alt="owl"></p>
-<p>Many compiler experts believe that the compiler is akin to &quot;Dinosaurs&quot; or &quot;Dragons&quot; (<strong><a href="https://www.rust-lang.org/">Rust</a> creator <a href="https://github.com/graydon">Graydon Hoare</a></strong> mentioned that in his <strong><a href="http://venge.net/graydon/talks/CompilerTalk-2019.pdf">talk</a></strong>).</p>
+<p>In <strong><a
+href="https://angold4.org/cs/docs/lectures/1Introduction.html">cs.1
+Introduction</a></strong>, we’ve talked a little bit about
+<strong>Modern Compiler</strong> and <strong>Compiler History</strong>.
+Before we really step into the actual compiler development, I want to
+share something related to the actual mordern industrial compilers since
+the gap between small “class” projects and industrial compilers seems to
+be overwhelming, and this huge gap may cause terror and misunderstanding
+when you want to write some stuff of your own from scratch.</p>
+<figure>
+<img src="Sources/owl.png" alt="owl" />
+<figcaption aria-hidden="true">owl</figcaption>
+</figure>
+<p>Many compiler experts believe that the compiler is akin to
+“Dinosaurs” or “Dragons” (<strong><a
+href="https://www.rust-lang.org/">Rust</a> creator <a
+href="https://github.com/graydon">Graydon Hoare</a></strong> mentioned
+that in his <strong><a
+href="http://venge.net/graydon/talks/CompilerTalk-2019.pdf">talk</a></strong>).</p>
 <ul>
 <li><strong>Some are bigger and scarier.</strong></li>
 <li><strong>Some are weird and wonderful.</strong></li>
 <li><strong>Some are really tiny!</strong></li>
 </ul>
-<p><img src="Sources/dragon.png" alt="dragon"></p>
-<h3>i. First impression: some giants</h3>
-<h4>Clang (LLVM Project)</h4>
+<figure>
+<img src="Sources/dragon.png" alt="dragon" />
+<figcaption aria-hidden="true">dragon</figcaption>
+</figure>
+<h3 id="i.-first-impression-some-giants">i. First impression: some
+giants</h3>
+<h4 id="clang-llvm-project">Clang (LLVM Project)</h4>
 <ul>
-<li><strong><a href="https://clang.llvm.org/">Link</a></strong> | <strong><a href="https://github.com/llvm/llvm-project/tree/main/clang">Source Code</a></strong></li>
+<li><strong><a href="https://clang.llvm.org/">Link</a></strong> |
+<strong><a
+href="https://github.com/llvm/llvm-project/tree/main/clang">Source
+Code</a></strong></li>
 <li><strong>Code Size: <em>~2m lines of C++</em></strong>
 <ul>
 <li><em>800k</em> lines clang (front end)</li>
 <li><em>1.2m</em> LLVM</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Self hosting, bootstrapped from GCC</strong></li>
-<li><strong>Compile C-language family (C, C++, ObjC) to multi-target (23).</strong></li>
+<li><strong>Compile C-language family (C, C++, ObjC) to multi-target
+(23).</strong></li>
 <li><strong>Good diagnostics, fast code</strong></li>
 <li>Originally Apple, 2007-now, large multi-org team.</li>
 </ul>
-<h4>Swiftc</h4>
+<h4 id="swiftc">Swiftc</h4>
 <ul>
-<li><strong><a href="https://www.swift.org/swift-compiler/">Link</a></strong> | <strong><a href="https://github.com/apple/swift">Source Code</a></strong></li>
+<li><strong><a
+href="https://www.swift.org/swift-compiler/">Link</a></strong> |
+<strong><a href="https://github.com/apple/swift">Source
+Code</a></strong></li>
 <li><strong>Code Size: <em>~2.5m lines of C++</em></strong>
 <ul>
 <li><em>530k</em> lines of C++ (front-end)</li>
-<li><em>2m</em> lines of clang and LLVM (swift interoprate with C/ObjC libraries)</li>
-</ul>
-</li>
+<li><em>2m</em> lines of clang and LLVM (swift interoprate with C/ObjC
+libraries)</li>
+</ul></li>
 <li><strong>Not self-hosting.</strong></li>
 <li><strong>Compile Swift language into multi-target.</strong></li>
-<li><strong>Newer app-dev language. Extra SIL IR for Swift-specific optimizations.</strong></li>
+<li><strong>Newer app-dev language. Extra SIL IR for Swift-specific
+optimizations.</strong></li>
 <li>2014-now, mostly Apple.</li>
 </ul>
-<h4>Rustc</h4>
+<h4 id="rustc">Rustc</h4>
 <ul>
-<li><strong><a href="https://doc.rust-lang.org/rustc/what-is-rustc.html">Link</a></strong> | <strong><a href="https://github.com/rust-lang/rust/tree/master/compiler">Source Code</a></strong></li>
+<li><strong><a
+href="https://doc.rust-lang.org/rustc/what-is-rustc.html">Link</a></strong>
+| <strong><a
+href="https://github.com/rust-lang/rust/tree/master/compiler">Source
+Code</a></strong></li>
 <li><strong>Code Size: <em>~1.5m</em> lines of Rust and C++</strong>
 <ul>
 <li><em>~360k</em> lines of Rust.</li>
 <li><em>1.2m</em> lines of LLVM.</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>Self hosting, bootstrapped from OCaml.(ML)</strong></li>
 <li><strong>Compile Rust language into multi-target.</strong></li>
-<li><strong>Newer safe system language, the <a href="https://blog.rust-lang.org/2016/04/19/MIR.html">HIR and MIR</a>.</strong></li>
+<li><strong>Newer safe system language, the <a
+href="https://blog.rust-lang.org/2016/04/19/MIR.html">HIR and
+MIR</a>.</strong></li>
 <li>Originally mostly Mozilla, 2010-now, large multi-org team.</li>
 </ul>
-<p><img src="Sources/rustflow.png" alt="rustflow"></p>
-<h4>GNU Compiler Collection (GCC)</h4>
+<figure>
+<img src="Sources/rustflow.png" alt="rustflow" />
+<figcaption aria-hidden="true">rustflow</figcaption>
+</figure>
+<h4 id="gnu-compiler-collection-gcc">GNU Compiler Collection (GCC)</h4>
 <ul>
-<li><strong><a href="https://gcc.gnu.org/">Link</a></strong> | <strong><a href="https://github.com/gcc-mirror/gcc">Source Code</a></strong></li>
-<li><strong>Code Size: <em>~2.2m</em> lines of mostly C, C++. <em>600k</em> lines Ada.</strong></li>
-<li><strong>Self hosting, bootstrapped from other C compilers.</strong></li>
-<li><strong>Multi-language(C, C++, ObjC, Ada, D, Go, Fortran), multi-target (21)</strong></li>
-<li><strong>Generates quite fast code. Language &amp; target-agnostic TREE AST and RTL IR.</strong>
+<li><strong><a href="https://gcc.gnu.org/">Link</a></strong> |
+<strong><a href="https://github.com/gcc-mirror/gcc">Source
+Code</a></strong></li>
+<li><strong>Code Size: <em>~2.2m</em> lines of mostly C, C++.
+<em>600k</em> lines Ada.</strong></li>
+<li><strong>Self hosting, bootstrapped from other C
+compilers.</strong></li>
+<li><strong>Multi-language(C, C++, ObjC, Ada, D, Go, Fortran),
+multi-target (21)</strong></li>
+<li><strong>Generates quite fast code. Language &amp; target-agnostic
+TREE AST and RTL IR.</strong>
 <ul>
 <li>Challenging to work on.</li>
-</ul>
-</li>
+</ul></li>
 <li>1987-present, large multi-org team.</li>
 </ul>
-<h3>ii. Variations</h3>
-<h4>Why so big?</h4>
-<p><strong>Compilers get big because the development costs are seen as justified by the benefits, at least to the people paying the bills.</strong></p>
-<ol>
-<li>Developer productivity: Highly expressive languages, extensive diagnostics, IDE intergration, legacy interop.</li>
-<li><strong>Compiled code will be released on billions of devices, and used for different purpose.</strong></li>
-<li><strong>At that time, compilation time and target code executing time become very huge (optimization)</strong></li>
-<li>Covering &amp; exploiting all the hardware: when a new chip released, they pay for an industrial compiler to make use of it.</li>
+<h3 id="ii.-variations">ii. Variations</h3>
+<h4 id="why-so-big">Why so big?</h4>
+<p><strong>Compilers get big because the development costs are seen as
+justified by the benefits, at least to the people paying the
+bills.</strong></p>
+<ol type="1">
+<li>Developer productivity: Highly expressive languages, extensive
+diagnostics, IDE intergration, legacy interop.</li>
+<li><strong>Compiled code will be released on billions of devices, and
+used for different purpose.</strong></li>
+<li><strong>At that time, compilation time and target code executing
+time become very huge (optimization)</strong></li>
+<li>Covering &amp; exploiting all the hardware: when a new chip
+released, they pay for an industrial compiler to make use of it.</li>
 </ol>
-<h4>Variation #1: Optimizations</h4>
-<h5>Fewer optimizations</h5>
-<p>In some contexts, &quot;all the optimizations&quot; is too much, since too much optimizations are too slow to compile, costs too much memory, too much development / maintenance effort and too inflexible.</p>
+<h4 id="variation-1-optimizations">Variation #1: Optimizations</h4>
+<h5 id="fewer-optimizations">Fewer optimizations</h5>
+<p>In some contexts, “all the optimizations” is too much, since too much
+optimizations are too slow to compile, costs too much memory, too much
+development / maintenance effort and too inflexible.</p>
 <ul>
-<li><strong>Optimization</strong> is hard, we cannot make an optimizer that do too well always.</li>
-<li>In some cases, (dynamic dispatch, pointer chasing): optimizer just can't do too well anyways.</li>
+<li><strong>Optimization</strong> is hard, we cannot make an optimizer
+that do too well always.</li>
+<li>In some cases, (dynamic dispatch, pointer chasing): optimizer just
+can’t do too well anyways.</li>
 </ul>
-<h5>Proebsting's law - &quot;Compiler Advances Double Computing Power Every 18 Years</h5>
-<p><img src="Sources/pl.png" alt="pl"></p>
-<p>Scoott, Kevin. On Proebsting's Law. 2001</p>
-<p>Just like Moore's law, another empirical observation. <strong>Optimizations seem to only win ~3-5x, after <em>60+</em> years of work. And it seems less true as languages gains more abstractions to eliminate. (More true if lower-level).</strong></p>
-<h4>Variation #2: Interpretation and Compilation</h4>
-<p>You may hear that quote before: &quot;<strong>The CPU is the lowest level interpreter.</strong>&quot;. In fact, <strong>all involve compilers interacting with interpreters.</strong>
-Interpreters &amp; Compilers actually have a long relationship! And the interpreters predate compilers. Let us travel back in time to the beginning, to illustrate!</p>
-<h5>1. Origins of &quot;Computer&quot;</h5>
-<p><img src="Sources/computing.jpg" alt="computing"></p>
+<h5
+id="proebstings-law---compiler-advances-double-computing-power-every-18-years">Proebsting’s
+law - “Compiler Advances Double Computing Power Every 18 Years</h5>
+<figure>
+<img src="Sources/pl.png" alt="pl" />
+<figcaption aria-hidden="true">pl</figcaption>
+</figure>
+<p>Scoott, Kevin. On Proebsting’s Law. 2001</p>
+<p>Just like Moore’s law, another empirical observation.
+<strong>Optimizations seem to only win ~3-5x, after <em>60+</em> years
+of work. And it seems less true as languages gains more abstractions to
+eliminate. (More true if lower-level).</strong></p>
+<h4 id="variation-2-interpretation-and-compilation">Variation #2:
+Interpretation and Compilation</h4>
+<p>You may hear that quote before: “<strong>The CPU is the lowest level
+interpreter.</strong>”. In fact, <strong>all involve compilers
+interacting with interpreters.</strong> Interpreters &amp; Compilers
+actually have a long relationship! And the interpreters predate
+compilers. Let us travel back in time to the beginning, to
+illustrate!</p>
+<h5 id="origins-of-computer">1. Origins of “Computer”</h5>
+<figure>
+<img src="Sources/computing.jpg" alt="computing" />
+<figcaption aria-hidden="true">computing</figcaption>
+</figure>
 <ul>
-<li><strong>1940s: First digital computers</strong> (or should call it &quot;calculator&quot;)</li>
-<li><strong>Computers: Fixed-function machines and/or humans(largely women) doing job called &quot;computer&quot;.</strong></li>
-<li>At that time, &quot;Computing power&quot; literally measured in &quot;kilo-girls&quot; and &quot;kilo-girl-hours&quot;.</li>
-<li>Around 1945, the first general computer <strong>ENIAC</strong> built for US Army, doing artillery calculations in WWII.
+<li><strong>1940s: First digital computers</strong> (or should call it
+“calculator”)</li>
+<li><strong>Computers: Fixed-function machines and/or humans(largely
+women) doing job called “computer”.</strong></li>
+<li>At that time, “Computing power” literally measured in “kilo-girls”
+and “kilo-girl-hours”.</li>
+<li>Around 1945, the first general computer <strong>ENIAC</strong> built
+for US Army, doing artillery calculations in WWII.
 <ul>
-<li>Which bring a new role: &quot;Programmers&quot;, drawn from &quot;computer&quot; staff, all women.</li>
-<li>&quot;Programming&quot; at that time meant physically <strong>rewiring</strong> per task.</li>
+<li>Which bring a new role: “Programmers”, drawn from “computer” staff,
+all women.</li>
+<li>“Programming” at that time meant physically
+<strong>rewiring</strong> per task.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h5>2. Stored Programs</h5>
-<p><img src="Sources/program.jpg" alt="program"></p>
+<h5 id="stored-programs">2. Stored Programs</h5>
+<figure>
+<img src="Sources/program.jpg" alt="program" />
+<figcaption aria-hidden="true">program</figcaption>
+</figure>
 <ul>
-<li><strong>In 1948, <a href="https://en.wikipedia.org/wiki/Jean_Bartik">Jean Bartik</a> leads team to convert ENIAC to &quot;stored programs&quot;</strong>
+<li><strong>In 1948, <a
+href="https://en.wikipedia.org/wiki/Jean_Bartik">Jean Bartik</a> leads
+team to convert ENIAC to “stored programs”</strong>
 <ul>
-<li>which is instructions (called &quot;orders&quot; at that time) held in memory.</li>
+<li>which is instructions (called “orders” at that time) held in
+memory.</li>
 <li>These instructions will be interpreted by hardware.</li>
-<li><strong>Faster to reconfigure than rewiring, but ran slower.</strong></li>
-</ul>
-</li>
-<li><strong>In 1949, The first software interpreter for ENIAC released.</strong>
+<li><strong>Faster to reconfigure than rewiring, but ran
+slower.</strong></li>
+</ul></li>
+<li><strong>In 1949, The first software interpreter for ENIAC
+released.</strong>
 <ul>
-<li>Short Code software interpreters for higher level &quot;pseudo-code&quot; instructions.</li>
-<li>This pseudo-code denotes <strong>subroutine calls and expressions</strong>.</li>
-<li>Faster to programming with, but <em>~50x</em> slower than HW-interpreted before.</li>
-</ul>
-</li>
+<li>Short Code software interpreters for higher level “pseudo-code”
+instructions.</li>
+<li>This pseudo-code denotes <strong>subroutine calls and
+expressions</strong>.</li>
+<li>Faster to programming with, but <em>~50x</em> slower than
+HW-interpreted before.</li>
+</ul></li>
 </ul>
 <p>An example from Wikipedia: The pseudo-code:</p>
-<pre><code>a = (b + c) / b * c
-</code></pre>
-<p>was converted to Short Code by a sequence of substitutions and final regrouping.</p>
+<pre><code>a = (b + c) / b * c</code></pre>
+<p>was converted to Short Code by a sequence of substitutions and final
+regrouping.</p>
 <pre><code>X3 =  (  X1 +  Y1 )  /  X1 * Y1   substitute variables
 X3 03 09 X1 07 Y1 02 04 X1   Y1   substitute operators and parentheses. 
 07Y10204X1Y1                      group into 12-byte words.
-0000X30309X1
-</code></pre>
-<p>This short code was interpreted and ran about <em>50x</em> slower than machine code.</p>
+0000X30309X1</code></pre>
+<p>This short code was interpreted and ran about <em>50x</em> slower
+than machine code.</p>
 <ul>
-<li><strong>In 1952, <a href="https://en.wikipedia.org/wiki/Grace_Hopper">Grace Hopper</a> completed the first compiler, known as the A-0.</strong>
+<li><strong>In 1952, <a
+href="https://en.wikipedia.org/wiki/Grace_Hopper">Grace Hopper</a>
+completed the first compiler, known as the A-0.</strong>
 <ul>
 <li>A-0 translate pseudo-codes into machine code.</li>
-<li><strong>Results runs almost as fast as manualy coded, but as easy to write-for as interpreter.</strong></li>
+<li><strong>Results runs almost as fast as manualy coded, but as easy to
+write-for as interpreter.</strong></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h5>3. Balance between Interpretation and Compilation</h5>
-<p><strong>All about balancing time tradeoffs!</strong> (coding-time | compiler-execution-time | run-time).
-Here we introduce two more mordern compilers as examples to illustrade this trade-off.</p>
-<h4>Eclipse Compiler for Java (ECJ)</h4>
+<h5 id="balance-between-interpretation-and-compilation">3. Balance
+between Interpretation and Compilation</h5>
+<p><strong>All about balancing time tradeoffs!</strong> (coding-time |
+compiler-execution-time | run-time). Here we introduce two more mordern
+compilers as examples to illustrade this trade-off.</p>
+<h4 id="eclipse-compiler-for-java-ecj">Eclipse Compiler for Java
+(ECJ)</h4>
 <ul>
-<li><strong><a href="https://www.eclipse.org/downloads/packages/release/juno/sr2/eclipse-ide-java-developers">Link</a> | Not Open Source</strong></li>
+<li><strong><a
+href="https://www.eclipse.org/downloads/packages/release/juno/sr2/eclipse-ide-java-developers">Link</a>
+| Not Open Source</strong></li>
 <li><strong>Code Size: <em>146k</em> lines Java</strong></li>
 <li><strong>Self-hosting, bootstrapped from javac</strong></li>
 <li><strong>Compile Java Code into JVM IR (Java Bytecode)</strong></li>
-<li><strong>Used in many Java products (e.g,. IntelliJ IDEA) Rich semantics, good diagnostics, IDE intergration</strong></li>
+<li><strong>Used in many Java products (e.g,. IntelliJ IDEA) Rich
+semantics, good diagnostics, IDE intergration</strong></li>
 <li>2001-now, IBM, OSS.</li>
 </ul>
-<p>In Eclipse example, we see a trade-off - <strong>Stop before real machine code. Emit IR == &quot;virtual machine&quot; code</strong>.
-Which can be compiled or even just interpreted further. And the residual VM interpreter has several real advantages:</p>
-<ol>
-<li>Easier to port to new hardware (Just need to make it running). (EZ Multi-platform)</li>
-<li><strong>Faster compilation &amp; program start up</strong>, keeps interactive user engaged.</li>
-<li>As an interpreter, it is relatively simple to write, less labour. Makes you can focus your time on frontend semantics.</li>
-</ol>
-<p>As an example, from <a href="https://xavierleroy.org/talks/zam-kazam05.pdf">https://xavierleroy.org/talks/zam-kazam05.pdf</a>, <strong>The general bytecode interpreters, as a cheap implementation device, offering <em>1/4</em> of the performance of optimizing native-code compilers, at <em>1/20</em> of the implementation cost.</strong></p>
-<h4>V8 Engine</h4>
+<p>In Eclipse example, we see a trade-off - <strong>Stop before real
+machine code. Emit IR == “virtual machine” code</strong>. Which can be
+compiled or even just interpreted further. And the residual VM
+interpreter has several real advantages: 1. Easier to port to new
+hardware (Just need to make it running). (EZ Multi-platform) 2.
+<strong>Faster compilation &amp; program start up</strong>, keeps
+interactive user engaged. 3. As an interpreter, it is relatively simple
+to write, less labour. Makes you can focus your time on frontend
+semantics.</p>
+<p>As an example, from <a
+href="https://xavierleroy.org/talks/zam-kazam05.pdf">https://xavierleroy.org/talks/zam-kazam05.pdf</a>,
+<strong>The general bytecode interpreters, as a cheap implementation
+device, offering <em>1/4</em> of the performance of optimizing
+native-code compilers, at <em>1/20</em> of the implementation
+cost.</strong></p>
+<h4 id="v8-engine">V8 Engine</h4>
 <ul>
-<li><strong><a href="https://v8.dev/">Link</a></strong> | <strong><a href="https://github.com/v8/v8">Source Code</a></strong></li>
-<li><strong>Code Size: <em>660k</em> lines C++ including backends.</strong></li>
+<li><strong><a href="https://v8.dev/">Link</a></strong> | <strong><a
+href="https://github.com/v8/v8">Source Code</a></strong></li>
+<li><strong>Code Size: <em>660k</em> lines C++ including
+backends.</strong></li>
 <li><strong>Not self-hosting</strong></li>
-<li><strong>Compile Javascript code into Machine Code, Multi-target(7), Multi-tier JIT</strong>
+<li><strong>Compile Javascript code into Machine Code, Multi-target(7),
+Multi-tier JIT</strong>
 <ul>
 <li>Multiple generations of optimization and IRs.</li>
-<li><strong>Always adjusting for sweet spot of runtime performance vs. compile time, memory, maintenance cost, etc.</strong></li>
-</ul>
-</li>
+<li><strong>Always adjusting for sweet spot of runtime performance
+vs. compile time, memory, maintenance cost, etc.</strong></li>
+</ul></li>
 <li>2008-present, mostly Google.</li>
 </ul>
-<p>In V8, we saw another example of balancing <strong>Interpretation</strong> and <strong>Compilation</strong> - <strong>JIT (Just in Time) Compilation</strong> for improved performance.</p>
-<p>The JIT, which can be illustrate as <strong>&quot;Compile at runtime&quot;</strong>. The V8 engine is both a compiler and an interpreter. There are basically three steps involved in processing the code:</p>
-<p>The parsing phase will generate a AST (Abstract Syntax Tree). In general, after that there are usually two ways to compile the AST into bytecode:</p>
+<p>In V8, we saw another example of balancing
+<strong>Interpretation</strong> and <strong>Compilation</strong> -
+<strong>JIT (Just in Time) Compilation</strong> for improved
+performance.</p>
+<p>The JIT, which can be illustrate as <strong>“Compile at
+runtime”</strong>. The V8 engine is both a compiler and an interpreter.
+There are basically three steps involved in processing the code:</p>
+<p>The parsing phase will generate a AST (Abstract Syntax Tree). In
+general, after that there are usually two ways to compile the AST into
+bytecode:</p>
 <ul>
-<li><strong>Using an Interpreter: The interpreter scans the code line by line and converts it into bytecode.</strong></li>
-<li><strong>Using an Compiler: The compiler scans the entire document and compiles it into highly optimized bytecode.</strong></li>
+<li><strong>Using an Interpreter: The interpreter scans the code line by
+line and converts it into bytecode.</strong></li>
+<li><strong>Using an Compiler: The compiler scans the entire document
+and compiles it into highly optimized bytecode.</strong></li>
 </ul>
-<p>The V8 engine initially uses an interpreter to interpret the code line by line. On further executions, <strong>the V8 engine finds patterns such as frequently executed functions frequently used variables, and compiles them to improve preformance.</strong></p>
-<h2>2. Tokenizer</h2>
-<h2>3. Parser</h2>
-<h2>Aside: what is this &quot;LLVM&quot;?</h2>
-<p>Notice that the first 3 languages in the first part of this article are end in <a href="https://github.com/llvm/llvm-project">LLVM</a>. &quot;Low Level Virtual Machine&quot;.</p>
+<p>The V8 engine initially uses an interpreter to interpret the code
+line by line. On further executions, <strong>the V8 engine finds
+patterns such as frequently executed functions frequently used
+variables, and compiles them to improve preformance.</strong></p>
+<h2 id="tokenizer">2. Tokenizer</h2>
+<h2 id="parser">3. Parser</h2>
+<p><strong>The output of the parser (tree-like structure) shows the
+order in which the operations in the code are to be
+performed.</strong></p>
+<h2 id="aside-what-is-this-llvm">Aside: what is this “LLVM”?</h2>
+<p>Notice that the first 3 languages in the first part of this article
+are end in <a href="https://github.com/llvm/llvm-project">LLVM</a>. “Low
+Level Virtual Machine”.</p>
 <ul>
-<li>Strongly typed IR, serialization format, library of optimizations, lowering to many target architectures.</li>
-<li><strong>&quot;One-stop-shop&quot; for compiler backends.</strong>: LLVM IR =&gt; Multi-target</li>
+<li>Strongly typed IR, serialization format, library of optimizations,
+lowering to many target architectures.</li>
+<li><strong>“One-stop-shop” for compiler backends.</strong>: LLVM IR
+=&gt; Multi-target</li>
 <li>2003-now, UIUC at first, many industrial contributors now.</li>
-<li><strong>Longstanding dream of compiler engineering world, possibly most successful attempt at it yet!</strong></li>
+<li><strong>Longstanding dream of compiler engineering world, possibly
+most successful attempt at it yet!</strong></li>
 </ul>
-<p>Here is a funny diagram of modern compilers from Andi McClure <a href="https://runhello.com/">https://runhello.com/</a>.</p>
-<p><img src="Sources/llvm.png" alt="llvm"></p>
-<p>If you are interested in LLVM, and how does it works, you may refer to this <strong><a href="../../uc/llvmIR/MIT6_172F18_lec5.pdf">slide</a>.</strong></p>
+<p>Here is a funny diagram of modern compilers from Andi McClure <a
+href="https://runhello.com/">https://runhello.com/</a>.</p>
+<figure>
+<img src="Sources/llvm.png" alt="llvm" />
+<figcaption aria-hidden="true">llvm</figcaption>
+</figure>
+<p>If you are interested in LLVM, and how does it works, you may refer
+to this <strong><a
+href="../../uc/llvmIR/MIT6_172F18_lec5.pdf">slide</a>.</strong></p>
 <p>Here is a procedure for you to test the llvm IR code:</p>
-<h3>1. Create file <code>fib.c</code></h3>
-<p>Please copy the <a href="../../uc/llvmIR/fib.c">fib.c</a> into the directory you want to work in.</p>
-<h3>2. Using clang to generate llvm IR code</h3>
-<pre><code>clang -S -emit-llvm fib.c
-</code></pre>
-<p>Now the <a href="../../uc/llvmIR/fib.ll">fib.ll</a> contains the IR code, which can be used to generate further muti-platform code.</p>
-<h3>3. Using weicc to generate corresponding assembly code (optional)</h3>
-<p>If you want to check the difference between actual assembly code and this LLVM IR code, you may use our weicc to compile that c file.
-For this, I already put an executable file (<code>weicc</code>) here: <strong><a href="https://github.com/Angold-4/cs/blob/main/uc/llvmIR/weicc?raw=true">weicc</a></strong>.
-If you want to compile weicc from source, just clone the latest source from github <a href="https://github.com/Angold-4/weicc">https://github.com/Angold-4/weicc</a> and build your own using Makefile.</p>
+<h3 id="create-file-fib.c">1. Create file <code>fib.c</code></h3>
+<p>Please copy the <a href="../../uc/llvmIR/fib.c">fib.c</a> into the
+directory you want to work in.</p>
+<h3 id="using-clang-to-generate-llvm-ir-code">2. Using clang to generate
+llvm IR code</h3>
+<pre><code>clang -S -emit-llvm fib.c</code></pre>
+<p>Now the <a href="../../uc/llvmIR/fib.ll">fib.ll</a> contains the IR
+code, which can be used to generate further muti-platform code.</p>
+<h3 id="using-weicc-to-generate-corresponding-assembly-code-optional">3.
+Using weicc to generate corresponding assembly code (optional)</h3>
+<p>If you want to check the difference between actual assembly code and
+this LLVM IR code, you may use our weicc to compile that c file. For
+this, I already put an executable file (<code>weicc</code>) here:
+<strong><a
+href="https://github.com/Angold-4/cs/blob/main/uc/llvmIR/weicc?raw=true">weicc</a></strong>.
+If you want to compile weicc from source, just clone the latest source
+from github <a
+href="https://github.com/Angold-4/weicc">https://github.com/Angold-4/weicc</a>
+and build your own using Makefile.</p>
 <p>After that, emit assembly code by executing:</p>
-<pre><code>./weicc -o fib2.s fib.c
-</code></pre>
-<h2>References</h2>
-<ol>
-<li><a href="http://venge.net/graydon/talks/CompilerTalk-2019.pdf">Slides</a> of a talk related to compilers in March 26, 2019 at UBC by <a href="https://github.com/graydon">Gradon Hoare</a>.</li>
-<li><a href="https://en.wikipedia.org/wiki/History_of_programming_languages">History of programming language from Wikipedia</a></li>
-<li><a href="https://www.geeksforgeeks.org/how-v8-compiles-javascript-code/">Geeksforgeeks How V8 compiles javascript code?</a></li>
+<pre><code>./weicc -o fib2.s fib.c</code></pre>
+<h2 id="references">References</h2>
+<ol type="1">
+<li><a
+href="http://venge.net/graydon/talks/CompilerTalk-2019.pdf">Slides</a>
+of a talk related to compilers in March 26, 2019 at UBC by <a
+href="https://github.com/graydon">Gradon Hoare</a>.</li>
+<li><a
+href="https://en.wikipedia.org/wiki/History_of_programming_languages">History
+of programming language from Wikipedia</a></li>
+<li><a
+href="https://www.geeksforgeeks.org/how-v8-compiles-javascript-code/">Geeksforgeeks
+How V8 compiles javascript code?</a></li>
 </ol>
 	</section>
 	</div>
@@ -348,6 +690,10 @@ this.page.identifier = "cs/docs/weicc/2Calculator.html"
    </div>
 </footer>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <script src="../../../theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->

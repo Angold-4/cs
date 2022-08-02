@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="../../../images/favicon.png" rel="icon">
-
 <link rel="canonical" href=".">
         <meta name="author" content="Angold Wang" />
 
@@ -26,6 +25,128 @@
 
     <link href="../../../theme/css/pygments/monokai.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../theme/css/style.css" type="text/css"/>
+
+  <style>
+
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+
+    li {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    a {
+      font-size: 18px;
+    }
+
+    k
+
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+    {   }
+
+    @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
 
 </head>
 <body>
@@ -64,96 +185,207 @@
     <div class="row">
         <div class="col-lg-12">
 	<section id="content" class="body">
-
-
-
-<h2>An introduction to creating a C compiler - weicc</h2>
-<h1>1. Thompson 1984</h1>
-<p><img src="Sources/ken.jpeg" alt="ken"></p>
-<h2>1. Reflections on Trusting Trust</h2>
-<p>To begin with, I want to introduce this old but not outdated famous speech by <strong><a href="https://en.wikipedia.org/wiki/Ken_Thompson">ken Thompson</a></strong> when he won the <strong>Turing Award</strong> in 1984. Namely <strong>&quot;<a href="../../uc/thompson1984.pdf">Reflections on Trusting Trust</a>&quot;</strong>.</p>
-<p>In this speech, thompson mentioned a lot of special topics, including program saftey, compiler... And I want to just introduce the first part of this speech (related to the compiler), which seems shows the solution of some intersting but non-obvious problems. If you feel interested in these topic, I highly recommend you to read the <a href="../../uc/thompson1984.pdf">original pdf</a>.</p>
-<h3>Intro Stage: How do we know a program is safe?</h3>
+<nav id="TOC" role="doc-toc">
 <ul>
-<li>
-<p><strong>Inspect the program's source code</strong></p>
-</li>
-<li>
-<p>But isn't the program source code compiled by a compiler?</p>
+<li><a href="#an-introduction-to-creating-a-c-compiler---weicc"
+id="toc-an-introduction-to-creating-a-c-compiler---weicc">An
+introduction to creating a C compiler - weicc</a></li>
+<li><a href="#thompson-1984" id="toc-thompson-1984">1. Thompson 1984</a>
 <ul>
-<li><strong>Then we inspect the compiler's source code.</strong></li>
+<li><a href="#reflections-on-trusting-trust"
+id="toc-reflections-on-trusting-trust">1. Reflections on Trusting
+Trust</a>
+<ul>
+<li><a href="#intro-stage-how-do-we-know-a-program-is-safe"
+id="toc-intro-stage-how-do-we-know-a-program-is-safe">Intro Stage: How
+do we know a program is safe?</a></li>
+<li><a href="#stage-i---a-program-that-produces-itself-quines"
+id="toc-stage-i---a-program-that-produces-itself-quines">Stage i - A
+program that produces itself (quines)</a></li>
+<li><a
+href="#stage-ii---an-example-of-ccc-compiler-that-compiles-a-compiler"
+id="toc-stage-ii---an-example-of-ccc-compiler-that-compiles-a-compiler">Stage
+ii - An example of ccc (Compiler that Compiles a Compiler)</a></li>
+<li><a href="#so-there-must-be-the-first-compiler-or-not"
+id="toc-so-there-must-be-the-first-compiler-or-not">So there must be the
+“first” compiler, or not?</a></li>
+</ul></li>
+<li><a href="#meet-weicc" id="toc-meet-weicc">2. Meet weicc</a></li>
+<li><a href="#taste-a-simple-add-and-subtract-compiler"
+id="toc-taste-a-simple-add-and-subtract-compiler">3. Taste: A Simple
+“add and subtract” Compiler</a>
+<ul>
+<li><a href="#linux-ubuntu" id="toc-linux-ubuntu">Linux
+(Ubuntu)</a></li>
+<li><a href="#macos" id="toc-macos">MacOS</a></li>
+<li><a href="#windows-wsl" id="toc-windows-wsl">Windows (WSL)</a></li>
+</ul></li>
+<li><a href="#references" id="toc-references">References</a></li>
+</ul></li>
 </ul>
-</li>
-<li>
-<p>But is't the compiler compiled by another compiler?</p>
+</nav>
+<h2 id="an-introduction-to-creating-a-c-compiler---weicc">An
+introduction to creating a C compiler - weicc</h2>
+<h1 id="thompson-1984">1. Thompson 1984</h1>
+<figure>
+<img src="Sources/ken.jpeg" alt="ken" />
+<figcaption aria-hidden="true">ken</figcaption>
+</figure>
+<h2 id="reflections-on-trusting-trust">1. Reflections on Trusting
+Trust</h2>
+<p>To begin with, I want to introduce this old but not outdated famous
+speech by <strong><a
+href="https://en.wikipedia.org/wiki/Ken_Thompson">ken
+Thompson</a></strong> when he won the <strong>Turing Award</strong> in
+1984. Namely <strong>“<a href="../../uc/thompson1984.pdf">Reflections on
+Trusting Trust</a>”</strong>.</p>
+<p>In this speech, thompson mentioned a lot of special topics, including
+program saftey, compiler… And I want to just introduce the first part of
+this speech (related to the compiler), which seems shows the solution of
+some intersting but non-obvious problems. If you feel interested in
+these topic, I highly recommend you to read the <a
+href="../../uc/thompson1984.pdf">original pdf</a>.</p>
+<h3 id="intro-stage-how-do-we-know-a-program-is-safe">Intro Stage: How
+do we know a program is safe?</h3>
+<ul>
+<li><p><strong>Inspect the program’s source code</strong></p></li>
+<li><p>But isn’t the program source code compiled by a compiler?</p>
+<ul>
+<li><strong>Then we inspect the compiler’s source code.</strong></li>
+</ul></li>
+<li><p>But is’t the compiler compiled by another compiler?</p>
 <ul>
 <li><strong>Self-hostng compilers compile themselves.</strong></li>
 <li>e.g, gcc compiles gcc</li>
+</ul></li>
+<li><p>……</p></li>
 </ul>
-</li>
-<li>
-<p>......</p>
-</li>
-</ul>
-<h3>Stage i - A program that produces itself (quines)</h3>
+<h3 id="stage-i---a-program-that-produces-itself-quines">Stage i - A
+program that produces itself (quines)</h3>
 <blockquote>
-<p><strong>Problem: Write a source program that, when compiled and executed, will produce as output an exact copy of its source. (Thompson)</strong></p>
+<p><strong>Problem: Write a source program that, when compiled and
+executed, will produce as output an exact copy of its source.
+(Thompson)</strong></p>
 </blockquote>
-<p>There are a couple of different strategies to writing quines. The obvious one is to just write code that opens the code file and prints it out. But the more interesting ones involve language features that allow for self-embedding (using variables) and a lot of trial and error is involved.</p>
-<p><strong><a href="../../uc/stages/quine.c">quine.c</a></strong> is one of the implementation, I found it very intersting while implementing it that <strong>if you take care of the variables inside the program, you may implement your own version very easy (careful enough). However, if you try to use no variables (<code>TEXT</code>) in <code>quine.c</code> it seems impossible to implement quine.</strong></p>
-<p>For example, first, whatever the program looks like, at some point it has to print something:</p>
-<pre><code>print ...
-</code></pre>
-<p>However, what should it print? itself, so it needs to print the &quot;print&quot; command:</p>
-<pre><code>print &quot;print ...&quot;
-</code></pre>
-<p>What should it print next? Well, in the mean time the program grew, so it needs to print the string starting with &quot;print&quot; too!</p>
-<pre><code>print &quot;print \&quot;print ... \&quot;&quot;
-</code></pre>
-<p><strong>..... It seems that we are dropping into an &quot;endless rabbit hole&quot;: The string <code>&quot;print \&quot;&quot;</code> is repeated over and over again.</strong> And it would be nice to put the repeating part into a variable:</p>
+<p>There are a couple of different strategies to writing quines. The
+obvious one is to just write code that opens the code file and prints it
+out. But the more interesting ones involve language features that allow
+for self-embedding (using variables) and a lot of trial and error is
+involved.</p>
+<p><strong><a href="../../uc/stages/quine.c">quine.c</a></strong> is one
+of the implementation, I found it very intersting while implementing it
+that <strong>if you take care of the variables inside the program, you
+may implement your own version very easy (careful enough). However, if
+you try to use no variables (<code>TEXT</code>) in <code>quine.c</code>
+it seems impossible to implement quine.</strong></p>
+<p>For example, first, whatever the program looks like, at some point it
+has to print something:</p>
+<pre><code>print ...</code></pre>
+<p>However, what should it print? itself, so it needs to print the
+“print” command:</p>
+<pre><code>print &quot;print ...&quot;</code></pre>
+<p>What should it print next? Well, in the mean time the program grew,
+so it needs to print the string starting with “print” too!</p>
+<pre><code>print &quot;print \&quot;print ... \&quot;&quot;</code></pre>
+<p><strong>….. It seems that we are dropping into an “endless rabbit
+hole”: The string <code>"print \""</code> is repeated over and over
+again.</strong> And it would be nice to put the repeating part into a
+variable:</p>
 <pre><code>a = &quot;a = @\nprint a.replace(\&quot;@\&quot;, quoted(a))&quot;
-print a.replace(&quot;@&quot;, quoted(a))
-</code></pre>
-<p><strong>Which solves this problem perfectly and precisely !</strong></p>
-<h4>What can we learn from quine?</h4>
-<p>A quine is a computer program that output its own source code. In other words, a quine is sort of like a list of instructions for writing the insturctions themselves, which called &quot;self--reference&quot; or &quot;recursion&quot;.</p>
-<h4>1. Ouroboros</h4>
-<p>The <strong><a href="https://en.wikipedia.org/wiki/Ouroboros">Ouroboros</a></strong> is one intersting practice of quine.
-<strong>This program shows that any program can be easily &quot;written&quot; by another program.</strong></p>
-<p>Please refer to <strong><a href="../../uc/stages/Ouroboros.java">Ouroboros.java</a></strong> and <strong><a href="../../uc/stages/Ouroboros.cpp">Ouroboros.cpp</a></strong> (better run them).</p>
-<p>You can also check the output in <strong><a href="http://codepad.org/MramrTbx">codepad.org</a></strong>, This C++ program outputs the source for a Java program that outputs the original C++ code. Also another intersting example: <strong><a href="https://github.com/mame/quine-relay">An uroboros program with 100+ programming languages</a>.</strong></p>
+print a.replace(&quot;@&quot;, quoted(a))</code></pre>
+<p><strong>Which solves this problem perfectly and precisely
+!</strong></p>
+<h4 id="what-can-we-learn-from-quine">What can we learn from quine?</h4>
+<p>A quine is a computer program that output its own source code. In
+other words, a quine is sort of like a list of instructions for writing
+the insturctions themselves, which called “self–reference” or
+“recursion”.</p>
+<h4 id="ouroboros">1. Ouroboros</h4>
+<p>The <strong><a
+href="https://en.wikipedia.org/wiki/Ouroboros">Ouroboros</a></strong> is
+one intersting practice of quine. <strong>This program shows that any
+program can be easily “written” by another program.</strong></p>
+<p>Please refer to <strong><a
+href="../../uc/stages/Ouroboros.java">Ouroboros.java</a></strong> and
+<strong><a
+href="../../uc/stages/Ouroboros.cpp">Ouroboros.cpp</a></strong> (better
+run them).</p>
+<p>You can also check the output in <strong><a
+href="http://codepad.org/MramrTbx">codepad.org</a></strong>, This C++
+program outputs the source for a Java program that outputs the original
+C++ code. Also another intersting example: <strong><a
+href="https://github.com/mame/quine-relay">An uroboros program with 100+
+programming languages</a>.</strong></p>
 <pre><code>Ouroboros.cpp -------&gt; Ouroboros.java
-             &lt;-------
-</code></pre>
-<p><img src="Sources/Ouroboros.png" alt="Ouroboros.png"></p>
-<p><strong>Ihcoyc at English Wikipedia, Public domain, via Wikimedia Commons</strong></p>
+             &lt;-------</code></pre>
+<figure>
+<img src="Sources/Ouroboros.png" alt="Ouroboros.png" />
+<figcaption aria-hidden="true">Ouroboros.png</figcaption>
+</figure>
+<p><strong>Ihcoyc at English Wikipedia, Public domain, via Wikimedia
+Commons</strong></p>
 <blockquote>
-<p>humans DNA sequencing themselves is considered valuable by some and seems oddly similar to the idea of computer programs printing their own source code.</p>
+<p>humans DNA sequencing themselves is considered valuable by some and
+seems oddly similar to the idea of computer programs printing their own
+source code.</p>
 </blockquote>
-<h4>2. Modern Compiler</h4>
-<p>It seems to me that mordern compilers are doing such &quot;conversion&quot; - it accepts any semantic language in some area of language syntax and try to produce this language in another format to actually do its work rather than simply print it out.</p>
-<p>For example: <strong>The C compiler do its work by translate the C language into Assembly, and then hand it to CPU to do the actual work.</strong></p>
-<h3>Stage ii - An example of ccc (Compiler that Compiles a Compiler)</h3>
-<p>The C compiler is written in C, and you may wonder how does it happends, or some sort of &quot;chicken and egg&quot; problems.</p>
-<h4>i. A Custom C &quot;Compiler&quot;</h4>
-<p>In this case, I will use a specific example from <strong>&quot;using C compiler to implement a &quot;new&quot; language that written in itself&quot;</strong>.
-Imagine now we have a compiler <strong><a href="../../uc/stages/stage2/compiler.c">compile.c</a></strong> that is written in c. Basically it just a wrapper of gcc (it will simply call <code>gcc</code> and pass the user command into it.)</p>
-<p>You can test this compiler by compiling any c program you like, in our case, I use <code>gcc</code> to simply compile our <code>compiler.c</code> first, and use this new compiled compiler to compile <strong><a href="../../uc/stages/stage2/hw.c">hw.c</a></strong> by executing <code>./compiler hw.c -o hw.out</code> and then run <code>hw.out</code>.</p>
-<p>Now you can see it success, and print <code>hello world</code> successfully! What we are going to do now is trying to <strong>create another language based on our <code>compiler.c</code> by adding some new features into c language.</strong></p>
-<h4>ii. The X Programming Language</h4>
-<p>Let's say now in our new language, we want to use <code>uint1</code> type to replace <code>char</code> type in c language. How can we do that?</p>
-<p>Well, seems it is relatively simple in our case. We can also use C program to implement this new compiler: Please check the source code of <strong><a href="../../uc/stages/stage2/xcompiler.c">xcompiler.c</a>.</strong>
-Basically, the only difference between our new language <strong>X</strong> compiler and the original c compiler is these few lines. And what it does is just simply replace all <code>uint1</code> in our new language into <code>char</code>, and then call <strong>gcc</strong> to compile it.</p>
-<pre><code class="language-c">  /* Our custom X language with uint1 data type */
-  uint1 newDataType[6] = {'u', 'i', 'n', 't', '1', '\0'};
-  uint1 * whereUint;
-
-  // Replace all instances of uint1 with char
-  while ((whereUint = strstr(buffer, newDataType)) != NULL) {
-    strncpy(whereUint, &quot;char &quot;, 5);
-  }
-</code></pre>
-<p>Now we use our previous compiler to compile our new <strong>&quot;X&quot;</strong> compiler. <code>./compiler xcompiler.c -o xcompilerc</code> and then use this new compiler to compile our new language <strong><a href="../../uc/stages/stage2/hw.x">hw.x</a></strong> and execute it.</p>
+<h4 id="modern-compiler">2. Modern Compiler</h4>
+<p>It seems to me that mordern compilers are doing such “conversion” -
+it accepts any semantic language in some area of language syntax and try
+to produce this language in another format to actually do its work
+rather than simply print it out.</p>
+<p>For example: <strong>The C compiler do its work by translate the C
+language into Assembly, and then hand it to CPU to do the actual
+work.</strong></p>
+<h3
+id="stage-ii---an-example-of-ccc-compiler-that-compiles-a-compiler">Stage
+ii - An example of ccc (Compiler that Compiles a Compiler)</h3>
+<p>The C compiler is written in C, and you may wonder how does it
+happends, or some sort of “chicken and egg” problems.</p>
+<h4 id="i.-a-custom-c-compiler">i. A Custom C “Compiler”</h4>
+<p>In this case, I will use a specific example from <strong>“using C
+compiler to implement a”new” language that written in itself”</strong>.
+Imagine now we have a compiler <strong><a
+href="../../uc/stages/stage2/compiler.c">compile.c</a></strong> that is
+written in c. Basically it just a wrapper of gcc (it will simply call
+<code>gcc</code> and pass the user command into it.)</p>
+<p>You can test this compiler by compiling any c program you like, in
+our case, I use <code>gcc</code> to simply compile our
+<code>compiler.c</code> first, and use this new compiled compiler to
+compile <strong><a href="../../uc/stages/stage2/hw.c">hw.c</a></strong>
+by executing <code>./compiler hw.c -o hw.out</code> and then run
+<code>hw.out</code>.</p>
+<p>Now you can see it success, and print <code>hello world</code>
+successfully! What we are going to do now is trying to <strong>create
+another language based on our <code>compiler.c</code> by adding some new
+features into c language.</strong></p>
+<h4 id="ii.-the-x-programming-language">ii. The X Programming
+Language</h4>
+<p>Let’s say now in our new language, we want to use <code>uint1</code>
+type to replace <code>char</code> type in c language. How can we do
+that?</p>
+<p>Well, seems it is relatively simple in our case. We can also use C
+program to implement this new compiler: Please check the source code of
+<strong><a
+href="../../uc/stages/stage2/xcompiler.c">xcompiler.c</a>.</strong>
+Basically, the only difference between our new language
+<strong>X</strong> compiler and the original c compiler is these few
+lines. And what it does is just simply replace all <code>uint1</code> in
+our new language into <code>char</code>, and then call
+<strong>gcc</strong> to compile it.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* Our custom X language with uint1 data type */</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  uint1 newDataType<span class="op">[</span><span class="dv">6</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="ch">&#39;u&#39;</span><span class="op">,</span> <span class="ch">&#39;i&#39;</span><span class="op">,</span> <span class="ch">&#39;n&#39;</span><span class="op">,</span> <span class="ch">&#39;t&#39;</span><span class="op">,</span> <span class="ch">&#39;1&#39;</span><span class="op">,</span> <span class="ch">&#39;\0&#39;</span><span class="op">};</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  uint1 <span class="op">*</span> whereUint<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Replace all instances of uint1 with char</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">((</span>whereUint <span class="op">=</span> strstr<span class="op">(</span>buffer<span class="op">,</span> newDataType<span class="op">))</span> <span class="op">!=</span> NULL<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    strncpy<span class="op">(</span>whereUint<span class="op">,</span> <span class="st">&quot;char &quot;</span><span class="op">,</span> <span class="dv">5</span><span class="op">);</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span></code></pre></div>
+<p>Now we use our previous compiler to compile our new
+<strong>“X”</strong> compiler.
+<code>./compiler xcompiler.c -o xcompilerc</code> and then use this new
+compiler to compile our new language <strong><a
+href="../../uc/stages/stage2/hw.x">hw.x</a></strong> and execute it.</p>
 <pre><code>// hw.x
 #include &lt;stdio.h&gt;
 
@@ -163,108 +395,224 @@ int main() {
   printf(&quot;%s\n&quot;, text);
 
   return 0;
-}
-</code></pre>
-<p>As we can see, our new language <strong>&quot;X&quot;</strong> is pretty much the same as C, except we use <code>uint1</code> to represent <code>char</code>.
-Using our new compiler <code>xcompilerc</code>, we can compile this <code>hw.x</code>, after execute it, it still prints out &quot;hello world&quot; to the screen !</p>
-<h4>iii. The X Compiler that is Written in X</h4>
-<p>Now we have the <strong>X</strong> programming language, with the <code>xcompiler.c</code> as its compiler. The next mission is to solve the problem we introduced at the beginning of this section: <strong>Is it possible to have a programming language that its compiler is written in its own?</strong> -- We want to create the <strong>X</strong> compiler that is written in <strong>X</strong> !</p>
-<p>It is very simple: we just need to create another file called <strong><a href="../../uc/stages/stage2/xcompiler.x">xcompiler.x</a></strong>, it does nothing special compared to <code>xcompiler.c</code> with replacing all occurrences of <code>char</code> in the original c file with <code>uint1</code> to fit the <strong>X</strong> programming language standard.</p>
-<p>Now after we use the <code>xcompilerc</code> to compiler this <strong>X</strong> programming language file <code>xcompiler.x</code> by executing <code>./xcompilerc xcompiler.x -o xcompiler</code> we get a <strong>X</strong> compiler <strong><code>xcompiler</code></strong> that is written in X.</p>
-<p>If you are quite confusing about these whole process (i, ii and iii). I highly recommend you to go through the whole procedure by yourself. The source code can be found in <strong><a href="https://gist.github.com/Angold-4/a5e69555ba6cb8d7ceca4c551e40e8c2">gist</a>.</strong></p>
-<h4>Bootstrapping</h4>
-<p>This procedure I showed above is also known as <strong>&quot;<a href="https://en.wikipedia.org/wiki/Bootstrapping_(compilers)">Bootstrapping</a>&quot;.</strong></p>
-<p><strong>Bootstrapping is the process by which simple language is used to translate more complicated program, which in turn may handle an even more complicated program so on...</strong></p>
-<p><strong>To wrap up, when writing the first X language compiler with the intention of &quot;self-hosting&quot;, you need to writing using an existing Y language that is different from X, and when the compiler is more complete, you need to rewrite the compiler itself from Y language to X language (<code>xcompilerc</code>)</strong>.</p>
-<p><img src="Sources/bootstrapping.png" alt="bootstrapping"></p>
+}</code></pre>
+<p>As we can see, our new language <strong>“X”</strong> is pretty much
+the same as C, except we use <code>uint1</code> to represent
+<code>char</code>. Using our new compiler <code>xcompilerc</code>, we
+can compile this <code>hw.x</code>, after execute it, it still prints
+out “hello world” to the screen !</p>
+<h4 id="iii.-the-x-compiler-that-is-written-in-x">iii. The X Compiler
+that is Written in X</h4>
+<p>Now we have the <strong>X</strong> programming language, with the
+<code>xcompiler.c</code> as its compiler. The next mission is to solve
+the problem we introduced at the beginning of this section: <strong>Is
+it possible to have a programming language that its compiler is written
+in its own?</strong> – We want to create the <strong>X</strong> compiler
+that is written in <strong>X</strong> !</p>
+<p>It is very simple: we just need to create another file called
+<strong><a
+href="../../uc/stages/stage2/xcompiler.x">xcompiler.x</a></strong>, it
+does nothing special compared to <code>xcompiler.c</code> with replacing
+all occurrences of <code>char</code> in the original c file with
+<code>uint1</code> to fit the <strong>X</strong> programming language
+standard.</p>
+<p>Now after we use the <code>xcompilerc</code> to compiler this
+<strong>X</strong> programming language file <code>xcompiler.x</code> by
+executing <code>./xcompilerc xcompiler.x -o xcompiler</code> we get a
+<strong>X</strong> compiler <strong><code>xcompiler</code></strong> that
+is written in X.</p>
+<p>If you are quite confusing about these whole process (i, ii and iii).
+I highly recommend you to go through the whole procedure by yourself.
+The source code can be found in <strong><a
+href="https://gist.github.com/Angold-4/a5e69555ba6cb8d7ceca4c551e40e8c2">gist</a>.</strong></p>
+<h4 id="bootstrapping">Bootstrapping</h4>
+<p>This procedure I showed above is also known as <strong>“<a
+href="https://en.wikipedia.org/wiki/Bootstrapping_(compilers)">Bootstrapping</a>”.</strong></p>
+<p><strong>Bootstrapping is the process by which simple language is used
+to translate more complicated program, which in turn may handle an even
+more complicated program so on…</strong></p>
+<p><strong>To wrap up, when writing the first X language compiler with
+the intention of “self-hosting”, you need to writing using an existing Y
+language that is different from X, and when the compiler is more
+complete, you need to rewrite the compiler itself from Y language to X
+language (<code>xcompilerc</code>)</strong>.</p>
+<figure>
+<img src="Sources/bootstrapping.png" alt="bootstrapping" />
+<figcaption aria-hidden="true">bootstrapping</figcaption>
+</figure>
 <blockquote>
-<p>The &quot;chicken or egg&quot; is yet another bootstrapping problem: <strong>Imagine the chicken is <code>X</code> in our example, and another chicken-like birds proto-chicken is <code>C</code>. One day the proto-chicken(<code>xcompiler.c</code>) lays a chicken egg(<code>xcompiler.x</code> -&gt; <code>xcompiler</code>) with some unknown changes (maybe its DNA changes), and the chicken can now produce new chicken eggs (<code>hw.x</code>)...</strong></p>
+<p>The “chicken or egg” is yet another bootstrapping problem:
+<strong>Imagine the chicken is <code>X</code> in our example, and
+another chicken-like birds proto-chicken is <code>C</code>. One day the
+proto-chicken(<code>xcompiler.c</code>) lays a chicken
+egg(<code>xcompiler.x</code> -&gt; <code>xcompiler</code>) with some
+unknown changes (maybe its DNA changes), and the chicken can now produce
+new chicken eggs (<code>hw.x</code>)…</strong></p>
 </blockquote>
-<h3>So there must be the &quot;first&quot; compiler, or not?</h3>
-<p>In the &quot;<strong>X</strong>&quot; language example, we simply using an existing C compiler <code>compiler.c</code> to implement our new language, but what if you don't have an existing compiler.Then we have no choice but to write in another language.
-Going back to the lineage of a compiler for a modern complex programming language, another compiler used to compile an implementation of that language, and so on. <strong>eventually someone used machine language directly in the early days of computers.</strong></p>
-<p><strong>The current compilers start with a very small assembller ancestors, just like the origin of life. So almost any existing executable is an indirect descendant of its primitive assembler.</strong></p>
-<h2>2. Meet weicc</h2>
-<p>As I mentioned above, if you already have an implementation of language X, there is no logical contradicton in creating a new language X compiler using that language itself. If you want to self-host, you can simply proceed with the development with an <strong>existing compiler and switch when your own is complete</strong>.</p>
-<p>And that is exactly what I am trying to implement in this series - <strong>A C language compiler that is implement using C</strong>.
-Initially  I plan to create a new language, but I can't come up with any new features or peculiarities for this new language, even if I implement it successfully, it may just a mediocre, buggy and flawed language.
-Designing and implementing the original language is good in terms of improving the design sense of the language, but as I mentioned above, it also has its pitfalls: You may design some specification of your own language intentionally where implementation is cumbersome.</p>
-<p>After watching the <strong><a href="https://github.com/rui314/chibicc">chibicc</a></strong> by <strong><a href="https://github.com/rui314/chibicc">Rui</a></strong>, I finially choose to implement a C compiler from scratch for these reasons:</p>
-<ol>
-<li><strong>C language has clear and reasonable specification</strong></li>
-<li><strong>C compiler translate C program into machine language (assembly), so by creating a compiler, I may learn how program works in real CPU at the same time C itself.</strong></li>
-<li><strong>C is so widely used that once the compiler works, you can compile and play with third-party source code:</strong>
+<h3 id="so-there-must-be-the-first-compiler-or-not">So there must be the
+“first” compiler, or not?</h3>
+<p>In the “<strong>X</strong>” language example, we simply using an
+existing C compiler <code>compiler.c</code> to implement our new
+language, but what if you don’t have an existing compiler.Then we have
+no choice but to write in another language. Going back to the lineage of
+a compiler for a modern complex programming language, another compiler
+used to compile an implementation of that language, and so on.
+<strong>eventually someone used machine language directly in the early
+days of computers.</strong></p>
+<p><strong>The current compilers start with a very small assembller
+ancestors, just like the origin of life. So almost any existing
+executable is an indirect descendant of its primitive
+assembler.</strong></p>
+<h2 id="meet-weicc">2. Meet weicc</h2>
+<p>As I mentioned above, if you already have an implementation of
+language X, there is no logical contradicton in creating a new language
+X compiler using that language itself. If you want to self-host, you can
+simply proceed with the development with an <strong>existing compiler
+and switch when your own is complete</strong>.</p>
+<p>And that is exactly what I am trying to implement in this series -
+<strong>A C language compiler that is implement using C</strong>.
+Initially I plan to create a new language, but I can’t come up with any
+new features or peculiarities for this new language, even if I implement
+it successfully, it may just a mediocre, buggy and flawed language.
+Designing and implementing the original language is good in terms of
+improving the design sense of the language, but as I mentioned above, it
+also has its pitfalls: You may design some specification of your own
+language intentionally where implementation is cumbersome.</p>
+<p>After watching the <strong><a
+href="https://github.com/rui314/chibicc">chibicc</a></strong> by
+<strong><a href="https://github.com/rui314/chibicc">Rui</a></strong>, I
+finially choose to implement a C compiler from scratch for these
+reasons:</p>
+<ol type="1">
+<li><strong>C language has clear and reasonable
+specification</strong></li>
+<li><strong>C compiler translate C program into machine language
+(assembly), so by creating a compiler, I may learn how program works in
+real CPU at the same time C itself.</strong></li>
+<li><strong>C is so widely used that once the compiler works, you can
+compile and play with third-party source code:</strong>
 <ul>
-<li>Xv6 - a mini unix operating system that I introduced in <a href="https://a4org.github.io/os/index.html">os</a>.</li>
+<li>Xv6 - a mini unix operating system that I introduced in <a
+href="https://a4org.github.io/os/index.html">os</a>.</li>
 <li>Linux (if the compiler is perfect enough)</li>
-</ul>
-</li>
-<li><strong>C++ has such a huge language specification that it is impossible to easily create a self-made compiler.</strong></li>
-<li><strong>There are already lots of self-implemented C compilers for reference, such as:</strong>
+</ul></li>
+<li><strong>C++ has such a huge language specification that it is
+impossible to easily create a self-made compiler.</strong></li>
+<li><strong>There are already lots of self-implemented C compilers for
+reference, such as:</strong>
 <ul>
-<li><strong><a href="https://github.com/rui314/chibicc">chibicc</a></strong> by <strong><a href="https://github.com/rui314">Rui Ueyama</a></strong>.</li>
-<li><strong><a href="https://github.com/drh/lcc">lcc</a></strong> by <strong><a href="https://github.com/drh">Dave Hanson</a></strong>.</li>
-<li><strong><a href="https://github.com/alexfru/SmallerC">SmallerC</a></strong> by <strong><a href="https://github.com/alexfru">Alexey Frunze</a></strong></li>
-<li><strong><a href="https://repo.or.cz/w/tinycc.git/tree">TinyCC</a></strong> by <strong><a href="https://bellard.org/tcc/">Fabrice Bellard</a></strong></li>
-<li>....</li>
-</ul>
-</li>
+<li><strong><a
+href="https://github.com/rui314/chibicc">chibicc</a></strong> by
+<strong><a href="https://github.com/rui314">Rui
+Ueyama</a></strong>.</li>
+<li><strong><a href="https://github.com/drh/lcc">lcc</a></strong> by
+<strong><a href="https://github.com/drh">Dave Hanson</a></strong>.</li>
+<li><strong><a
+href="https://github.com/alexfru/SmallerC">SmallerC</a></strong> by
+<strong><a href="https://github.com/alexfru">Alexey
+Frunze</a></strong></li>
+<li><strong><a
+href="https://repo.or.cz/w/tinycc.git/tree">TinyCC</a></strong> by
+<strong><a href="https://bellard.org/tcc/">Fabrice
+Bellard</a></strong></li>
+<li>….</li>
+</ul></li>
 </ol>
-<p>I call this new compiler <strong>weicc</strong>. You can find the newest update of this project on <strong><a href="https://github.com/Angold-4/weicc">https://github.com/Angold-4/weicc</a></strong>.
-I pronounce weicc as way cee cee. &quot;wei&quot; means &quot;mini&quot; or &quot;small&quot; in Chinese. &quot;cc&quot; stands for C compiler.</p>
-<p>I am going to blog the journey while I implement this compiler, also as weicc's documentation, this is the first, soon the second, and so on...
-When I am writing this first document, I had been working on weicc for a while, and I had Implemented a lot of features: <strong>variables</strong>, <strong>statements</strong>, <strong>control structures</strong>... And I believe that as the documentation continues to grow, soon I will have a self-made C compiler.</p>
-<p><strong>The compiler can be conceptly divided into multiple stages such as <code>lexical analysis</code>, <code>parsing</code> and <code>code generation</code>. A common textbook approach would be to have chapters on each topic. In this way, while it does reduce such complexity by splitting the compilation process into several stages, I still don't think it is very easy to implement in stages.</strong>
-The reason is that with the development method created for each stage, it is not possible to run the compiler until all stages are completed, which is sometimes couterintuitive <strong>(In my opinion, nothing is hard, they are just complex, and if we want to learn something, we have to start simple, because complex usually means hard and understanding based on this &quot;hard&quot; shell usually means decisively mistake.)</strong></p>
-<p>In this implementation, I decided to take a different approach. We start from a <strong>&quot;propreitary language&quot;</strong> with a very simple language specification such as a calculator in order to go through and understand each compiler stages. Then we will add functionality to the &quot;unique language&quot; throughout our journey, and eventually developing it to match C.</p>
-<p>weicc is influenced (at least trying to) by <strong><a href="https://en.wikipedia.org/wiki/Rob_Pike">Rob Pike</a></strong>'s way of <strong><a href="https://users.ece.utexas.edu/~adnan/pike.html">thinking about programming</a></strong>. Rob Pike is a former colleague of C author <strong><a href="https://en.wikipedia.org/wiki/Dennis_Ritchie">Dennis Ritchie</a></strong>, he created go language and UTF-8 with <strong><a href="https://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a></strong>.</p>
-<p>I quote these five rules in the index page of <strong><a href="https://a4org.github.io/cs/index.html">cs</a></strong>, I really like the Rule 5, which can be shortened to <strong>&quot;write stubid code that uses smart objects.&quot;</strong></p>
-<h2>3. Taste: A Simple &quot;add and subtract&quot; Compiler</h2>
-<p>Before we actually get into the weicc compiler, let's look at a simple example of <strong>&quot;add and substract&quot; Compiler</strong>.
-If your machine is running on Linux, you may copy the following code below and run it directly. Otherwise, if you are in MacOS, you may change the <code>main</code> in line 14 and 15 into <code>_main</code> (add prefix <code>_</code>) in order to run it*.</p>
-<pre><code class="language-c">// main.c
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-int main(int argc, char **argv) {
-  if (argc != 2) {
-    fprintf(stderr, &quot;Args Err!\n&quot;);
-    return 1;
-  }
-
-  char *p = argv[1]; // char pointer
-
-  printf(&quot;.intel_syntax noprefix\n&quot;);
-  printf(&quot;.globl main\n&quot;);
-  printf(&quot;main:\n&quot;);
-  printf(&quot;  mov rax, %ld\n&quot;, strtol(p, &amp;p, 10)); // base 10
-
-  while (*p) {
-    if (*p == '+') {
-      p++;
-      printf(&quot;  add rax, %ld\n&quot;, strtol(p, &amp;p, 10));
-      continue;
-    }
-
-    if (*p == '-') {
-      p++;
-      printf(&quot;  sub rax, %ld\n&quot;, strtol(p, &amp;p, 10));
-      continue;
-    }
-
-    fprintf(stderr, &quot;invalid input: %c\n&quot;, *p);
-    return 1;
-  }
-
-  printf(&quot;  ret\n&quot;);
-  return 0;
-}
-</code></pre>
-<p>This small piece of code is very simple, and easy to understand. Basically it just prepared to read statements like &quot;num(+/-num)*&quot;
-And store answers in <strong><code>%rax</code></strong> register, which is the return register of x86-based CPUs.</p>
+<p>I call this new compiler <strong>weicc</strong>. You can find the
+newest update of this project on <strong><a
+href="https://github.com/Angold-4/weicc">https://github.com/Angold-4/weicc</a></strong>.
+I pronounce weicc as way cee cee. “wei” means “mini” or “small” in
+Chinese. “cc” stands for C compiler.</p>
+<p>I am going to blog the journey while I implement this compiler, also
+as weicc’s documentation, this is the first, soon the second, and so on…
+When I am writing this first document, I had been working on weicc for a
+while, and I had Implemented a lot of features:
+<strong>variables</strong>, <strong>statements</strong>, <strong>control
+structures</strong>… And I believe that as the documentation continues
+to grow, soon I will have a self-made C compiler.</p>
+<p><strong>The compiler can be conceptly divided into multiple stages
+such as <code>lexical analysis</code>, <code>parsing</code> and
+<code>code generation</code>. A common textbook approach would be to
+have chapters on each topic. In this way, while it does reduce such
+complexity by splitting the compilation process into several stages, I
+still don’t think it is very easy to implement in stages.</strong> The
+reason is that with the development method created for each stage, it is
+not possible to run the compiler until all stages are completed, which
+is sometimes couterintuitive <strong>(In my opinion, nothing is hard,
+they are just complex, and if we want to learn something, we have to
+start simple, because complex usually means hard and understanding based
+on this “hard” shell usually means decisively mistake.)</strong></p>
+<p>In this implementation, I decided to take a different approach. We
+start from a <strong>“propreitary language”</strong> with a very simple
+language specification such as a calculator in order to go through and
+understand each compiler stages. Then we will add functionality to the
+“unique language” throughout our journey, and eventually developing it
+to match C.</p>
+<p>weicc is influenced (at least trying to) by <strong><a
+href="https://en.wikipedia.org/wiki/Rob_Pike">Rob Pike</a></strong>’s
+way of <strong><a
+href="https://users.ece.utexas.edu/~adnan/pike.html">thinking about
+programming</a></strong>. Rob Pike is a former colleague of C author
+<strong><a href="https://en.wikipedia.org/wiki/Dennis_Ritchie">Dennis
+Ritchie</a></strong>, he created go language and UTF-8 with <strong><a
+href="https://en.wikipedia.org/wiki/Ken_Thompson">Ken
+Thompson</a></strong>.</p>
+<p>I quote these five rules in the index page of <strong><a
+href="https://a4org.github.io/cs/index.html">cs</a></strong>, I really
+like the Rule 5, which can be shortened to <strong>“write stubid code
+that uses smart objects.”</strong></p>
+<h2 id="taste-a-simple-add-and-subtract-compiler">3. Taste: A Simple
+“add and subtract” Compiler</h2>
+<p>Before we actually get into the weicc compiler, let’s look at a
+simple example of <strong>“add and substract” Compiler</strong>. If your
+machine is running on Linux, you may copy the following code below and
+run it directly. Otherwise, if you are in MacOS, you may change the
+<code>main</code> in line 14 and 15 into <code>_main</code> (add prefix
+<code>_</code>) in order to run it*.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.c</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdlib.h&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">(</span><span class="dt">int</span> argc<span class="op">,</span> <span class="dt">char</span> <span class="op">**</span>argv<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>argc <span class="op">!=</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;Args Err!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">char</span> <span class="op">*</span>p <span class="op">=</span> argv<span class="op">[</span><span class="dv">1</span><span class="op">];</span> <span class="co">// char pointer</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  printf<span class="op">(</span><span class="st">&quot;.intel_syntax noprefix</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  printf<span class="op">(</span><span class="st">&quot;.globl main</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  printf<span class="op">(</span><span class="st">&quot;main:</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  printf<span class="op">(</span><span class="st">&quot;  mov rax, %ld</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> strtol<span class="op">(</span>p<span class="op">,</span> <span class="op">&amp;</span>p<span class="op">,</span> <span class="dv">10</span><span class="op">));</span> <span class="co">// base 10</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(*</span>p<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(*</span>p <span class="op">==</span> <span class="ch">&#39;+&#39;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>      p<span class="op">++;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>      printf<span class="op">(</span><span class="st">&quot;  add rax, %ld</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> strtol<span class="op">(</span>p<span class="op">,</span> <span class="op">&amp;</span>p<span class="op">,</span> <span class="dv">10</span><span class="op">));</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>      <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(*</span>p <span class="op">==</span> <span class="ch">&#39;-&#39;</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>      p<span class="op">++;</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>      printf<span class="op">(</span><span class="st">&quot;  sub rax, %ld</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> strtol<span class="op">(</span>p<span class="op">,</span> <span class="op">&amp;</span>p<span class="op">,</span> <span class="dv">10</span><span class="op">));</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>      <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    fprintf<span class="op">(</span>stderr<span class="op">,</span> <span class="st">&quot;invalid input: %c</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">,</span> <span class="op">*</span>p<span class="op">);</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>  printf<span class="op">(</span><span class="st">&quot;  ret</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>This small piece of code is very simple, and easy to understand.
+Basically it just prepared to read statements like “num(+/-num)*” And
+store answers in <strong><code>%rax</code></strong> register, which is
+the return register of x86-based CPUs.</p>
 <p>An execution example is shown below:</p>
 <pre><code>$ gcc main.c -o main
-$ ./main '5+20-4' &gt; tmp.s
+$ ./main &#39;5+20-4&#39; &gt; tmp.s
 .intel_syntax noprefix
 .globl main
 main:
@@ -275,34 +623,67 @@ ret
 $ gcc -o tmp tmp.s
 $ ./tmp
 $ echo $?
-21
-</code></pre>
-<p>It is worth mentioning that in this series of weicc development notes. I'll trying to avoid putting this big chunk of code in the main body of my post. Instead, I will put the code into my corresbonding <strong><a href="https://github.com/Angold-4/weicc/commits/main">weicc commits</a></strong>, and put link there for your easy reference.
-<strong>And also I won't talk too much about the code itself, because I try not to use many complex algorithms (I can't use them freely either) and write comments as much as possible (most of them were brute force).</strong></p>
-<p>This is a very interesting piece of code, and it is perfect as a dessert, giving us some sort of taste of <strong>compiler</strong> or <strong>compilation procedure</strong>.</p>
-<p>Thanks for reading this! If you have any questions or suggestions, please email me <strong>@<a href="mailto:wangold4w@gmail.com">wangold4w@gmail.com</a></strong>.</p>
-<h2>Development environment assumed in this series*</h2>
-<h3>Linux (Ubuntu)</h3>
-<p><strong>I use Linux as my developing environment (especially Ubuntu 20.04) that runs on so-called ordinary PCs such as Intel and AMD.</strong>
-If you are using ubuntu, you may install the command used in this manual by executing the following command:</p>
+21</code></pre>
+<p>It is worth mentioning that in this series of weicc development
+notes. I’ll trying to avoid putting this big chunk of code in the main
+body of my post. Instead, I will put the code into my corresbonding
+<strong><a href="https://github.com/Angold-4/weicc/commits/main">weicc
+commits</a></strong>, and put link there for your easy reference.
+<strong>And also I won’t talk too much about the code itself, because I
+try not to use many complex algorithms (I can’t use them freely either)
+and write comments as much as possible (most of them were brute
+force).</strong></p>
+<p>This is a very interesting piece of code, and it is perfect as a
+dessert, giving us some sort of taste of <strong>compiler</strong> or
+<strong>compilation procedure</strong>.</p>
+<p>Thanks for reading this! If you have any questions or suggestions,
+please email me <strong>@<a
+href="mailto:wangold4w@gmail.com">wangold4w@gmail.com</a></strong>. ##
+Development environment assumed in this series*</p>
+<h3 id="linux-ubuntu">Linux (Ubuntu)</h3>
+<p><strong>I use Linux as my developing environment (especially Ubuntu
+20.04) that runs on so-called ordinary PCs such as Intel and
+AMD.</strong> If you are using ubuntu, you may install the command used
+in this manual by executing the following command:</p>
 <pre><code>$ sudo apt update
-$ sudo apt install -y gcc make git binutils libc6-dev
-</code></pre>
-<h3>MacOS</h3>
-<p><strong>MacOS is fairly compatible with Linux at the source level of the assembly, but it's not fully compatible (specifically, it doesn't support a feature called &quot;static linking&quot;). Due to this problem, I think it is very hard to implement a MacOS Version of C compiler. (It might can be implemented, but there may be various incompatibilities in every detail).</strong> I'll trying to implement a MacOS version of weicc. You may refer to the <strong><a href="https://github.com/Angold-4/weicc/tree/macos">macos branch</a></strong> to check the updates.</p>
-<h3>Windows (WSL)</h3>
-<p>Windows is not compatible with Linux at the assembly source level. However, with Windows 10, it is possible to run Linux on Windows like a single application, and by using it, you can proceed with development on Windows. An application called Windows Subsystem for Linux (WSL) is the Linux compatible environment. When practicing the contents of this book on Windows, please install WSL and proceed with development in it.</p>
-<h2>References</h2>
-<ol>
-<li><strong><a href="../../docs/weicc/thompson1984.pdf">Reflections on Trusting Trust, 1984, Thompson</a></strong></li>
-<li><strong><a href="https://www.youtube.com/watch?v=tc4ROCJYbm0">VCF East 2019 -- Brian Kernighan interviews Ken Thompson</a></strong></li>
-<li><strong><a href="https://www.youtube.com/watch?v=EY6q5dv_B-o">AT&amp;T Archives: The UNIX Operating System</a></strong></li>
-<li><strong><a href="https://www.youtube.com/watch?v=JoVQTPbD6UY">Ken Thompson and Dennis Ritchie Explain UNIX (Bell Labs)</a></strong></li>
-<li><strong><a href="https://www.youtube.com/watch?v=IjvjqAVkvYo">2011 (27th) Japan Prize; Dr. Ritchie / Dr. Thompson</a></strong></li>
-<li><strong><a href="https://www.sigbus.info/compilerbook">低レイヤを知りたい人のためのCコンパイラ作成入門 by Rui Ueyama</a></strong></li>
+$ sudo apt install -y gcc make git binutils libc6-dev</code></pre>
+<h3 id="macos">MacOS</h3>
+<p><strong>MacOS is fairly compatible with Linux at the source level of
+the assembly, but it’s not fully compatible (specifically, it doesn’t
+support a feature called “static linking”). Due to this problem, I think
+it is very hard to implement a MacOS Version of C compiler. (It might
+can be implemented, but there may be various incompatibilities in every
+detail).</strong> I’ll trying to implement a MacOS version of weicc. You
+may refer to the <strong><a
+href="https://github.com/Angold-4/weicc/tree/macos">macos
+branch</a></strong> to check the updates.</p>
+<h3 id="windows-wsl">Windows (WSL)</h3>
+<p>Windows is not compatible with Linux at the assembly source level.
+However, with Windows 10, it is possible to run Linux on Windows like a
+single application, and by using it, you can proceed with development on
+Windows. An application called Windows Subsystem for Linux (WSL) is the
+Linux compatible environment. When practicing the contents of this book
+on Windows, please install WSL and proceed with development in it.</p>
+<h2 id="references">References</h2>
+<ol type="1">
+<li><strong><a href="../../docs/weicc/thompson1984.pdf">Reflections on
+Trusting Trust, 1984, Thompson</a></strong></li>
+<li><strong><a href="https://www.youtube.com/watch?v=tc4ROCJYbm0">VCF
+East 2019 – Brian Kernighan interviews Ken Thompson</a></strong></li>
+<li><strong><a
+href="https://www.youtube.com/watch?v=EY6q5dv_B-o">AT&amp;T Archives:
+The UNIX Operating System</a></strong></li>
+<li><strong><a href="https://www.youtube.com/watch?v=JoVQTPbD6UY">Ken
+Thompson and Dennis Ritchie Explain UNIX (Bell Labs)</a></strong></li>
+<li><strong><a href="https://www.youtube.com/watch?v=IjvjqAVkvYo">2011
+(27th) Japan Prize; Dr. Ritchie / Dr. Thompson</a></strong></li>
+<li><strong><a
+href="https://www.sigbus.info/compilerbook">低レイヤを知りたい人のためのCコンパイラ作成入門
+by Rui Ueyama</a></strong></li>
 </ol>
-<hr>
-<p><strong>This page was last edited on 17 Apr 2022, at 15:48 (UTC), by <a href="https://github.com/Angold-4">Angold Wang</a>.</strong></p>
+<hr />
+<p><strong>This page was last edited on 17 Apr 2022, at 15:48 (UTC), by
+<a href="https://github.com/Angold-4">Angold Wang</a>.</strong></p>
 	</section>
 	</div>
     </div>
@@ -342,6 +723,10 @@ this.page.identifier = "cs/docs/weicc/1Thompson1984.html"
    </div>
 </footer>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <script src="../../../theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
