@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="../../../images/favicon.png" rel="icon">
-
 <link rel="canonical" href=".">
         <meta name="author" content="Angold Wang" />
 
@@ -26,6 +25,128 @@
 
     <link href="../../../theme/css/pygments/monokai.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../theme/css/style.css" type="text/css"/>
+
+  <style>
+
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+
+    li {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    a {
+      font-size: 18px;
+    }
+
+    k
+
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+    {   }
+
+    @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
 
 </head>
 <body>
@@ -64,144 +185,231 @@
     <div class="row">
         <div class="col-lg-12">
 	<section id="content" class="body">
-
-
-
-<h1>1. Introduction</h1>
-<p><strong>By Angold Wang | 11/02/2022</strong></p>
-<h2>1. Compiler</h2>
-<h3>i. Overview</h3>
-<p><img src="Sources/always.jpeg" alt="always"></p>
+<nav id="TOC" role="doc-toc">
 <ul>
-<li><strong>Compilers translate your program</strong></li>
-<li><strong>Interpreters run your program</strong></li>
+<li><a href="#introduction" id="toc-introduction">1. Introduction</a>
+<ul>
+<li><a href="#compiler" id="toc-compiler">1. Compiler</a>
+<ul>
+<li><a href="#i.-overview" id="toc-i.-overview">i. Overview</a></li>
+<li><a href="#ii.-compiler-history" id="toc-ii.-compiler-history">ii.
+Compiler History</a></li>
+<li><a href="#iii.-compiler-structure"
+id="toc-iii.-compiler-structure">iii. Compiler Structure</a></li>
+<li><a href="#iv.-compiler-economy" id="toc-iv.-compiler-economy">iv.
+Compiler Economy</a></li>
+</ul></li>
+<li><a href="#typical-compiler-stages"
+id="toc-typical-compiler-stages">2. Typical Compiler Stages</a>
+<ul>
+<li><a href="#i.-lexical-analysis" id="toc-i.-lexical-analysis">i.
+Lexical Analysis</a></li>
+<li><a href="#ii.-parsing" id="toc-ii.-parsing">ii. Parsing</a></li>
+<li><a href="#iii.-semantic-analysis"
+id="toc-iii.-semantic-analysis">iii. Semantic Analysis</a></li>
+<li><a href="#iv.-optimization" id="toc-iv.-optimization">iv.
+Optimization</a></li>
+<li><a href="#v.-backend" id="toc-v.-backend">v. Backend</a></li>
+</ul></li>
+</ul></li>
 </ul>
-<p><img src="Sources/runtime.png" alt="runtime"></p>
-<h3>ii. Compiler History</h3>
-<p><img src="Sources/hist.png" alt="hist"></p>
-<p>In 1954, <em><a href="https://en.wikipedia.org/wiki/John_Backus">John Backus</a></em> developed the first high-level language: <strong>FORTRAN (Formula-Translation)</strong></p>
-<p><strong>Which translate high-level code to assembly, and the performance is close to hand-written assembly!</strong></p>
+</nav>
+<h1 id="introduction">1. Introduction</h1>
+<p><strong>By Angold Wang | 11/02/2022</strong></p>
+<h2 id="compiler">1. Compiler</h2>
+<h3 id="i.-overview">i. Overview</h3>
+<p><img src="Sources/always.jpeg" alt="always" /> * <strong>Compilers
+translate your program</strong> * <strong>Interpreters run your
+program</strong></p>
+<figure>
+<img src="Sources/runtime.png" alt="runtime" />
+<figcaption aria-hidden="true">runtime</figcaption>
+</figure>
+<h3 id="ii.-compiler-history">ii. Compiler History</h3>
+<figure>
+<img src="Sources/hist.png" alt="hist" />
+<figcaption aria-hidden="true">hist</figcaption>
+</figure>
+<p>In 1954, <em><a href="https://en.wikipedia.org/wiki/John_Backus">John
+Backus</a></em> developed the first high-level language: <strong>FORTRAN
+(Formula-Translation)</strong></p>
+<p><strong>Which translate high-level code to assembly, and the
+performance is close to hand-written assembly!</strong></p>
 <ul>
 <li>Development time halved</li>
 <li>in 1958 &gt;50% of all software is in FORTRAN.</li>
 </ul>
-<h3>iii. Compiler Structure</h3>
-<p><strong>FORTRAN I is the first compiler, which brings huge impact on computer science (Many thought this is impossible).</strong>
-<strong>And modern compiers preserve the outlines of FORTRAN:</strong></p>
-<ol>
+<h3 id="iii.-compiler-structure">iii. Compiler Structure</h3>
+<p><strong>FORTRAN I is the first compiler, which brings huge impact on
+computer science (Many thought this is impossible).</strong> <strong>And
+modern compiers preserve the outlines of FORTRAN:</strong></p>
+<ol type="1">
 <li>Lexical Analysis</li>
 <li>Parsing</li>
 <li>Semantic Analysis</li>
 <li>Optimiaztion</li>
 <li>Code Generation</li>
 </ol>
-<p>Today, the overall structure of almost every compiler adheres to this outline, but proportions are changed since FORTRAN:</p>
-<p><img src="Sources/structure.png" alt="structure"></p>
-<h3>iv. Compiler Economy</h3>
-<h4>Why are there so many programming languages?</h4>
-<p><strong>Application Domains have distinctive/conflicting needs.</strong></p>
+<p>Today, the overall structure of almost every compiler adheres to this
+outline, but proportions are changed since FORTRAN:</p>
+<figure>
+<img src="Sources/structure.png" alt="structure" />
+<figcaption aria-hidden="true">structure</figcaption>
+</figure>
+<h3 id="iv.-compiler-economy">iv. Compiler Economy</h3>
+<h4 id="why-are-there-so-many-programming-languages">Why are there so
+many programming languages?</h4>
+<p><strong>Application Domains have distinctive/conflicting
+needs.</strong></p>
 <ul>
-<li>
-<p><strong>Scientific Computing</strong></p>
+<li><strong>Scientific Computing</strong>
 <ul>
 <li>Good Floating-point support</li>
 <li>Godd Arrays</li>
 <li>Parallelism Example: <em>FORTRAN / Matlab / R</em></li>
-</ul>
-</li>
-<li>
-<p><strong>Business Applications</strong></p>
+</ul></li>
+<li><strong>Business Applications</strong>
 <ul>
 <li>Persistance (Stable, Safe)</li>
 <li>Report Generation</li>
 <li>Data Analysis</li>
 <li>Example: <em>SQL</em></li>
-</ul>
-</li>
-<li>
-<p><strong>System Programming</strong></p>
+</ul></li>
+<li><strong>System Programming</strong>
 <ul>
 <li>Control of Resources</li>
 <li>Real-time constraints</li>
 <li>Example: <em>C / C++</em></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<p><strong>As you can see, what's important in one domain or most important in one domain is not the same as in another domain. And it is easy to imagine at least that it would be difficult to intergrate all of these into one system that would do good job on all of these things.</strong></p>
-<h4>Why are there so many new programming languages?</h4>
-<p><strong>An interesting claim:</strong></p>
-<blockquote>
-<p>Programmer training is the dominant cost for a programming language.</p>
-</blockquote>
-<p>That leads three things:</p>
-<ol>
-<li>
-<p>Widely used languages are slow to change:<!-- raw HTML omitted -->
-<strong>We would expect the most popular languages, which will have larger and larger programmer basis, to become more and more ossified. To evolve more and more slowly.</strong></p>
-</li>
-<li>
-<p>Better and easier to start a new language:<!-- raw HTML omitted -->
-<strong>Since there are new application domains coming along all the time, instead of updating the widely-used languages, which is very hard and costs much as we metioned above, we better like to start a new language.<!-- raw HTML omitted --></strong>
-<strong>Because you start with zero users and so there is essentially zero training cost at the beginning, the new language can evolve much more quickly to changing situations. And it's just not very costly to experiment with a new language at all.</strong></p>
-</li>
-<li>
-<p>New languages tend to look like old languages:<!-- raw HTML omitted -->
-<strong>Reduce the trainning cost, (Java versus C++)</strong></p>
-</li>
+<p><strong>As you can see, what’s important in one domain or most
+important in one domain is not the same as in another domain. And it is
+easy to imagine at least that it would be difficult to intergrate all of
+these into one system that would do good job on all of these
+things.</strong></p>
+<h4 id="why-are-there-so-many-new-programming-languages">Why are there
+so many new programming languages?</h4>
+<p><strong>An interesting claim:</strong> &gt; Programmer training is
+the dominant cost for a programming language.</p>
+<p>That leads three things: 1. Widely used languages are slow to
+change:<br> <strong>We would expect the most popular languages, which
+will have larger and larger programmer basis, to become more and more
+ossified. To evolve more and more slowly.</strong></p>
+<ol start="2" type="1">
+<li><p>Better and easier to start a new language:<br> <strong>Since
+there are new application domains coming along all the time, instead of
+updating the widely-used languages, which is very hard and costs much as
+we metioned above, we better like to start a new language.<br></strong>
+<strong>Because you start with zero users and so there is essentially
+zero training cost at the beginning, the new language can evolve much
+more quickly to changing situations. And it’s just not very costly to
+experiment with a new language at all.</strong></p></li>
+<li><p>New languages tend to look like old languages:<br> <strong>Reduce
+the trainning cost, (Java versus C++)</strong></p></li>
 </ol>
-<h4>What is a good programming language?</h4>
-<p><strong>No &quot;Perfect&quot; Language, each of them has its own domain.</strong></p>
-<h2>2. Typical Compiler Stages</h2>
-<h4>Structure of a typical compiler</h4>
-<p><strong>To reduce complexity, and create a more modular system. We divide the whole compiler into different <em>stages</em>, and each stages is the procedure of multiple <em>passes</em>.</strong></p>
-<p><img src="Sources/stages.png" alt="stages"></p>
-<p>The monolithic structure may be more <strong>efficient</strong>, and the multi-pass structure helps to <strong>reduce the complexity of the implementation</strong>, and it is relatively <strong>simple to debug</strong>, it also improves the <strong>flexibility,</strong> which means different combinations of optimization techniques can be used in different situations.</p>
-<p>To make this abstraction more concrete, consider the steps required to generate executable code from the following expression:</p>
-<pre><code>C = A + 3 * 4 
-</code></pre>
-<h3>i. Lexical Analysis</h3>
-<p>Basically, the <strong>Lexical Analyzer</strong> transforms the <strong>input source char stream</strong> into the <strong>word stream of the given programming language</strong> (so called &quot;token&quot;), each token must classified into the a <strong>grammatical category.</strong></p>
-<p>For example, after the lexical analysis, the input source program becomes:</p>
+<h4 id="what-is-a-good-programming-language">What is a good programming
+language?</h4>
+<p><strong>No “Perfect” Language, each of them has its own
+domain.</strong></p>
+<h2 id="typical-compiler-stages">2. Typical Compiler Stages</h2>
+<h4 id="structure-of-a-typical-compiler">Structure of a typical
+compiler</h4>
+<p><strong>To reduce complexity, and create a more modular system. We
+divide the whole compiler into different <em>stages</em>, and each
+stages is the procedure of multiple <em>passes</em>.</strong></p>
+<figure>
+<img src="Sources/stages.png" alt="stages" />
+<figcaption aria-hidden="true">stages</figcaption>
+</figure>
+<p>The monolithic structure may be more <strong>efficient</strong>, and
+the multi-pass structure helps to <strong>reduce the complexity of the
+implementation</strong>, and it is relatively <strong>simple to
+debug</strong>, it also improves the <strong>flexibility,</strong> which
+means different combinations of optimization techniques can be used in
+different situations.</p>
+<p>To make this abstraction more concrete, consider the steps required
+to generate executable code from the following expression:</p>
+<pre><code>C = A + 3 * 4 </code></pre>
+<h3 id="i.-lexical-analysis">i. Lexical Analysis</h3>
+<p>Basically, the <strong>Lexical Analyzer</strong> transforms the
+<strong>input source char stream</strong> into the <strong>word stream
+of the given programming language</strong> (so called “token”), each
+token must classified into the a <strong>grammatical
+category.</strong></p>
+<p>For example, after the lexical analysis, the input source program
+becomes:</p>
 <pre><code>(identifier, C), (assign equal, =), (identifier, A),
-(add, +), (integer, 3), (multiple, *), (integer, 4).
-</code></pre>
-<p>Nowadays, since we had a great understanding of the math concepts (<strong>Finite-automata</strong>) behind the Lexer (aka. Scanner) implementation. People design many tools in order to auto-generate Lexer by using the given <strong>Regular Expression.</strong></p>
-<h3>ii. Parsing</h3>
-<p>Now, the parsing step is going to match the <strong>grammar</strong> of the input <strong>tokens</strong>.</p>
-<h4>Programming language constructs have recursive structure.</h4>
+(add, +), (integer, 3), (multiple, *), (integer, 4).</code></pre>
+<p>Nowadays, since we had a great understanding of the math concepts
+(<strong>Finite-automata</strong>) behind the Lexer (aka. Scanner)
+implementation. People design many tools in order to auto-generate Lexer
+by using the given <strong>Regular Expression.</strong></p>
+<h3 id="ii.-parsing">ii. Parsing</h3>
+<p>Now, the parsing step is going to match the <strong>grammar</strong>
+of the input <strong>tokens</strong>.</p>
+<h4
+id="programming-language-constructs-have-recursive-structure.">Programming
+language constructs have recursive structure.</h4>
 <pre><code>S -&gt; A | ... ;
 A -&gt; E ASSIGN_EQUAL E;
 E -&gt; E + T | T ;
 T -&gt; T * F | F
-F -&gt; (E) | IDENTIFIER | INTEGER | OP ;
-</code></pre>
-<p>The language above is called <strong>Context-free Grammar</strong>, which can describe the grammar of given programming language.
-<strong>Not only we want to check whether the input tokens is in the grammar, but we also need to produce an output that represents a valid stream of tokens for future processes.</strong>
-The output is called <strong>Parse Tree</strong>, which describes the derivation steps, and it is enough for future pass. <em>(From Button to UP)</em></p>
-<p><img src="Sources/ptree.png" alt="ptree"></p>
-<h3>iii. Semantic Analysis</h3>
-<p><strong>Grammatically correct statements may be meaningless. Whether it has meaning depends on its context.</strong></p>
+F -&gt; (E) | IDENTIFIER | INTEGER | OP ;</code></pre>
+<p>The language above is called <strong>Context-free Grammar</strong>,
+which can describe the grammar of given programming language.
+<strong>Not only we want to check whether the input tokens is in the
+grammar, but we also need to produce an output that represents a valid
+stream of tokens for future processes.</strong> The output is called
+<strong>Parse Tree</strong>, which describes the derivation steps, and
+it is enough for future pass. <em>(From Button to UP)</em></p>
+<figure>
+<img src="Sources/ptree.png" alt="ptree" />
+<figcaption aria-hidden="true">ptree</figcaption>
+</figure>
+<h3 id="iii.-semantic-analysis">iii. Semantic Analysis</h3>
+<p><strong>Grammatically correct statements may be meaningless. Whether
+it has meaning depends on its context.</strong></p>
 <p>For example, think about the following two sentences in English:</p>
 <pre><code>Rocks are green vegetables.
-Compilers are engineered objects.
-</code></pre>
-<p>Both of them use the same syntatic category token in the same order, but the previous statement has no reasonable semantics. To understand that statement, contextual knowledge about <code>Rocks</code>, <code>Vegetables</code> are required.</p>
-<p>In the <strong>runtime</strong> of this pass, the compiler will maintain a <strong>symbol table</strong>, where stores the <strong>context</strong> of each variable, like their type, value, size, etc,. <strong>And the compiler will use that table to check whether each <code>variable</code>, <code>function</code>, <code>class</code> ... is used in compliance with its definitions.</strong></p>
-<p>Like in the <code>C = A + 3 * 4</code> example, in this pass, the compiler will try to find the definition of variable <code>A</code> and <code>C</code>, and check their type and value. If all of them are valid in this context. then Compiler will come to the next stages.</p>
-<h3>iv. Optimization</h3>
-<p>The term <strong>&quot;Optimization&quot;</strong> implies that the compiler needs to find the optimal solution to a problem. <strong>But the problems that occur in the optimization process are so intricate and complex that these problems cannot actually be optimally solved.</strong></p>
-<p>The mordern optimizer is extremely complex, because there are a lot of things need to be concerned. The Optimizer are also divied into a lot of <strong>passes</strong>, each pass is responsible to deal with some optimizations. They read source IR and then output transformed IR.</p>
-<p>In our example, to reduce the execution time, we can optimize the IR by reducing the number of lines, or the number of registers used. (assume <code>A</code> equal to 5 in this context).</p>
+Compilers are engineered objects.</code></pre>
+<p>Both of them use the same syntatic category token in the same order,
+but the previous statement has no reasonable semantics. To understand
+that statement, contextual knowledge about <code>Rocks</code>,
+<code>Vegetables</code> are required.</p>
+<p>In the <strong>runtime</strong> of this pass, the compiler will
+maintain a <strong>symbol table</strong>, where stores the
+<strong>context</strong> of each variable, like their type, value, size,
+etc,. <strong>And the compiler will use that table to check whether each
+<code>variable</code>, <code>function</code>, <code>class</code> … is
+used in compliance with its definitions.</strong></p>
+<p>Like in the <code>C = A + 3 * 4</code> example, in this pass, the
+compiler will try to find the definition of variable <code>A</code> and
+<code>C</code>, and check their type and value. If all of them are valid
+in this context. then Compiler will come to the next stages.</p>
+<h3 id="iv.-optimization">iv. Optimization</h3>
+<p>The term <strong>“Optimization”</strong> implies that the compiler
+needs to find the optimal solution to a problem. <strong>But the
+problems that occur in the optimization process are so intricate and
+complex that these problems cannot actually be optimally
+solved.</strong></p>
+<p>The mordern optimizer is extremely complex, because there are a lot
+of things need to be concerned. The Optimizer are also divied into a lot
+of <strong>passes</strong>, each pass is responsible to deal with some
+optimizations. They read source IR and then output transformed IR.</p>
+<p>In our example, to reduce the execution time, we can optimize the IR
+by reducing the number of lines, or the number of registers used.
+(assume <code>A</code> equal to 5 in this context).</p>
 <pre><code>t0 = 3          |          t0 = 12
 t1 = 4          |          t1 = 3 + 12
 t2 = t0 * t1    |          t2 = 5
 t3 = A         =|=&gt;        t2 = t1
 t4 = t3 + t2    |
 t5 = C          |
-t5 = t4         |
-</code></pre>
-<h3>v. Backend</h3>
-<p><strong>The backend of the compiler will traverse the IR form of the code and output the code of the target machine (or interpreter).</strong></p>
+t5 = t4         |</code></pre>
+<h3 id="v.-backend">v. Backend</h3>
+<p><strong>The backend of the compiler will traverse the IR form of the
+code and output the code of the target machine (or
+interpreter).</strong></p>
 	</section>
 	</div>
     </div>
@@ -241,6 +449,10 @@ this.page.identifier = "cs/docs/lectures/1Introduction.html"
    </div>
 </footer>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <script src="../../../theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->

@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link href="../../../images/favicon.png" rel="icon">
-
 <link rel="canonical" href=".">
         <meta name="author" content="Angold Wang" />
 
@@ -26,6 +25,128 @@
 
     <link href="../../../theme/css/pygments/monokai.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../theme/css/style.css" type="text/css"/>
+
+  <style>
+
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+
+    li {
+      font-size: 18px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    a {
+      font-size: 18px;
+    }
+
+    k
+
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+    {   }
+
+    @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
 
 </head>
 <body>
@@ -64,138 +185,187 @@
     <div class="row">
         <div class="col-lg-12">
 	<section id="content" class="body">
-
-
-
-<h1>2. Lexical Analysis</h1>
-<h5>Angold Wang 19/02/2022</h5>
-<h4>User view</h4>
-<pre><code class="language-c">if (i == j) 
-    z = 0;
-else 
-    z = 1;
-</code></pre>
-<h4>Compiler view</h4>
-<pre><code>if (i == j)\n\t\tz = 0;\n\telse\n\t\tz = 1;
-</code></pre>
-<h2>1. Formal Languages</h2>
-<h3>Seperate Syntax and Semantics</h3>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#lexical-analysis" id="toc-lexical-analysis">2. Lexical
+Analysis</a>
+<ul>
+<li><a href="#formal-languages" id="toc-formal-languages">1. Formal
+Languages</a>
+<ul>
+<li><a href="#seperate-syntax-and-semantics"
+id="toc-seperate-syntax-and-semantics">Seperate Syntax and
+Semantics</a></li>
+<li><a href="#syntax-vs.-semantics" id="toc-syntax-vs.-semantics">Syntax
+vs. Semantics</a></li>
+</ul></li>
+<li><a href="#lexical-specification" id="toc-lexical-specification">2.
+Lexical Specification</a></li>
+<li><a href="#finite-automata" id="toc-finite-automata">3. Finite
+Automata</a>
+<ul>
+<li><a href="#regular-expressions---nfa"
+id="toc-regular-expressions---nfa">1. Regular Expressions -&gt;
+NFA</a></li>
+<li><a href="#nfa-to-dfa" id="toc-nfa-to-dfa">2. NFA to DFA</a></li>
+<li><a href="#implement-table-driven-dfa"
+id="toc-implement-table-driven-dfa">3. Implement Table-driven
+DFA</a></li>
+</ul></li>
+<li><a href="#exercises" id="toc-exercises">3. Exercises</a>
+<ul>
+<li><a href="#minimum-states" id="toc-minimum-states">1. Minimum
+States</a></li>
+<li><a href="#nfa-vs.-dfa" id="toc-nfa-vs.-dfa">2. NFA vs. DFA</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="lexical-analysis">2. Lexical Analysis</h1>
+<h5 id="angold-wang-19022022">Angold Wang 19/02/2022</h5>
+<h4 id="user-view">User view</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>i <span class="op">==</span> j<span class="op">)</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span></code></pre></div>
+<h4 id="compiler-view">Compiler view</h4>
+<pre><code>if (i == j)\n\t\tz = 0;\n\telse\n\t\tz = 1;</code></pre>
+<h2 id="formal-languages">1. Formal Languages</h2>
+<h3 id="seperate-syntax-and-semantics">Seperate Syntax and
+Semantics</h3>
 <ul>
 <li>Makes clear what is syntax, what is semantics.</li>
-<li>Example: <strong>Roman numerals vs. Arabic numerals</strong>
+<li>Example: <strong>Roman numerals vs. Arabic numerals</strong>
 <ul>
 <li>Roman numerals are painful to do addition and subtraction, etc.</li>
 <li>The reason is that the algorithms were kind of complicated.</li>
 <li>The notation causes this big difference (procedure)</li>
-<li>Don't underestimate the importatance of notation.</li>
+<li>Don’t underestimate the importatance of notation.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3>Syntax vs. Semantics</h3>
+<h3 id="syntax-vs.-semantics">Syntax vs. Semantics</h3>
 <ul>
-<li>We can use <strong>Multiple syntax</strong> to represent the <strong>same semantics.</strong></li>
+<li>We can use <strong>Multiple syntax</strong> to represent the
+<strong>same semantics.</strong></li>
 <li>Which is the basis of <strong>Optimization.</strong></li>
-<li>The fact that several programs that are actually functionally equivalent, that allow us to substitute one program that runs faster than another.</li>
+<li>The fact that several programs that are actually functionally
+equivalent, that allow us to substitute one program that runs faster
+than another.</li>
 <li><strong>Never one to many!!!</strong></li>
 </ul>
-<h2>2. Lexical Specification</h2>
-<h4>1. Write rexp for the lexemes of each token class</h4>
+<h2 id="lexical-specification">2. Lexical Specification</h2>
+<h4 id="write-rexp-for-the-lexemes-of-each-token-class">1. Write rexp
+for the lexemes of each token class</h4>
 <ul>
 <li>Number = digit+</li>
-<li>Keyword = 'if' + 'else' + 'for' + ...</li>
+<li>Keyword = ‘if’ + ‘else’ + ‘for’ + …</li>
 <li>Identifier = letter(letter + digit)*</li>
-<li>OpenPar = '('</li>
-<li>...</li>
+<li>OpenPar = ‘(’</li>
+<li>…</li>
 </ul>
-<h4>2. Construct R, matching all lexemes for all tokens</h4>
-<p><strong>Which is just the union of all the regular expressions</strong><!-- raw HTML omitted -->
-<strong><code>R = Keyword + Identifier + Number + ...</code></strong><!-- raw HTML omitted -->
-<strong>R is the some of of all the different token classes of our language</strong></p>
-<h4>3. Let input be <code>x1...xn</code></h4>
-<p><strong>For <code>1 &lt;= i &lt;= n</code> check whether <code>x1...xi</code> in <code>L(R)</code></strong>.<!-- raw HTML omitted --></p>
-<p><strong>What if no rules matches?</strong></p>
-<ul>
-<li><strong>if the whole <code>x1...xn</code> not in L(R)</strong> - We don't let this ever happen.</li>
-<li><strong>We we are going to do instead, is to write a category of error strings.</strong>
-<ul>
-<li><strong><code>ERROR = all strings not in the lexical specifications</code></strong></li>
-<li>Put <strong><code>ERROR</code></strong> last in piority</li>
-</ul>
-</li>
-</ul>
-<h4>4. If success, then we know that</h4>
-<p><strong><code>x1...xi</code> in <code>L(Rj)</code> for some j</strong></p>
-<p><strong>How much input is used?</strong></p>
-<ul>
-<li><strong>if <code>x1...xi</code> in <code>L(R)</code>, and so as <code>x1...xj</code> <code>(i != j)</code></strong>
-<ul>
-<li>For example. <strong><code>==</code> should be treat as &quot;double <code>=</code>&quot; or &quot;equal operator <code>==</code>&quot;?</strong></li>
-</ul>
-</li>
-<li>Solution: <strong>Maximal Munch</strong>
-<ul>
-<li>We should always take the longer one when meet ambigurity</li>
-<li>That just the way that humans themselves read things</li>
-</ul>
-</li>
-</ul>
-<p><strong>Which token is used?</strong></p>
-<ul>
-<li><strong>Suppose <code>R = R1 + R2 + ... Rn</code> and there we have:</strong>
-<ul>
-<li><code>(x1...xi)</code> in <code>L(Rj)</code></li>
-<li><code>(x1...xi)</code> in <code>L(Rk)</code></li>
-<li><code>k != j</code></li>
-</ul>
-</li>
-<li>For example. <strong><code>if</code> should be treat as an Identifier or a keyword?</strong></li>
-<li>Solution: <strong>Piority Ordering</strong>
-<ul>
-<li>Choose the one listed first.</li>
-<li>typically, put <strong>keywords</strong> before the <strong>identifiers</strong></li>
-</ul>
-</li>
-</ul>
-<h4>5. Remove <code>x1...xi</code> from input and go to (3)</h4>
-<h2>3. Finite Automata</h2>
+<h4 id="construct-r-matching-all-lexemes-for-all-tokens">2. Construct R,
+matching all lexemes for all tokens</h4>
+<p><strong>Which is just the union of all the regular
+expressions</strong><br>
+<strong><code>R = Keyword + Identifier + Number + ...</code></strong><br>
+<strong>R is the some of of all the different token classes of our
+language</strong></p>
+<h4 id="let-input-be-x1...xn">3. Let input be <code>x1...xn</code></h4>
+<p><strong>For <code>1 &lt;= i &lt;= n</code> check whether
+<code>x1...xi</code> in <code>L(R)</code></strong>.<br></p>
+<p><strong>What if no rules matches?</strong> * <strong>if the whole
+<code>x1...xn</code> not in L(R)</strong> - We don’t let this ever
+happen. * <strong>We we are going to do instead, is to write a category
+of error strings.</strong> *
+<strong><code>ERROR = all strings not in the lexical specifications</code></strong>
+* Put <strong><code>ERROR</code></strong> last in piority</p>
+<h4 id="if-success-then-we-know-that">4. If success, then we know
+that</h4>
+<p><strong><code>x1...xi</code> in <code>L(Rj)</code> for some
+j</strong></p>
+<p><strong>How much input is used?</strong> * <strong>if
+<code>x1...xi</code> in <code>L(R)</code>, and so as
+<code>x1...xj</code> <code>(i != j)</code></strong> * For example.
+<strong><code>==</code> should be treat as “double <code>=</code>” or
+“equal operator <code>==</code>”?</strong> * Solution: <strong>Maximal
+Munch</strong> * We should always take the longer one when meet
+ambigurity * That just the way that humans themselves read things</p>
+<p><strong>Which token is used?</strong> * <strong>Suppose
+<code>R = R1 + R2 + ... Rn</code> and there we have:</strong> *
+<code>(x1...xi)</code> in <code>L(Rj)</code> * <code>(x1...xi)</code> in
+<code>L(Rk)</code> * <code>k != j</code> * For example.
+<strong><code>if</code> should be treat as an Identifier or a
+keyword?</strong> * Solution: <strong>Piority Ordering</strong> * Choose
+the one listed first. * typically, put <strong>keywords</strong> before
+the <strong>identifiers</strong></p>
+<h4 id="remove-x1...xi-from-input-and-go-to-3">5. Remove
+<code>x1...xi</code> from input and go to (3)</h4>
+<h2 id="finite-automata">3. Finite Automata</h2>
 <ul>
 <li><strong>Regular expressions = specification</strong></li>
 <li><strong>Finite automata = implementation</strong></li>
 </ul>
-<p><img src="Sources/rexp.png" alt="rexp"></p>
+<figure>
+<img src="Sources/rexp.png" alt="rexp" />
+<figcaption aria-hidden="true">rexp</figcaption>
+</figure>
 <ul>
-<li><strong>Both NFAs and DFAs can recognize regular languages (equivalent power)</strong></li>
+<li><strong>Both NFAs and DFAs can recognize regular languages
+(equivalent power)</strong></li>
 <li><strong>DFAs are faster to execute.</strong>
 <ul>
 <li>There are no choices to consider</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>NFAs are, in general, smaller.</strong></li>
 </ul>
-<p><strong>Example: A NFA that accepts the rexp: <code>1* + 0</code></strong>:</p>
-<p><img src="Sources/example.png" alt="example"></p>
-<h3>1. Regular Expressions -&gt; NFA</h3>
-<p><img src="Sources/operation.png" alt="operation"></p>
-<h3>2. NFA to DFA</h3>
+<p><strong>Example: A NFA that accepts the rexp:
+<code>1* + 0</code></strong>:</p>
+<figure>
+<img src="Sources/example.png" alt="example" />
+<figcaption aria-hidden="true">example</figcaption>
+</figure>
+<h3 id="regular-expressions---nfa">1. Regular Expressions -&gt; NFA</h3>
+<figure>
+<img src="Sources/operation.png" alt="operation" />
+<figcaption aria-hidden="true">operation</figcaption>
+</figure>
+<h3 id="nfa-to-dfa">2. NFA to DFA</h3>
 <ul>
-<li>Key IDEA: <strong>DFA M' keeps track of the subset of possible states in NFA M.</strong></li>
-<li>That is why in general DFA are much bigger: <strong><code>2^n - 1</code> subsets for n states NFA</strong></li>
+<li>Key IDEA: <strong>DFA M’ keeps track of the subset of possible
+states in NFA M.</strong></li>
+<li>That is why in general DFA are much bigger:
+<strong><code>2^n - 1</code> subsets for n states NFA</strong></li>
 </ul>
-<p><img src="Sources/nfadfa.png" alt="nfadfa"></p>
-<h3>3. Implement Table-driven DFA</h3>
-<h2>3. Exercises</h2>
-<h3>1. Minimum States</h3>
-<p><img src="Sources/q5.png" alt="q5"></p>
+<figure>
+<img src="Sources/nfadfa.png" alt="nfadfa" />
+<figcaption aria-hidden="true">nfadfa</figcaption>
+</figure>
+<h3 id="implement-table-driven-dfa">3. Implement Table-driven DFA</h3>
+<h2 id="exercises">3. Exercises</h2>
+<h3 id="minimum-states">1. Minimum States</h3>
+<figure>
+<img src="Sources/q5.png" alt="q5" />
+<figcaption aria-hidden="true">q5</figcaption>
+</figure>
 <ul>
 <li><strong>Answer: Minimum states: 3n + 1</strong></li>
 </ul>
-<p><img src="Sources/q5ans.png" alt="q5ans"></p>
-<h3>2. NFA vs. DFA</h3>
-<p><strong>Question: Which of the following automata are NFAs?</strong></p>
-<p><img src="Sources/ndfa.png" alt="ndfa"></p>
+<figure>
+<img src="Sources/q5ans.png" alt="q5ans" />
+<figcaption aria-hidden="true">q5ans</figcaption>
+</figure>
+<h3 id="nfa-vs.-dfa">2. NFA vs. DFA</h3>
+<p><strong>Question: Which of the following automata are
+NFAs?</strong></p>
+<figure>
+<img src="Sources/ndfa.png" alt="ndfa" />
+<figcaption aria-hidden="true">ndfa</figcaption>
+</figure>
 <ul>
-<li><strong>NFAs must have a finite set of states, which rules out the last option.</strong></li>
-<li><strong>Every DFA is also an NFA, which is why the first option is included.</strong></li>
+<li><strong>NFAs must have a finite set of states, which rules out the
+last option.</strong></li>
+<li><strong>Every DFA is also an NFA, which is why the first option is
+included.</strong></li>
 </ul>
 	</section>
 	</div>
@@ -236,6 +406,10 @@ this.page.identifier = "cs/docs/lectures/2Lexical.html"
    </div>
 </footer>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <script src="../../../theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
