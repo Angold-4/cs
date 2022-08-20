@@ -4,7 +4,7 @@
 
 Include Chapter 1 & 2 of the book: **[Parsing Techniques](ParsingTechniques.pdf)**.
 
-**Parsing (syntactic analysis) is one of the best understood branches of computer science.** And of course parsers are being used extensively in a number of disciplines:
+**Parsing (syntactic analysis) is probably one of the best understood branches of computer science.** And of course parsers are being used extensively in a number of disciplines:
 
 ### In Computer Science
 * **Compiler Construction**
@@ -58,11 +58,65 @@ Quite unlike human, the computer needs a **clear, well-understood and unambiguou
 
 **A good way to build a set of objects is to start with a small object and to give rules how to add to it and construct new objects from it.** For example, "Two is an even number and the sum of two even numbers is again an even number" effectively generates the set of all even numbers. 
 
+Suppose we want to generate the set of all enumerations of names, of the type "Tom, Dick and Harry", in which all names but the last two are separated by commas.
+
+For example, in this case, we will not accept "Tom, Dick, Harry" nor "Tom and Dick and Harry". And Only "Tom, Dick and Harry" would be right. **A simple-minded recipe would be:**
+
+#### Recipe #1
+0. Tom is a name, Dick is a name, Harry is a name;
+1. a name is a sentence;
+2. a sentence followed by a comma and a name is again a sentence; 
+3. before finishing, if the sentence ends in ", name", replace it by "and name".
+
+**Although this seems will work for a cooperative reader, there are several things wrong with it:**
+
+#### Problems of Recipe #1
+1. **In Clause 3, the sentence does not really end in ", name", it actually end in ", Dick" or such.**
+    * The "name" is just a symbol that stands for the real name. it will be replaced by a real name as given in rule 1.
+    * **To Solve it, we define that there are two kinds of symbols involved here: terminals and non-terminals**.
+    * **terminals** (short for "terminal symbols") are symbols that will occur in finished sentences. (e.g, "tom")
+    * **non-terminals** (a singularly unin-spired term) which are the intermediate symbols that cannot occured in a finished sentence.
+
+2. **As I mentioned above, the computer needs a clear and generative grammar in order to process its language.** 
+    * In Clause 1, the "$X$ is a $Y$" should be replaced by "$Y$ may be replaced by $X$".
+
+
+**This gives us the Recipe #2:** 
+
+(To distinguish them, we write terminals in small letters and start non-terminals with a bond capital.)
+
+#### Recipe #2
+0. **Name** may be replaced by "tom" | **Name** may be replaced by "dick" | **Name** may be replaced by "harry"
+1. **Sentence** may be replaced by **Name**
+2. **Sentence** may be replaced by **Sentence, Name**
+3. **", Name"** at the end of a **Sentence** must be replaced by **"and Name"** before **Name** is replaced by any of its replacements
+4. a sentence is finished only when it no longer contains non-terminals
+5. we start our replacement procedure with **Sentence**
+
+Clause 1 through 4 describe replacements, Clause 5 is not specific to this grammar. It is valid generally and is one of the rules of the game. Clause 6 tells us where to start generating.
+
+#### Problem of Recipe #2
+
+The Only problem of recipe #2 is also in Clause 4: most rules have "may be replaced", but this one has "must be replaced". And since we want a more generic and elegant grammar, we only want to use **may be replaced** in all of our rules.
+
+This can be solved by adding an **end-marker** after it. And if we make the **end-marker** a **non-terminal** which cannot be used anywhere except in the required replacement from ", Name" to "and Name", we automatically **enforce the restriction that no sentence is finished unless the replacement test has taken place.**
+
+Then for brevity we write -> instead of "may be replaced by" and here comes the final recipe #3:
+
+#### Recipe #3
+0. **Name** -> tom | **Name** -> dick | **Name** -> harry
+1. **Sentence** -> **Name** | **Sentence** -> **List** End
+2. **List** -> Name | **List** -> **List, Name**
+3. **, Name End** -> and **Name**
+4. the start symbol is **Sentence**
+
+As we can see, **we have succeeded in implementing the notion "must replace" in a system that only uses "may replace"; looking more closely, we see that we have split "must replace" into "may replace" and "must not be a non-terminal".**
+
+### ii. Formal Grammars
 
 ## 3. The Chomsky Hierarchy of Grammars
 
 ![30grammar](Sources/30grammar.png)
-
 
 
 
