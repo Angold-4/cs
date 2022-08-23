@@ -212,6 +212,8 @@ Device</a>
 <li><a href="#i.-describing-a-language-through-a-finite-recipe."
 id="toc-i.-describing-a-language-through-a-finite-recipe.">i. Describing
 a language through a finite recipe.</a></li>
+<li><a href="#ii.-formal-grammars" id="toc-ii.-formal-grammars">ii.
+Formal Grammars</a></li>
 </ul></li>
 <li><a href="#the-chomsky-hierarchy-of-grammars"
 id="toc-the-chomsky-hierarchy-of-grammars">3. The Chomsky Hierarchy of
@@ -224,9 +226,9 @@ Notes by Angold Wang</h3>
 <h1 id="parsing-and-grammars">1. Parsing and Grammars</h1>
 <p>Include Chapter 1 &amp; 2 of the book: <strong><a
 href="ParsingTechniques.pdf">Parsing Techniques</a></strong>.</p>
-<p><strong>Parsing (syntactic analysis) is one of the best understood
-branches of computer science.</strong> And of course parsers are being
-used extensively in a number of disciplines:</p>
+<p><strong>Parsing (syntactic analysis) is probably one of the best
+understood branches of computer science.</strong> And of course parsers
+are being used extensively in a number of disciplines:</p>
 <h3 id="in-computer-science">In Computer Science</h3>
 <ul>
 <li><strong>Compiler Construction</strong></li>
@@ -323,8 +325,199 @@ object and to give rules how to add to it and construct new objects from
 it.</strong> For example, “Two is an even number and the sum of two even
 numbers is again an even number” effectively generates the set of all
 even numbers.</p>
+<p>Suppose we want to generate the set of all enumerations of names, of
+the type “Tom, Dick and Harry”, in which all names but the last two are
+separated by commas.</p>
+<p>For example, in this case, we will not accept “Tom, Dick, Harry” nor
+“Tom and Dick and Harry”. And Only “Tom, Dick and Harry” would be right.
+<strong>A simple-minded recipe would be:</strong></p>
+<h4 id="recipe-1">Recipe #1</h4>
+<ol start="0" type="1">
+<li>Tom is a name, Dick is a name, Harry is a name;</li>
+<li>a name is a sentence;</li>
+<li>a sentence followed by a comma and a name is again a sentence;</li>
+<li>before finishing, if the sentence ends in “, name”, replace it by
+“and name”.</li>
+</ol>
+<p><strong>Although this seems will work for a cooperative reader, there
+are several things wrong with it:</strong></p>
+<h4 id="problems-of-recipe-1">Problems of Recipe #1</h4>
+<ol type="1">
+<li><strong>In Clause 3, the sentence does not really end in “, name”,
+it actually end in “, Dick” or such.</strong>
+<ul>
+<li>The “name” is just a symbol that stands for the real name. it will
+be replaced by a real name as given in rule 1.</li>
+<li><strong>To Solve it, we define that there are two kinds of symbols
+involved here: terminals and non-terminals</strong>.</li>
+<li><strong>terminals</strong> (short for “terminal symbols”) are
+symbols that will occur in finished sentences. (e.g, “tom”)</li>
+<li><strong>non-terminals</strong> (a singularly unin-spired term) which
+are the intermediate symbols that cannot occured in a finished
+sentence.</li>
+</ul></li>
+<li><strong>As I mentioned above, the computer needs a clear and
+generative grammar in order to process its language.</strong>
+<ul>
+<li>In Clause 1, the “<span class="math inline">\(X\)</span> is a <span
+class="math inline">\(Y\)</span>” should be replaced by “<span
+class="math inline">\(Y\)</span> may be replaced by <span
+class="math inline">\(X\)</span>”.</li>
+</ul></li>
+</ol>
+<p><strong>This gives us the Recipe #2:</strong></p>
+<p>(To distinguish them, we write terminals in small letters and start
+non-terminals with a bond capital.)</p>
+<h4 id="recipe-2">Recipe #2</h4>
+<ol start="0" type="1">
+<li><strong>Name</strong> may be replaced by “tom” |
+<strong>Name</strong> may be replaced by “dick” | <strong>Name</strong>
+may be replaced by “harry”</li>
+<li><strong>Sentence</strong> may be replaced by
+<strong>Name</strong></li>
+<li><strong>Sentence</strong> may be replaced by <strong>Sentence,
+Name</strong></li>
+<li><strong>“, Name”</strong> at the end of a <strong>Sentence</strong>
+must be replaced by <strong>“and Name”</strong> before
+<strong>Name</strong> is replaced by any of its replacements</li>
+<li>a sentence is finished only when it no longer contains
+non-terminals</li>
+<li>we start our replacement procedure with
+<strong>Sentence</strong></li>
+</ol>
+<p>Clause 1 through 4 describe replacements, Clause 5 is not specific to
+this grammar. It is valid generally and is one of the rules of the game.
+Clause 6 tells us where to start generating.</p>
+<h4 id="problem-of-recipe-2">Problem of Recipe #2</h4>
+<p>The Only problem of recipe #2 is also in Clause 4: most rules have
+“may be replaced”, but this one has “must be replaced”. And since we
+want a more generic and elegant grammar, we only want to use <strong>may
+be replaced</strong> in all of our rules.</p>
+<p>This can be solved by adding an <strong>end-marker</strong> after it.
+And if we make the <strong>end-marker</strong> a
+<strong>non-terminal</strong> which cannot be used anywhere except in
+the required replacement from “, Name” to “and Name”, we automatically
+<strong>enforce the restriction that no sentence is finished unless the
+replacement test has taken place.</strong></p>
+<p>Then for brevity we write <span class="math inline">\(\to\)</span>
+instead of “may be replaced by” and here comes the final recipe #3:</p>
+<h4 id="recipe-3">Recipe #3</h4>
+<ol start="0" type="1">
+<li><strong>Name</strong> <span class="math inline">\(\to\)</span> tom |
+<strong>Name</strong> <span class="math inline">\(\to\)</span> dick |
+<strong>Name</strong> <span class="math inline">\(\to\)</span>
+harry</li>
+<li><strong>Sentence</strong> <span class="math inline">\(\to\)</span>
+<strong>Name</strong> | <strong>Sentence</strong> <span
+class="math inline">\(\to\)</span> <strong>List</strong> End</li>
+<li><strong>List</strong> <span class="math inline">\(\to\)</span> Name
+| <strong>List</strong> <span class="math inline">\(\to\)</span>
+<strong>List, Name</strong></li>
+<li><strong>, Name End</strong> <span class="math inline">\(\to\)</span>
+and <strong>Name</strong></li>
+<li>the start symbol is <strong>Sentence</strong></li>
+</ol>
+<p>As we can see, <strong>we have succeeded in implementing the notion
+“must replace” in a system that only uses “may replace”; looking more
+closely, we see that we have split “must replace” into “may replace” and
+“must not be a non-terminal”.</strong></p>
+<p>The above recipe form #3, based on replacement according to rules, is
+strong enough to serve as a basis for <strong>formal
+grammars.</strong></p>
+<h3 id="ii.-formal-grammars">ii. Formal Grammars</h3>
+<p>Here, based on Recipe #3, we will give a formal definition of
+grammars, but before that, let me introduce the two reasons for having a
+<strong>formal definition</strong>:</p>
+<ol type="1">
+<li><strong>It allows us to be very precise</strong>, then we’ll know
+exactly what we means by a <strong>grammar</strong> and should answer
+any question about what counts and what doesn’t count.</li>
+<li>We can use this <strong>formal notation</strong> rather than as a
+kind of a picture when we want to represents them in formal
+articles.</li>
+</ol>
+<h4 id="the-definition-of-formal-grammars">The definition of formal
+grammars</h4>
+<p><strong>A</strong> <em>generative grammar</em> <strong>is a 4-tuple
+<span class="math inline">\((V_N, V_T, R, S)\)</span> such
+that:</strong> 1. <strong><span class="math inline">\(V_N\)</span> and
+<span class="math inline">\(V_T\)</span> are finite sets of
+symbols.</strong> 2. <strong><span class="math inline">\(V_N \cap V_T =
+\varnothing\)</span></strong> 3. <strong><span
+class="math inline">\(R\)</span> is a set of pairs <span
+class="math inline">\((P, Q)\)</span> such that:</strong> * <span
+class="math inline">\(P \in (V_N \cup V_T)^+\)</span> * <span
+class="math inline">\(Q \in (V_N \cup V_T)^*\)</span> 4. <strong><span
+class="math inline">\(S \in V_N\)</span></strong></p>
+<p>A 4-tuple is just an object consisting of 4 identifiable parts; they
+are the <strong>non-terminals</strong>, <strong>the terminals</strong>,
+the <strong>rules</strong> and the <strong>start symbol</strong>, in
+that order. For our grammars we have:</p>
+<p><span class="math display">\[
+V_N = {\mathbf Name, \mathbf Sentence, \mathbf List, \mathbf End}
+\]</span></p>
+<p><span class="math display">\[
+V_T = {tom, dick, harry, \mathbf, , and}
+\]</span></p>
+<p>The intersection of <span class="math inline">\(V_N\)</span> and
+<span class="math inline">\(V_T\)</span> (2) must be empty, that is, the
+non-terminals and the terminals may not have a symbol in common, which
+is understandable.</p>
+<p><span class="math inline">\(R\)</span> is the set of all rules (3),
+and <span class="math inline">\(P\)</span> and <span
+class="math inline">\(Q\)</span> are the left-hand sides and right-hand
+sides, respectively. Each <span class="math inline">\(P\)</span> must
+consist of sequences of <strong>one or more non-terminals and
+terminals</strong> and each <span class="math inline">\(Q\)</span> must
+consist of sequences of <strong>zero or more non-terminals and
+terminals</strong>.</p>
+<p>The start symbol <span class="math inline">\(S\)</span> must be an
+element of <span class="math inline">\(V_N\)</span>, that is, it must be
+a non-terminal:</p>
+<p><span class="math display">\[
+S = \mathbf Sentence
+\]</span></p>
+<h4 id="generating-sentences-from-a-formal-grammar">Generating sentences
+from a formal grammar</h4>
+<p>Now, let’s using our formal grammar to generate some sentences. For
+your convinence, I’ll put the <a
+href="https://angold4.org/cs/docs/parsingtech/1Introduction.html#Recipe-#3">Recipe
+#3</a> here, with some little changes: 1. Several right-hand sides for
+one and the same left-hand side are <strong>grouped together</strong>
+and separated by vertical bars. 2. The non-terminal with the subscript
+<span class="math inline">\(_s\)</span> is the start symbol.</p>
+<figure>
+<img src="Sources/grammar.png" alt="grammar" />
+<figcaption aria-hidden="true">grammar</figcaption>
+</figure>
+<p>Now let’s generate our initial example from this grammar, using
+replacement according to the above rules only. We obtain the following
+successive forms for <strong>Sentence</strong>:</p>
+<figure>
+<img src="Sources/replacement.png" alt="replacement" />
+<figcaption aria-hidden="true">replacement</figcaption>
+</figure>
+<p>The intermediate forms are called <em>sentential forms</em>;
+<strong>if a sentential form contains no non-terminals it is called a
+sentence and belongs to the generated language</strong>. The transitions
+from one line to the next are called production steps and the rules are
+often called production rules.</p>
+<p>This production process can be made more visual by drawing connective
+lines between corresponding symbols, such a picture is called
+<em>production graph</em> or <em>syntactic graph</em>, because
+<strong>it depicts the syntactic structure (with regard to the given
+grammar) of the finial sentence</strong></p>
+<figure>
+<img src="Sources/production.svg" alt="production" />
+<figcaption aria-hidden="true">production</figcaption>
+</figure>
 <h2 id="the-chomsky-hierarchy-of-grammars">3. The Chomsky Hierarchy of
 Grammars</h2>
+<p>The <strong>Formal Grammars</strong> was first studied extensively by
+<strong><a href="https://en.wikipedia.org/wiki/Noam_Chomsky">Noam
+Chomsky</a></strong> in 1959. His analysis has been the foundation for
+almost all research and progress in formal languages, parsers and a
+considerable part of compiler construction and linguistics.</p>
 <figure>
 <img src="Sources/30grammar.png" alt="30grammar" />
 <figcaption aria-hidden="true">30grammar</figcaption>
@@ -332,24 +525,6 @@ Grammars</h2>
 	</section>
 	</div>
     </div>
-
-<div id="disqus_thread"></div>
-<script>
-    var disqus_config = function () {
-this.page.url = "https://angold4.org/cs/docs/parsingtech/1Introduction.html"
-this.page.identifier = "cs/docs/parsingtech/1Introduction.html"
-
-    };
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://angold.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-</script>
-
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
 </div>
 <footer>
    <div class="well well-lg" id="footer-well">
@@ -368,11 +543,10 @@ this.page.identifier = "cs/docs/parsingtech/1Introduction.html"
    </div>
 </footer>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../../../theme/js/bootstrap.min.js"></script>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-<script src="../../../theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="../../../theme/js/respond.min.js"></script>
