@@ -266,7 +266,7 @@ When one has been working for a while with CF grammars, one gradually gets the f
 
 1. $uv^ixy^iz \in A$ for all $i \ge 0$.
 
-2. $vy \neq \epsilon $
+2. $vy \neq \epsilon$
 
 3. $|vxy| \le p$
 
