@@ -1,0 +1,24 @@
+digraph {
+  Sentence [label = <<b>Sentence</b>>]
+  List [label = <<b>List</b>>]
+  and [label = "and" color = blue]
+  Name [label = <<b>Name</b>>]
+  Name2 [label = <<b>Name</b>>]
+  dot1 [label = "," color = blue]
+  List2 [label = <<b>List</b>>]
+  Name3 [label = <<b>Name</b>>]
+  tom [color = blue]
+  dick [color = blue]
+  harry [color = blue]
+
+  Sentence -> List
+  Sentence -> and
+  Sentence -> Name
+  List -> Name2
+  List -> dot1
+  List -> List2
+  Name -> harry
+  Name2 -> tom
+  List2 -> Name3
+  Name3 -> dick
+}

@@ -269,6 +269,7 @@ static Node *relational(Token **rest, Token *tok) {
 
 // add = mul ("+" mul | "-" mul)*
 static Node *add(Token **rest, Token *tok) {
+
   Node *node = mul(&tok, tok);
   for (;;) { // *
     if (equal(tok, "+")) {
@@ -283,7 +284,6 @@ static Node *add(Token **rest, Token *tok) {
     return node;
   }
 }
-
 
 // mul = unary ("*" unary | "/" unary)*
 static Node *mul(Token **rest, Token *tok) {

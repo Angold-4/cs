@@ -217,7 +217,20 @@ Formal Grammars</a></li>
 </ul></li>
 <li><a href="#the-chomsky-hierarchy-of-grammars"
 id="toc-the-chomsky-hierarchy-of-grammars">3. The Chomsky Hierarchy of
-Grammars</a></li>
+Grammars</a>
+<ul>
+<li><a href="#type-1-grammars" id="toc-type-1-grammars">Type 1
+grammars</a></li>
+<li><a href="#type-2-grammars" id="toc-type-2-grammars">Type 2
+grammars</a></li>
+<li><a href="#type-3-grammars" id="toc-type-3-grammars">Type 3
+grammars</a></li>
+<li><a href="#type-4-grammars" id="toc-type-4-grammars">Type 4
+grammars</a></li>
+<li><a href="#a-comparision-of-grammar-types"
+id="toc-a-comparision-of-grammar-types">A comparision of grammar
+types</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -332,7 +345,7 @@ separated by commas.</p>
 “Tom and Dick and Harry”. And Only “Tom, Dick and Harry” would be right.
 <strong>A simple-minded recipe would be:</strong></p>
 <h4 id="recipe-1">Recipe #1</h4>
-<ol start="0" type="1">
+<ol type="1">
 <li>Tom is a name, Dick is a name, Harry is a name;</li>
 <li>a name is a sentence;</li>
 <li>a sentence followed by a comma and a name is again a sentence;</li>
@@ -369,7 +382,7 @@ class="math inline">\(X\)</span>”.</li>
 <p>(To distinguish them, we write terminals in small letters and start
 non-terminals with a bond capital.)</p>
 <h4 id="recipe-2">Recipe #2</h4>
-<ol start="0" type="1">
+<ol type="1">
 <li><strong>Name</strong> may be replaced by “tom” |
 <strong>Name</strong> may be replaced by “dick” | <strong>Name</strong>
 may be replaced by “harry”</li>
@@ -387,7 +400,7 @@ non-terminals</li>
 </ol>
 <p>Clause 1 through 4 describe replacements, Clause 5 is not specific to
 this grammar. It is valid generally and is one of the rules of the game.
-Clause 6 tells us where to start generating.</p>
+Clause 7 tells us where to start generating.</p>
 <h4 id="problem-of-recipe-2">Problem of Recipe #2</h4>
 <p>The Only problem of recipe #2 is also in Clause 4: most rules have
 “may be replaced”, but this one has “must be replaced”. And since we
@@ -402,7 +415,7 @@ replacement test has taken place.</strong></p>
 <p>Then for brevity we write <span class="math inline">\(\to\)</span>
 instead of “may be replaced by” and here comes the final recipe #3:</p>
 <h4 id="recipe-3">Recipe #3</h4>
-<ol start="0" type="1">
+<ol type="1">
 <li><strong>Name</strong> <span class="math inline">\(\to\)</span> tom |
 <strong>Name</strong> <span class="math inline">\(\to\)</span> dick |
 <strong>Name</strong> <span class="math inline">\(\to\)</span>
@@ -440,15 +453,24 @@ articles.</li>
 grammars</h4>
 <p><strong>A</strong> <em>generative grammar</em> <strong>is a 4-tuple
 <span class="math inline">\((V_N, V_T, R, S)\)</span> such
-that:</strong> 1. <strong><span class="math inline">\(V_N\)</span> and
-<span class="math inline">\(V_T\)</span> are finite sets of
-symbols.</strong> 2. <strong><span class="math inline">\(V_N \cap V_T =
-\varnothing\)</span></strong> 3. <strong><span
-class="math inline">\(R\)</span> is a set of pairs <span
-class="math inline">\((P, Q)\)</span> such that:</strong> * <span
-class="math inline">\(P \in (V_N \cup V_T)^+\)</span> * <span
-class="math inline">\(Q \in (V_N \cup V_T)^*\)</span> 4. <strong><span
-class="math inline">\(S \in V_N\)</span></strong></p>
+that:</strong></p>
+<ol type="1">
+<li><p><strong><span class="math inline">\(V_N\)</span> and <span
+class="math inline">\(V_T\)</span> are finite sets of
+symbols.</strong></p></li>
+<li><p><strong><span class="math inline">\(V_N \cap V_T =
+\varnothing\)</span></strong></p></li>
+<li><p><strong><span class="math inline">\(R\)</span> is a set of pairs
+<span class="math inline">\((P, Q)\)</span> such that:</strong></p>
+<ul>
+<li><p><span class="math inline">\(P \in (V_N \cup
+V_T)^+\)</span></p></li>
+<li><p><span class="math inline">\(Q \in (V_N \cup
+V_T)^*\)</span></p></li>
+</ul></li>
+<li><p><strong><span class="math inline">\(S \in
+V_N\)</span></strong></p></li>
+</ol>
 <p>A 4-tuple is just an object consisting of 4 identifiable parts; they
 are the <strong>non-terminals</strong>, <strong>the terminals</strong>,
 the <strong>rules</strong> and the <strong>start symbol</strong>, in
@@ -513,18 +535,296 @@ grammar) of the finial sentence</strong></p>
 </figure>
 <h2 id="the-chomsky-hierarchy-of-grammars">3. The Chomsky Hierarchy of
 Grammars</h2>
+<p>The example above shows us indeed <strong>some simple phrase
+structure grammars can actually generate very complicated sets</strong>.
+Moreover, by giving the definition of <strong>formal grammars</strong>
+(e.g. instantiate the grammar), we can now try to deal with our problem
+– <strong>How to parsing</strong>.</p>
 <p>The <strong>Formal Grammars</strong> was first studied extensively by
 <strong><a href="https://en.wikipedia.org/wiki/Noam_Chomsky">Noam
 Chomsky</a></strong> in 1959. His analysis has been the foundation for
 almost all research and progress in formal languages, parsers and a
 considerable part of compiler construction and linguistics.</p>
+<blockquote>
+<p>According to Chomsky’s hypothesis, the reason why humans can speak is
+that humans are born with a dedicated circuit for acquiring production
+rules in the brain. Because humans have the ability to acquire
+<strong>recursive language rules</strong>, they become able to speak
+languages. Non-human animals do not have the ability to acquire
+language, which he attributed to the absence of circuits in the
+non-human brains for acquiring production rules. Chomsky’s claims, which
+have not been substantiated or disproved nearly 60 years after the
+hypothesis was published, are still considered quite convincing.</p>
+</blockquote>
+<p>In practice, the grammar can be so complex, <strong>we shall see that
+now general parsing algorithm for them can exist, and all known special
+parsing algorithms are either very inefficient or very complex.</strong>
+The desire to <strong>restrict the unmanageability of phrase structure
+grammars,</strong> while keeping as much of their generative powers as
+possible, has led the <em>Chomsky hierarchy of grammars</em>.</p>
+<p>This hierarchy distinguishes four types of grammars numbered from 0
+to 3. Type 0 grammars are the (unrestricted phrase structure grammars of
+which we have already seen examples). The other types originate from
+<strong>applying more and more restrictions</strong> to the allowed form
+of the rules in the grammar, by applying these restrictions:</p>
+<ul>
+<li>The resulting grammars are gradually easier to understand and to
+manipulate.</li>
+<li>But their <strong>generative power</strong> are gradually less
+powerful.</li>
+</ul>
+<p>Fortunately, these less powerful types are still very useful,
+actually more useful even than Type 0. We shall now introduce each of
+the three remaining types in turn:</p>
+<h3 id="type-1-grammars">Type 1 grammars</h3>
+<h4 id="definition">Definition:</h4>
+<ul>
+<li><strong>Definition 1: A grammar is</strong> <em>Type 1
+monotonic</em> <strong>if it contains no rules in which the left hand
+side consists of more symbols than the right hand side.</strong>
+<ul>
+<li>Example: <strong><span class="math inline">\(,\)</span> <span
+class="math inline">\(Name\)</span> <span
+class="math inline">\(End\)</span> <span
+class="math inline">\(\to\)</span> <span
+class="math inline">\(and\)</span> <span
+class="math inline">\(Name\)</span></strong> is prohibited in type
+1.</li>
+</ul></li>
+</ul>
+<figure>
+<img src="Sources/type1monotonic.png" alt="type1monotonic" />
+<figcaption aria-hidden="true">type1monotonic</figcaption>
+</figure>
+<ul>
+<li><strong>Definition 2: A grammar is</strong> <em>Type 1
+context-sensitive</em> <strong>if all of its rules are
+context-sensitive.</strong>
+<ul>
+<li>Context-sensitive: <strong>Only one (non-terminal) symbol in its
+left-hand side gets replaced by other symbols</strong>.</li>
+</ul></li>
+</ul>
+<figure>
+<img src="Sources/type1contexts.png" alt="type1contexts" />
+<figcaption aria-hidden="true">type1contexts</figcaption>
+</figure>
+<p>We can prove that: <strong>Monotonic and context-sensitive grammars
+are equally powerful.</strong> They all classified as Type 1 grammars,
+and both of them are less powerful than the Type 0 grammars, that is,
+there are languages that can be generated by a Type 0 grammar but now by
+any Type 1.</p>
+<h4 id="example">Example:</h4>
+<p>The standard example of a Type 1 language is the set of words that
+consist of equal numbers of a’s, b’s and c’s: <span
+class="math display">\[
+a^n  b^n  c^n
+\]</span></p>
+<p>Since usually it is not that easy to give a grammar of Type 1
+language by human. For the sake of completeness, I just put the correct
+grammar here, with a derivation tree for <span
+class="math inline">\(a^2b^2c^2\)</span> as an example to show the
+derivation process.</p>
+<figure>
+<img src="Sources/type1ans.png" alt="type1ans" />
+<figcaption aria-hidden="true">type1ans</figcaption>
+</figure>
+<figure>
+<img src="Sources/type1derivation.png" alt="type1derivation" />
+<figcaption aria-hidden="true">type1derivation</figcaption>
+</figure>
+<p>You may find that although Type 1 grammars (also called as
+context-sensitive grammars) can express correlations, but the grammar is
+not in a way that human can understand.</p>
+<h3 id="type-2-grammars">Type 2 grammars</h3>
+<h4 id="definition-1">Definition:</h4>
+<ul>
+<li><strong>Definition: A grammar is</strong> <em>Type 2 context-free
+grammars</em> <strong>if all of its rules are context-free.</strong>
+<ul>
+<li>Context-free: <strong>Only single non-ternminal are allowed on the
+left-hand side.</strong></li>
+</ul></li>
+</ul>
+<figure>
+<img src="Sources/type2contextf.png" alt="type2contextf" />
+<figcaption aria-hidden="true">type2contextf</figcaption>
+</figure>
+<figure>
+<img src="Sources/cfex.svg" alt="cfex.svg" />
+<figcaption aria-hidden="true">cfex.svg</figcaption>
+</figure>
+<p>Comparing to the Type 1 (CS) grammar, the Type2 (CF) grammer have the
+following properties:</p>
+<ol type="1">
+<li><p>Since there is always only one symbol on the left-hand side, each
+node in a production graph has the property that whatever it produces is
+independent of what is neighbours produce: <strong>The productive life
+of a non-terminal is independent of its context.</strong> (That is why
+it is called context-free). Unlike context-sensitive grammars, which has
+to look at its neighbours on the left and on the right to see what
+production rules are allowed for it.</p></li>
+<li><p>The production graph will consequently has a pure tree-form
+called a <em>production tree</em>.</p></li>
+<li><p>Since there is only one symbol on the left-hand side, all
+right-hand sides for a given non-terminal; can always be collected in
+one grammar rule, and then each grammar reads like a
+<strong>definition</strong> of the left-hand side.</p></li>
+</ol>
+<h4 id="examples">Examples:</h4>
+<p>The standard example of a Type 2 language is also equal numbers of
+words, but only for 2 different words.</p>
+<p><span class="math display">\[
+a^n  b^n
+\]</span></p>
+<p>And the CF grammar is pretty easy, which is human-understandable.</p>
+<p><span class="math display">\[
+S \to a S b  \vert  ab
+\]</span></p>
+<h4 id="the-limitations-of-cf-grammars">The limitations of CF
+grammars:</h4>
+<p>When one has been working for a while with CF grammars, one gradually
+gets the feeling that almost anything could be expressed in a CF
+grammar. However, serious limitations to what can be said by a CF
+grammar is shown by the famous <em>uvwxy</em> theorem (also called
+<strong>pumping lemma</strong>). And by using this lemma, we can easily
+prove that whether a language can be expressed using a CF grammar.</p>
+<h4 id="pumping-lemma-for-cfls">Pumping Lemma for CFLs:</h4>
+<p><strong>For every CFL <span class="math inline">\(A\)</span>, there
+is a <span class="math inline">\(p\)</span> such that if <span
+class="math inline">\(s\)</span> <span
+class="math inline">\(\in\)</span> <span
+class="math inline">\(A\)</span> and <span
+class="math inline">\(|s|\)</span> <span
+class="math inline">\(\ge\)</span> <span
+class="math inline">\(p\)</span> then <span
+class="math inline">\(s\)</span> <span class="math inline">\(=\)</span>
+<span class="math inline">\(uvxyz\)</span> where:</strong></p>
+<ol type="1">
+<li><p><span class="math inline">\(uv^ixy^iz \in A\)</span> for all
+<span class="math inline">\(i \ge 0\)</span>.</p></li>
+<li><p>$vy $</p></li>
+<li><p><span class="math inline">\(|vxy| \le p\)</span></p></li>
+</ol>
+<p><strong>Any sentence generated by a CF grammar, that is longer than
+the longest original sentence from that grammar, can be cut into five
+pieces <span class="math inline">\(u,v,w,x\)</span> and <span
+class="math inline">\(y\)</span> in such a way that <span
+class="math inline">\(uv^nwx^ny\)</span> is a sentence from that grammar
+for all <span class="math inline">\(n \ge 0\)</span></strong></p>
+<figure>
+<img src="Sources/pumping.png" alt="pumping" />
+<figcaption aria-hidden="true">pumping</figcaption>
+</figure>
+<p>All long unoriginal string s that CF generates have this
+<strong>pumping quality</strong>:</p>
+<p><strong>You can break them up into five pieces, so that the second
+and forth piece can be repeated and stay in the language.</strong></p>
+<figure>
+<img src="Sources/pump.png" alt="pump" />
+<figcaption aria-hidden="true">pump</figcaption>
+</figure>
+<h3 id="type-3-grammars">Type 3 grammars</h3>
+<h4 id="definition-2">Definition:</h4>
+<ul>
+<li><strong>Definition: A grammar is</strong> <em>Type 3 regular
+grammars</em> <strong>if all of its rules are regular.</strong>
+<ul>
+<li>Regular #1: <strong>A non-terminal produces zero or more
+terminals.</strong></li>
+<li>Regular #2: <strong>A non-terminal produces zero or more terminals
+followed by one non-terminal.</strong></li>
+</ul></li>
+</ul>
+<p>Type 3 grammars are also called <em>regular grammars</em> or
+<em>finite-state</em> grammars. Since regular grammars are used very
+often to describe the structure of text on the character level.
+(e.g. <strong>classification of different tokens</strong>)</p>
+<h3 id="type-4-grammars">Type 4 grammars</h3>
+<p>The last restriction we shall apply to what is allowed in a
+production rule is a pretty final one: <strong>no non-terminal is
+allowed in the right-hand side.</strong> This removes all the generative
+power from the mechanism, except for the choosing of alternatives, which
+will only introduce a finite number of terminals.</p>
+<p>The type 4 grammar is also called finite-choice grammar. And it can
+only be used in some limited situations (e.g. <strong>classification of
+different chars</strong>).</p>
+<h3 id="a-comparision-of-grammar-types">A comparision of grammar
+types</h3>
+<figure>
+<img src="Sources/summary.png" alt="summary" />
+<figcaption aria-hidden="true">summary</figcaption>
+</figure>
 <figure>
 <img src="Sources/30grammar.png" alt="30grammar" />
 <figcaption aria-hidden="true">30grammar</figcaption>
 </figure>
+<p>This differece between these grammars has been depicted
+metaphorically in the rose figure above, in which a rose is approximated
+by increasingly finer outlines. In this metaphor, the <strong>rose
+corresponds to the language</strong> (imagine the sentences of the
+language as molecules in the rose); <strong>the grammar serves to
+delineate its silhouette.</strong> * A <strong>regular grammar</strong>
+only allows us straight horizontal and vertical line segments to
+describe the flower; ruler and T-square suffice, but the result is a
+coarse and mechanical-looking picture. * A <strong>CF grammar</strong>
+would approximate the outline by straight lines at any angle and by
+circle segments; the drawing could still be made using the classical
+tools of compasses and ruler. The result is stilted but recognizable. *
+A <strong>CS grammar</strong> would present us with a smooth curve
+tightly enveloping the flower, but the curve is too smooth: it cannot
+follow all the sharp turns and it deviates slightly at complicated
+points; still, a very realistic picture results. * An
+<strong>unrestricted phrase structure grammar</strong> can represent the
+outline perfectly. The rose itself cannot be caught in a finite
+description; its essence remains forever out of our reach.</p>
+<p>A more prosaic and practical example can be found in the successive
+sets of <strong>Pascal</strong> programs that can be generated by the
+various grammar types.</p>
+<ul>
+<li><p><strong>The set of all lexically correct Pascal programs can be
+generated by a regular grammar.</strong></p>
+<ul>
+<li>A Pascal program is lexically correct if there are no newlines
+insidstrings, comment is terminated before end-of-file, all numerical
+constants have the right form, etc.</li>
+</ul></li>
+<li><p><strong>The set of all syntactically correct Pascal programs can
+be generated by a context-free grammar.</strong></p></li>
+<li><p><strong>The set of all semantically correct Pascal programs can
+be generated by a CS grammar</strong></p>
+<ul>
+<li>A Pascal programs is semantically correct if it will pass through a
+Pascal compiler without drawing error messages.</li>
+</ul></li>
+<li><p><strong>The set of all Pascal programs that would terminate in
+finite time when run with a given input can be generated by an
+unrestricted phrase structure grammar.</strong></p></li>
+<li><p><strong>The set of all Pascal programs that solve a given
+problem</strong> (for instance, play chess) cannot be generated by a
+grammar (although the description of the set is finite).</p></li>
+</ul>
 	</section>
 	</div>
     </div>
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+this.page.url = "https://angold4.org/cs/docs/parsingtech/1Introduction.html"
+this.page.identifier = "cs/docs/parsingtech/1Introduction.html"
+
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://angold.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
 </div>
 <footer>
    <div class="well well-lg" id="footer-well">
@@ -543,10 +843,11 @@ considerable part of compiler construction and linguistics.</p>
    </div>
 </footer>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../../../theme/js/bootstrap.min.js"></script>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<script src="../../../theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
 <script src="../../../theme/js/respond.min.js"></script>

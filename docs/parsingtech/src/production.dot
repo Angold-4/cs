@@ -15,7 +15,6 @@ digraph {
   tom [color = blue]
   dick [color = blue]
   harry [color = blue]
-  
 
   
   Sentence -> List
