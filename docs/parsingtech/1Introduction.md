@@ -303,6 +303,7 @@ The type 4 grammar is also called finite-choice grammar. And it can only be used
 ![30grammar](Sources/30grammar.png)
 
 This differece between these grammars has been depicted metaphorically in the rose figure above, in which a rose is approximated by increasingly finer outlines. In this metaphor, the **rose corresponds to the language** (imagine the sentences of the language as molecules in the rose); **the grammar serves to delineate its silhouette.** 
+
 * A **regular grammar** only allows us straight horizontal and vertical line segments to describe the flower; ruler and T-square suffice, but the result is a coarse and mechanical-looking picture. 
 * A **CF grammar** would approximate the outline by straight lines at any angle and by circle segments; the drawing could still be made using the classical tools of compasses and ruler. The result is stilted but recognizable. 
 * A **CS grammar** would present us with a smooth curve tightly enveloping the flower, but the curve is too smooth: it cannot follow all the sharp turns and it deviates slightly at complicated points; still, a very realistic picture results. 
